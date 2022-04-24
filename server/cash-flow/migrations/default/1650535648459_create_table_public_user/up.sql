@@ -1,0 +1,1 @@
+CREATE TABLE "public"."user" ("id" uuid NOT NULL, "name" varchar NOT NULL, "email" varchar NOT NULL, "pwd" varchar NOT NULL, PRIMARY KEY ("id") );COMMENT ON TABLE "public"."user" IS E'holds user data';
