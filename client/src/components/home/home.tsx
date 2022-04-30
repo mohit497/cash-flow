@@ -10,6 +10,7 @@ export default function Home() {
 
     return (
         <Container>
+            <h1 className='p-3'> Products</h1>
             <Products />
         </Container>
     )

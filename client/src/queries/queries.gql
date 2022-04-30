@@ -3,4 +3,16 @@ query getusers {
       name
     }
   }
+
+query getproducts {
+  products(limit: 10, offset: 0) {
+    amount
+    code
+    createdAt
+    id
+    name
+    org
+  }
+}
+
   

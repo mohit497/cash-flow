@@ -1,0 +1,1 @@
+INSERT INTO "public"."products"("id", "name", "code", "amount", "org", "createdAt", "updatedAt") VALUES (E'18cbf82d-852e-4381-b10d-55dd186a1ea1', E'test_product', E'testabc', 100, E'26e434c0-4114-44c8-adb7-adeaea4e7d70', E'2022-04-30T16:20:41.265199+00:00', E'2022-04-30T16:20:41.265199+00:00');

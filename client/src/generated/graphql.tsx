@@ -1421,6 +1421,17 @@ export type GetusersQuery = (
   )> }
 );
 
+export type GetproductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetproductsQuery = (
+  { __typename?: 'query_root' }
+  & { products: Array<(
+    { __typename?: 'products' }
+    & Pick<Products, 'amount' | 'code' | 'createdAt' | 'id' | 'name' | 'org'>
+  )> }
+);
+
 
 export const GetusersDocument = gql`
     query getusers {
@@ -1456,3 +1467,42 @@ export function useGetusersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetusersQueryHookResult = ReturnType<typeof useGetusersQuery>;
 export type GetusersLazyQueryHookResult = ReturnType<typeof useGetusersLazyQuery>;
 export type GetusersQueryResult = Apollo.QueryResult<GetusersQuery, GetusersQueryVariables>;
+export const GetproductsDocument = gql`
+    query getproducts {
+  products(limit: 10, offset: 0) {
+    amount
+    code
+    createdAt
+    id
+    name
+    org
+  }
+}
+    `;
+
+/**
+ * __useGetproductsQuery__
+ *
+ * To run a query within a React component, call `useGetproductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetproductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetproductsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetproductsQuery(baseOptions?: Apollo.QueryHookOptions<GetproductsQuery, GetproductsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetproductsQuery, GetproductsQueryVariables>(GetproductsDocument, options);
+      }
+export function useGetproductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetproductsQuery, GetproductsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetproductsQuery, GetproductsQueryVariables>(GetproductsDocument, options);
+        }
+export type GetproductsQueryHookResult = ReturnType<typeof useGetproductsQuery>;
+export type GetproductsLazyQueryHookResult = ReturnType<typeof useGetproductsLazyQuery>;
+export type GetproductsQueryResult = Apollo.QueryResult<GetproductsQuery, GetproductsQueryVariables>;
