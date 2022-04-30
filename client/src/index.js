@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  useQuery,
   gql
 } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: `${process.env.REACT_APP_GRAPH_URL}`,
   cache: new InMemoryCache()
 });
 
@@ -33,7 +35,9 @@ client
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ApolloProvider client={client}>
     <App />
+    </ApolloProvider>
   </React.StrictMode>
 );
 

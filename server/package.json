@@ -19,8 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "start:console:staging": "hasura console --endpoint https://cash-flow-hasura.herokuapp.com  --admin-secret myadminsecretkey "
-
+    "start:console:staging": "cd cash-flow &&hasura console --endpoint https://cash-flow-hasura.herokuapp.com  --admin-secret myadminsecretkey "
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
