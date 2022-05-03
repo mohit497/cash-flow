@@ -1,3 +1,7 @@
 table:
   schema: public
   name: products
+object_relationships:
+  - name: orgByOrg
+    using:
+      foreign_key_constraint_on: org

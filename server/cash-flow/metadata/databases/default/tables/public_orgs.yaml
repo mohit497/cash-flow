@@ -1,3 +1,25 @@
 table:
   schema: public
   name: orgs
+array_relationships:
+  - name: products
+    using:
+      foreign_key_constraint_on:
+        column: org
+        table:
+          schema: public
+          name: products
+  - name: sales
+    using:
+      foreign_key_constraint_on:
+        column: org
+        table:
+          schema: public
+          name: sales
+  - name: shops
+    using:
+      foreign_key_constraint_on:
+        column: org
+        table:
+          schema: public
+          name: shops

@@ -2,3 +2,11 @@ table:
   schema: public
   name: ROLES
 is_enum: true
+array_relationships:
+  - name: active_roles
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          schema: public
+          name: active_roles

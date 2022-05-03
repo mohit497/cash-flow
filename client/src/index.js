@@ -10,7 +10,6 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql
 } from "@apollo/client";
 
 const client = new ApolloClient({
@@ -18,25 +17,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-// const client = ...
 
-client
-  .query({
-    query: gql`
-      query GetRates {
-        rates(currency: "USD") {
-          currency
-        }
-      }
-    `
-  })
-  .then(result => console.log(result));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-    <App />
+      <App />
     </ApolloProvider>
   </React.StrictMode>
 );

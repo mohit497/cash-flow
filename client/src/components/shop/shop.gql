@@ -1,0 +1,21 @@
+query getshops($limit: Int = 10, $offset: Int = 0) {
+  shops(offset: $offset, limit: $limit) {
+    id
+    location
+    org
+    name
+    address
+    orgByOrg {
+      name
+    }
+  }
+}
+
+mutation addshop($objects: [shops_insert_input!] = {}) {
+  insert_shops(objects: $objects) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}

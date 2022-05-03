@@ -1,5 +1,4 @@
-import Products from 'components/products';
-import { Container } from 'react-bootstrap';
+import Products from 'components/product/products';
 import { useGetusersQuery } from '../../generated/graphql'
 
 export default function Home() {
@@ -9,9 +8,8 @@ export default function Home() {
     console.log(data)
 
     return (
-        <Container>
-            <h1 className='p-3'> Products</h1>
+        <div>
             <Products />
-        </Container>
+        </div>
     )
 }

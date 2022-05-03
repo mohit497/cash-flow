@@ -1,3 +1,13 @@
 table:
   schema: public
   name: active_roles
+object_relationships:
+  - name: ROLE
+    using:
+      foreign_key_constraint_on: role
+  - name: userByOrg
+    using:
+      foreign_key_constraint_on: org
+  - name: userByUser
+    using:
+      foreign_key_constraint_on: user

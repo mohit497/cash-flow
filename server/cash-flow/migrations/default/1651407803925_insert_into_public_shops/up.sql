@@ -1,0 +1,1 @@
+INSERT INTO "public"."shops"("id", "name", "address", "location", "org") VALUES (E'eb7877aa-6a56-49aa-846f-c095d9e81f14', E'test_shop', E'test addresss', E'new delhi', E'26e434c0-4114-44c8-adb7-adeaea4e7d70');

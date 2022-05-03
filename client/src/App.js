@@ -1,15 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/home/home';
 import Header from 'components/header';
+import Shops from 'components/shop/shop'
+import { Container, Row, Col } from 'react-bootstrap';
+import SideMenu from 'components/sideMenu';
+import { getUserRole } from './utils'
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
+import Products from 'components/product/products';
+import Cashier from 'components/cashier/cashier';
 
 function App() {
 
+  const role = getUserRole()
 
   return (
     <div className="App">
-      <Header />
-      <Home />
+      <Router>
+        <Header />
+        <Container fluid>
+          <Row className='w-100'>
+            {!!role &&
+              <Col xs={2} md={3}>
+                <SideMenu />
+              </Col>
+            }
+
+            <Col>
+              <Routes>
+                <Route exact path="/" element={<Home />}>
+                </Route>
+                <Route exact path="/products" element={<Products />}>
+                </Route>
+                <Route exact path="/shops" element={<Shops />}>
+                </Route>
+                <Route exact path="/cashier" element={<Cashier />}>
+                </Route>
+              </Routes>
+            </Col>
+          </Row>
+        </Container>
+      </Router>
     </div>
   );
 }

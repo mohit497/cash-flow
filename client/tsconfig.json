@@ -48,6 +48,5 @@
     "no-submodule-imports": [
       true,
       "intro.js/introjs.css",
-  
     ]
   }

@@ -1,0 +1,14 @@
+mutation addproduct($objects: [products_insert_input!] = {}) {
+  insert_products(objects: $objects) {
+    affected_rows
+    returning {
+      code
+      amount
+      createdAt
+      id
+      name
+      org
+      updatedAt
+    }
+  }
+}
