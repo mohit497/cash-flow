@@ -3102,8 +3102,8 @@ export type SoldMutationHookResult = ReturnType<typeof useSoldMutation>;
 export type SoldMutationResult = Apollo.MutationResult<SoldMutation>;
 export type SoldMutationOptions = Apollo.BaseMutationOptions<SoldMutation, SoldMutationVariables>;
 export const GetsalesDocument = gql`
-    query getsales($limit: Int = 1) {
-  sales(order_by: {createdAt: desc}) {
+    query getsales($limit: Int = 2) {
+  sales(order_by: {createdAt: desc}, limit: $limit) {
     createdAt
     id
     org

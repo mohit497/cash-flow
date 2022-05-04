@@ -76,12 +76,12 @@ export default function Cashier() {
                         <Col><h1> Total - {getTotal()} </h1></Col>
                     </Row>
                 </Col>
-                <Col className="info-col">
+                <Col md={3} className="info-col">
                     <Numpad />
                     <Row>
                         {
                             data?.sales.map((sale) => {
-                                return <SaleCard {...sale as Sales} />
+                                return <Col xs={12}><SaleCard {...sale as Sales} /></Col>
                             })
                         }
                     </Row>

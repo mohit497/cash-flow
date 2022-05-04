@@ -1,5 +1,5 @@
 import { useAppState } from 'appstate/useAppstate'
-import {  useSoldMutation } from 'generated/graphql'
+import {  useSoldMutation , GetsalesDocument} from 'generated/graphql'
 import { Row, Col, Button } from 'react-bootstrap'
 
 export default function CashierHeader() {
@@ -29,7 +29,8 @@ export default function CashierHeader() {
                 shop:"eb7877aa-6a56-49aa-846f-c095d9e81f14",
                 user:"dda031eb-f8b4-4e29-8b52-de2a46cfb8c2",
                 data:getTransction()
-            }
+            },
+            refetchQueries:[ {query: GetsalesDocument}]
         }).then((a)=>{
             setProducts([])
             console.log(a)

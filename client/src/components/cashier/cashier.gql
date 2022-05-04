@@ -26,8 +26,8 @@ mutation sold($org: uuid = "", $shop: uuid = "", $user: uuid = "", $data: [trans
   }
 }
 
-query getsales($limit: Int = 1) {
-  sales(order_by: {createdAt: desc}) {
+query getsales($limit: Int = 2) {
+  sales(order_by: {createdAt: desc}, limit: $limit) {
     createdAt
     id
     org
@@ -46,4 +46,3 @@ query getsales($limit: Int = 1) {
     }
   }
 }
-
