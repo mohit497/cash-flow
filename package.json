@@ -1,0 +1,25 @@
+{
+  "name": "cash-flow",
+  "version": "1.0.0",
+  "description": "## Get inventory view and everyday cash analysis",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "concurrently \"cd client && npm run start\" \" cd server && npm run start \"",
+    "start:con": "concurrently \"cd server && npm run start:console:staging\" "
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohit497/cash-flow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohit497/cash-flow/issues"
+  },
+  "homepage": "https://github.com/mohit497/cash-flow#readme"
+}

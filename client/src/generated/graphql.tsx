@@ -1412,9 +1412,9 @@ export type Query_Root = {
   shops_aggregate: Shops_Aggregate;
   /** fetch data from the table: "shops" using primary key columns */
   shops_by_pk?: Maybe<Shops>;
-  /** fetch data from the table: "transactions" */
+  /** An array relationship */
   transactions: Array<Transactions>;
-  /** fetch aggregated fields from the table: "transactions" */
+  /** An aggregate relationship */
   transactions_aggregate: Transactions_Aggregate;
   /** fetch data from the table: "transactions" using primary key columns */
   transactions_by_pk?: Maybe<Transactions>;
@@ -1621,12 +1621,34 @@ export type Sales = {
   shop: Scalars['uuid'];
   /** An object relationship */
   shopByShop: Shops;
-  /** An object relationship */
-  transaction?: Maybe<Transactions>;
+  /** An array relationship */
+  transactions: Array<Transactions>;
+  /** An aggregate relationship */
+  transactions_aggregate: Transactions_Aggregate;
   updatedAt: Scalars['timestamptz'];
   user: Scalars['uuid'];
   /** An object relationship */
   userByUser: Users;
+};
+
+
+/** holds sales data */
+export type SalesTransactionsArgs = {
+  distinct_on?: Maybe<Array<Transactions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transactions_Order_By>>;
+  where?: Maybe<Transactions_Bool_Exp>;
+};
+
+
+/** holds sales data */
+export type SalesTransactions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Transactions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transactions_Order_By>>;
+  where?: Maybe<Transactions_Bool_Exp>;
 };
 
 /** aggregated selection of "sales" */
@@ -1676,7 +1698,7 @@ export type Sales_Bool_Exp = {
   orgByOrg?: Maybe<Orgs_Bool_Exp>;
   shop?: Maybe<Uuid_Comparison_Exp>;
   shopByShop?: Maybe<Shops_Bool_Exp>;
-  transaction?: Maybe<Transactions_Bool_Exp>;
+  transactions?: Maybe<Transactions_Bool_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<Uuid_Comparison_Exp>;
   userByUser?: Maybe<Users_Bool_Exp>;
@@ -1696,7 +1718,7 @@ export type Sales_Insert_Input = {
   orgByOrg?: Maybe<Orgs_Obj_Rel_Insert_Input>;
   shop?: Maybe<Scalars['uuid']>;
   shopByShop?: Maybe<Shops_Obj_Rel_Insert_Input>;
-  transaction?: Maybe<Transactions_Obj_Rel_Insert_Input>;
+  transactions?: Maybe<Transactions_Arr_Rel_Insert_Input>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Scalars['uuid']>;
   userByUser?: Maybe<Users_Obj_Rel_Insert_Input>;
@@ -1775,7 +1797,7 @@ export type Sales_Order_By = {
   orgByOrg?: Maybe<Orgs_Order_By>;
   shop?: Maybe<Order_By>;
   shopByShop?: Maybe<Shops_Order_By>;
-  transaction?: Maybe<Transactions_Order_By>;
+  transactions_aggregate?: Maybe<Transactions_Aggregate_Order_By>;
   updatedAt?: Maybe<Order_By>;
   user?: Maybe<Order_By>;
   userByUser?: Maybe<Users_Order_By>;
@@ -2083,9 +2105,9 @@ export type Subscription_Root = {
   shops_aggregate: Shops_Aggregate;
   /** fetch data from the table: "shops" using primary key columns */
   shops_by_pk?: Maybe<Shops>;
-  /** fetch data from the table: "transactions" */
+  /** An array relationship */
   transactions: Array<Transactions>;
-  /** fetch aggregated fields from the table: "transactions" */
+  /** An aggregate relationship */
   transactions_aggregate: Transactions_Aggregate;
   /** fetch data from the table: "transactions" using primary key columns */
   transactions_by_pk?: Maybe<Transactions>;
@@ -2303,7 +2325,7 @@ export type Transactions = {
   p_code: Scalars['String'];
   sale: Scalars['uuid'];
   /** An object relationship */
-  saleById: Sales;
+  saleBySale: Sales;
 };
 
 /** aggregated selection of "transactions" */
@@ -2336,10 +2358,37 @@ export type Transactions_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "transactions" */
+export type Transactions_Aggregate_Order_By = {
+  avg?: Maybe<Transactions_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Transactions_Max_Order_By>;
+  min?: Maybe<Transactions_Min_Order_By>;
+  stddev?: Maybe<Transactions_Stddev_Order_By>;
+  stddev_pop?: Maybe<Transactions_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Transactions_Stddev_Samp_Order_By>;
+  sum?: Maybe<Transactions_Sum_Order_By>;
+  var_pop?: Maybe<Transactions_Var_Pop_Order_By>;
+  var_samp?: Maybe<Transactions_Var_Samp_Order_By>;
+  variance?: Maybe<Transactions_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "transactions" */
+export type Transactions_Arr_Rel_Insert_Input = {
+  data: Array<Transactions_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Transactions_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Transactions_Avg_Fields = {
   __typename?: 'transactions_avg_fields';
   count?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "transactions" */
+export type Transactions_Avg_Order_By = {
+  count?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "transactions". All fields are combined with a logical 'AND'. */
@@ -2351,7 +2400,7 @@ export type Transactions_Bool_Exp = {
   id?: Maybe<Uuid_Comparison_Exp>;
   p_code?: Maybe<String_Comparison_Exp>;
   sale?: Maybe<Uuid_Comparison_Exp>;
-  saleById?: Maybe<Sales_Bool_Exp>;
+  saleBySale?: Maybe<Sales_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "transactions" */
@@ -2371,7 +2420,7 @@ export type Transactions_Insert_Input = {
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
   sale?: Maybe<Scalars['uuid']>;
-  saleById?: Maybe<Sales_Obj_Rel_Insert_Input>;
+  saleBySale?: Maybe<Sales_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -2383,6 +2432,14 @@ export type Transactions_Max_Fields = {
   sale?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "transactions" */
+export type Transactions_Max_Order_By = {
+  count?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  p_code?: Maybe<Order_By>;
+  sale?: Maybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Transactions_Min_Fields = {
   __typename?: 'transactions_min_fields';
@@ -2392,6 +2449,14 @@ export type Transactions_Min_Fields = {
   sale?: Maybe<Scalars['uuid']>;
 };
 
+/** order by min() on columns of table "transactions" */
+export type Transactions_Min_Order_By = {
+  count?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  p_code?: Maybe<Order_By>;
+  sale?: Maybe<Order_By>;
+};
+
 /** response of any mutation on the table "transactions" */
 export type Transactions_Mutation_Response = {
   __typename?: 'transactions_mutation_response';
@@ -2399,13 +2464,6 @@ export type Transactions_Mutation_Response = {
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
   returning: Array<Transactions>;
-};
-
-/** input type for inserting object relation for remote table "transactions" */
-export type Transactions_Obj_Rel_Insert_Input = {
-  data: Transactions_Insert_Input;
-  /** upsert condition */
-  on_conflict?: Maybe<Transactions_On_Conflict>;
 };
 
 /** on_conflict condition type for table "transactions" */
@@ -2421,7 +2479,7 @@ export type Transactions_Order_By = {
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
   sale?: Maybe<Order_By>;
-  saleById?: Maybe<Sales_Order_By>;
+  saleBySale?: Maybe<Sales_Order_By>;
 };
 
 /** primary key columns input for table: transactions */
@@ -2455,10 +2513,20 @@ export type Transactions_Stddev_Fields = {
   count?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "transactions" */
+export type Transactions_Stddev_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Transactions_Stddev_Pop_Fields = {
   __typename?: 'transactions_stddev_pop_fields';
   count?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "transactions" */
+export type Transactions_Stddev_Pop_Order_By = {
+  count?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -2467,10 +2535,20 @@ export type Transactions_Stddev_Samp_Fields = {
   count?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_samp() on columns of table "transactions" */
+export type Transactions_Stddev_Samp_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
 /** aggregate sum on columns */
 export type Transactions_Sum_Fields = {
   __typename?: 'transactions_sum_fields';
   count?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "transactions" */
+export type Transactions_Sum_Order_By = {
+  count?: Maybe<Order_By>;
 };
 
 /** update columns of table "transactions" */
@@ -2491,16 +2569,31 @@ export type Transactions_Var_Pop_Fields = {
   count?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "transactions" */
+export type Transactions_Var_Pop_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Transactions_Var_Samp_Fields = {
   __typename?: 'transactions_var_samp_fields';
   count?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_samp() on columns of table "transactions" */
+export type Transactions_Var_Samp_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Transactions_Variance_Fields = {
   __typename?: 'transactions_variance_fields';
   count?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "transactions" */
+export type Transactions_Variance_Order_By = {
+  count?: Maybe<Order_By>;
 };
 
 /** holds user data */
@@ -2754,6 +2847,68 @@ export type FindproductQuery = (
   )> }
 );
 
+export type AddtransactionMutationVariables = Exact<{
+  objects?: Maybe<Array<Transactions_Insert_Input> | Transactions_Insert_Input>;
+}>;
+
+
+export type AddtransactionMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_transactions?: Maybe<(
+    { __typename?: 'transactions_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'transactions' }
+      & Pick<Transactions, 'id'>
+    )> }
+  )> }
+);
+
+export type SoldMutationVariables = Exact<{
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  user?: Maybe<Scalars['uuid']>;
+  data?: Maybe<Array<Transactions_Insert_Input> | Transactions_Insert_Input>;
+}>;
+
+
+export type SoldMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_sales?: Maybe<(
+    { __typename?: 'sales_mutation_response' }
+    & Pick<Sales_Mutation_Response, 'affected_rows'>
+    & { returning: Array<(
+      { __typename?: 'sales' }
+      & Pick<Sales, 'id'>
+    )> }
+  )> }
+);
+
+export type GetsalesQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetsalesQuery = (
+  { __typename?: 'query_root' }
+  & { sales: Array<(
+    { __typename?: 'sales' }
+    & Pick<Sales, 'createdAt' | 'id' | 'org'>
+    & { transactions: Array<(
+      { __typename?: 'transactions' }
+      & Pick<Transactions, 'count' | 'id' | 'p_code'>
+    )>, transactions_aggregate: (
+      { __typename?: 'transactions_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'transactions_aggregate_fields' }
+        & Pick<Transactions_Aggregate_Fields, 'count'>
+      )> }
+    ), userByUser: (
+      { __typename?: 'users' }
+      & Pick<Users, 'name'>
+    ) }
+  )> }
+);
+
 export type AddproductMutationVariables = Exact<{
   objects?: Maybe<Array<Products_Insert_Input> | Products_Insert_Input>;
 }>;
@@ -2870,6 +3025,132 @@ export function useFindproductLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type FindproductQueryHookResult = ReturnType<typeof useFindproductQuery>;
 export type FindproductLazyQueryHookResult = ReturnType<typeof useFindproductLazyQuery>;
 export type FindproductQueryResult = Apollo.QueryResult<FindproductQuery, FindproductQueryVariables>;
+export const AddtransactionDocument = gql`
+    mutation addtransaction($objects: [transactions_insert_input!] = {}) {
+  insert_transactions(objects: $objects) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export type AddtransactionMutationFn = Apollo.MutationFunction<AddtransactionMutation, AddtransactionMutationVariables>;
+
+/**
+ * __useAddtransactionMutation__
+ *
+ * To run a mutation, you first call `useAddtransactionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddtransactionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addtransactionMutation, { data, loading, error }] = useAddtransactionMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useAddtransactionMutation(baseOptions?: Apollo.MutationHookOptions<AddtransactionMutation, AddtransactionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddtransactionMutation, AddtransactionMutationVariables>(AddtransactionDocument, options);
+      }
+export type AddtransactionMutationHookResult = ReturnType<typeof useAddtransactionMutation>;
+export type AddtransactionMutationResult = Apollo.MutationResult<AddtransactionMutation>;
+export type AddtransactionMutationOptions = Apollo.BaseMutationOptions<AddtransactionMutation, AddtransactionMutationVariables>;
+export const SoldDocument = gql`
+    mutation sold($org: uuid = "", $shop: uuid = "", $user: uuid = "", $data: [transactions_insert_input!] = {}) {
+  insert_sales(
+    objects: {org: $org, shop: $shop, user: $user, transactions: {data: $data}}
+  ) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+    `;
+export type SoldMutationFn = Apollo.MutationFunction<SoldMutation, SoldMutationVariables>;
+
+/**
+ * __useSoldMutation__
+ *
+ * To run a mutation, you first call `useSoldMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSoldMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [soldMutation, { data, loading, error }] = useSoldMutation({
+ *   variables: {
+ *      org: // value for 'org'
+ *      shop: // value for 'shop'
+ *      user: // value for 'user'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSoldMutation(baseOptions?: Apollo.MutationHookOptions<SoldMutation, SoldMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SoldMutation, SoldMutationVariables>(SoldDocument, options);
+      }
+export type SoldMutationHookResult = ReturnType<typeof useSoldMutation>;
+export type SoldMutationResult = Apollo.MutationResult<SoldMutation>;
+export type SoldMutationOptions = Apollo.BaseMutationOptions<SoldMutation, SoldMutationVariables>;
+export const GetsalesDocument = gql`
+    query getsales($limit: Int = 1) {
+  sales(order_by: {createdAt: desc}) {
+    createdAt
+    id
+    org
+    transactions {
+      count
+      id
+      p_code
+    }
+    transactions_aggregate(limit: $limit) {
+      aggregate {
+        count
+      }
+    }
+    userByUser {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetsalesQuery__
+ *
+ * To run a query within a React component, call `useGetsalesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetsalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetsalesQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useGetsalesQuery(baseOptions?: Apollo.QueryHookOptions<GetsalesQuery, GetsalesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetsalesQuery, GetsalesQueryVariables>(GetsalesDocument, options);
+      }
+export function useGetsalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetsalesQuery, GetsalesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetsalesQuery, GetsalesQueryVariables>(GetsalesDocument, options);
+        }
+export type GetsalesQueryHookResult = ReturnType<typeof useGetsalesQuery>;
+export type GetsalesLazyQueryHookResult = ReturnType<typeof useGetsalesLazyQuery>;
+export type GetsalesQueryResult = Apollo.QueryResult<GetsalesQuery, GetsalesQueryVariables>;
 export const AddproductDocument = gql`
     mutation addproduct($objects: [products_insert_input!] = {}) {
   insert_products(objects: $objects) {

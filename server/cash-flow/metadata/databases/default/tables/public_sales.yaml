@@ -8,13 +8,14 @@ object_relationships:
   - name: shopByShop
     using:
       foreign_key_constraint_on: shop
-  - name: transaction
-    using:
-      foreign_key_constraint_on:
-        column: id
-        table:
-          schema: public
-          name: transactions
   - name: userByUser
     using:
       foreign_key_constraint_on: user
+array_relationships:
+  - name: transactions
+    using:
+      foreign_key_constraint_on:
+        column: sale
+        table:
+          schema: public
+          name: transactions

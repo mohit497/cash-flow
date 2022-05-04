@@ -8,3 +8,42 @@ query findproduct($_iregex: String = "", $_iregex1: String = "") {
     org
   }
 }
+
+mutation addtransaction($objects: [transactions_insert_input!] = {}) {
+  insert_transactions(objects: $objects) {
+    returning {
+      id
+    }
+  }
+}
+
+mutation sold($org: uuid = "", $shop: uuid = "", $user: uuid = "", $data: [transactions_insert_input!] = {}) {
+  insert_sales(objects: {org: $org, shop: $shop, user: $user, transactions: {data: $data}}) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+query getsales($limit: Int = 1) {
+  sales(order_by: {createdAt: desc}) {
+    createdAt
+    id
+    org
+    transactions {
+      count
+      id
+      p_code
+    }
+    transactions_aggregate(limit: $limit) {
+      aggregate {
+        count
+      }
+    }
+    userByUser {
+      name
+    }
+  }
+}
+

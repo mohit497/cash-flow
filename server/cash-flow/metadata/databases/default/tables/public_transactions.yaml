@@ -2,6 +2,6 @@ table:
   schema: public
   name: transactions
 object_relationships:
-  - name: saleById
+  - name: saleBySale
     using:
-      foreign_key_constraint_on: id
+      foreign_key_constraint_on: sale
