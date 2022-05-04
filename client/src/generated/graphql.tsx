@@ -2740,6 +2740,20 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
+export type FindproductQueryVariables = Exact<{
+  _iregex?: Maybe<Scalars['String']>;
+  _iregex1?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindproductQuery = (
+  { __typename?: 'query_root' }
+  & { products: Array<(
+    { __typename?: 'products' }
+    & Pick<Products, 'amount' | 'code' | 'createdAt' | 'id' | 'name' | 'org'>
+  )> }
+);
+
 export type AddproductMutationVariables = Exact<{
   objects?: Maybe<Array<Products_Insert_Input> | Products_Insert_Input>;
 }>;
@@ -2815,6 +2829,47 @@ export type GetproductsQuery = (
 );
 
 
+export const FindproductDocument = gql`
+    query findproduct($_iregex: String = "", $_iregex1: String = "") {
+  products(where: {_or: {name: {_iregex: $_iregex}, code: {_iregex: $_iregex1}}}) {
+    amount
+    code
+    createdAt
+    id
+    name
+    org
+  }
+}
+    `;
+
+/**
+ * __useFindproductQuery__
+ *
+ * To run a query within a React component, call `useFindproductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindproductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindproductQuery({
+ *   variables: {
+ *      _iregex: // value for '_iregex'
+ *      _iregex1: // value for '_iregex1'
+ *   },
+ * });
+ */
+export function useFindproductQuery(baseOptions?: Apollo.QueryHookOptions<FindproductQuery, FindproductQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindproductQuery, FindproductQueryVariables>(FindproductDocument, options);
+      }
+export function useFindproductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindproductQuery, FindproductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindproductQuery, FindproductQueryVariables>(FindproductDocument, options);
+        }
+export type FindproductQueryHookResult = ReturnType<typeof useFindproductQuery>;
+export type FindproductLazyQueryHookResult = ReturnType<typeof useFindproductLazyQuery>;
+export type FindproductQueryResult = Apollo.QueryResult<FindproductQuery, FindproductQueryVariables>;
 export const AddproductDocument = gql`
     mutation addproduct($objects: [products_insert_input!] = {}) {
   insert_products(objects: $objects) {

@@ -10,7 +10,6 @@ export default function Products() {
     return (
         <Container>
             <h1 className='p-3 pull-left'> Products</h1>
-
             <AddProduct />
             <ActionsHeader />
             <Table striped bordered hover>

@@ -1,0 +1,10 @@
+query findproduct($_iregex: String = "", $_iregex1: String = "") {
+  products(where: {_or: {name: {_iregex: $_iregex}, code: {_iregex: $_iregex1}}}) {
+    amount
+    code
+    createdAt
+    id
+    name
+    org
+  }
+}
