@@ -389,6 +389,298 @@ export enum Active_Roles_Update_Column {
   User = 'user'
 }
 
+/** holds product inventory */
+export type Inventory = {
+  __typename?: 'inventory';
+  count: Scalars['Int'];
+  createdAt: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  p_code: Scalars['String'];
+  /** An object relationship */
+  product: Products;
+  updatedAt: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "inventory" */
+export type Inventory_Aggregate = {
+  __typename?: 'inventory_aggregate';
+  aggregate?: Maybe<Inventory_Aggregate_Fields>;
+  nodes: Array<Inventory>;
+};
+
+/** aggregate fields of "inventory" */
+export type Inventory_Aggregate_Fields = {
+  __typename?: 'inventory_aggregate_fields';
+  avg?: Maybe<Inventory_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Inventory_Max_Fields>;
+  min?: Maybe<Inventory_Min_Fields>;
+  stddev?: Maybe<Inventory_Stddev_Fields>;
+  stddev_pop?: Maybe<Inventory_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Inventory_Stddev_Samp_Fields>;
+  sum?: Maybe<Inventory_Sum_Fields>;
+  var_pop?: Maybe<Inventory_Var_Pop_Fields>;
+  var_samp?: Maybe<Inventory_Var_Samp_Fields>;
+  variance?: Maybe<Inventory_Variance_Fields>;
+};
+
+
+/** aggregate fields of "inventory" */
+export type Inventory_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Inventory_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "inventory" */
+export type Inventory_Aggregate_Order_By = {
+  avg?: Maybe<Inventory_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Inventory_Max_Order_By>;
+  min?: Maybe<Inventory_Min_Order_By>;
+  stddev?: Maybe<Inventory_Stddev_Order_By>;
+  stddev_pop?: Maybe<Inventory_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Inventory_Stddev_Samp_Order_By>;
+  sum?: Maybe<Inventory_Sum_Order_By>;
+  var_pop?: Maybe<Inventory_Var_Pop_Order_By>;
+  var_samp?: Maybe<Inventory_Var_Samp_Order_By>;
+  variance?: Maybe<Inventory_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "inventory" */
+export type Inventory_Arr_Rel_Insert_Input = {
+  data: Array<Inventory_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Inventory_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Inventory_Avg_Fields = {
+  __typename?: 'inventory_avg_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "inventory" */
+export type Inventory_Avg_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "inventory". All fields are combined with a logical 'AND'. */
+export type Inventory_Bool_Exp = {
+  _and?: Maybe<Array<Inventory_Bool_Exp>>;
+  _not?: Maybe<Inventory_Bool_Exp>;
+  _or?: Maybe<Array<Inventory_Bool_Exp>>;
+  count?: Maybe<Int_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  p_code?: Maybe<String_Comparison_Exp>;
+  product?: Maybe<Products_Bool_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "inventory" */
+export enum Inventory_Constraint {
+  /** unique or primary key constraint */
+  InventoryPkey = 'inventory_pkey'
+}
+
+/** input type for incrementing numeric columns in table "inventory" */
+export type Inventory_Inc_Input = {
+  count?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "inventory" */
+export type Inventory_Insert_Input = {
+  count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  product?: Maybe<Products_Obj_Rel_Insert_Input>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Inventory_Max_Fields = {
+  __typename?: 'inventory_max_fields';
+  count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "inventory" */
+export type Inventory_Max_Order_By = {
+  count?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  p_code?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Inventory_Min_Fields = {
+  __typename?: 'inventory_min_fields';
+  count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "inventory" */
+export type Inventory_Min_Order_By = {
+  count?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  p_code?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "inventory" */
+export type Inventory_Mutation_Response = {
+  __typename?: 'inventory_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Inventory>;
+};
+
+/** on_conflict condition type for table "inventory" */
+export type Inventory_On_Conflict = {
+  constraint: Inventory_Constraint;
+  update_columns?: Array<Inventory_Update_Column>;
+  where?: Maybe<Inventory_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "inventory". */
+export type Inventory_Order_By = {
+  count?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  p_code?: Maybe<Order_By>;
+  product?: Maybe<Products_Order_By>;
+  updatedAt?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: inventory */
+export type Inventory_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "inventory" */
+export enum Inventory_Select_Column {
+  /** column name */
+  Count = 'count',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PCode = 'p_code',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** input type for updating data in table "inventory" */
+export type Inventory_Set_Input = {
+  count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Inventory_Stddev_Fields = {
+  __typename?: 'inventory_stddev_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "inventory" */
+export type Inventory_Stddev_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Inventory_Stddev_Pop_Fields = {
+  __typename?: 'inventory_stddev_pop_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "inventory" */
+export type Inventory_Stddev_Pop_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Inventory_Stddev_Samp_Fields = {
+  __typename?: 'inventory_stddev_samp_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "inventory" */
+export type Inventory_Stddev_Samp_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Inventory_Sum_Fields = {
+  __typename?: 'inventory_sum_fields';
+  count?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "inventory" */
+export type Inventory_Sum_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
+/** update columns of table "inventory" */
+export enum Inventory_Update_Column {
+  /** column name */
+  Count = 'count',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PCode = 'p_code',
+  /** column name */
+  UpdatedAt = 'updatedAt'
+}
+
+/** aggregate var_pop on columns */
+export type Inventory_Var_Pop_Fields = {
+  __typename?: 'inventory_var_pop_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "inventory" */
+export type Inventory_Var_Pop_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Inventory_Var_Samp_Fields = {
+  __typename?: 'inventory_var_samp_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "inventory" */
+export type Inventory_Var_Samp_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Inventory_Variance_Fields = {
+  __typename?: 'inventory_variance_fields';
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "inventory" */
+export type Inventory_Variance_Order_By = {
+  count?: Maybe<Order_By>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
@@ -400,6 +692,10 @@ export type Mutation_Root = {
   delete_active_roles?: Maybe<Active_Roles_Mutation_Response>;
   /** delete single row from the table: "active_roles" */
   delete_active_roles_by_pk?: Maybe<Active_Roles>;
+  /** delete data from the table: "inventory" */
+  delete_inventory?: Maybe<Inventory_Mutation_Response>;
+  /** delete single row from the table: "inventory" */
+  delete_inventory_by_pk?: Maybe<Inventory>;
   /** delete data from the table: "orgs" */
   delete_orgs?: Maybe<Orgs_Mutation_Response>;
   /** delete single row from the table: "orgs" */
@@ -432,6 +728,10 @@ export type Mutation_Root = {
   insert_active_roles?: Maybe<Active_Roles_Mutation_Response>;
   /** insert a single row into the table: "active_roles" */
   insert_active_roles_one?: Maybe<Active_Roles>;
+  /** insert data into the table: "inventory" */
+  insert_inventory?: Maybe<Inventory_Mutation_Response>;
+  /** insert a single row into the table: "inventory" */
+  insert_inventory_one?: Maybe<Inventory>;
   /** insert data into the table: "orgs" */
   insert_orgs?: Maybe<Orgs_Mutation_Response>;
   /** insert a single row into the table: "orgs" */
@@ -464,6 +764,10 @@ export type Mutation_Root = {
   update_active_roles?: Maybe<Active_Roles_Mutation_Response>;
   /** update single row of the table: "active_roles" */
   update_active_roles_by_pk?: Maybe<Active_Roles>;
+  /** update data of the table: "inventory" */
+  update_inventory?: Maybe<Inventory_Mutation_Response>;
+  /** update single row of the table: "inventory" */
+  update_inventory_by_pk?: Maybe<Inventory>;
   /** update data of the table: "orgs" */
   update_orgs?: Maybe<Orgs_Mutation_Response>;
   /** update single row of the table: "orgs" */
@@ -511,6 +815,18 @@ export type Mutation_RootDelete_Active_RolesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Active_Roles_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_InventoryArgs = {
+  where: Inventory_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Inventory_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -612,6 +928,20 @@ export type Mutation_RootInsert_Active_RolesArgs = {
 export type Mutation_RootInsert_Active_Roles_OneArgs = {
   object: Active_Roles_Insert_Input;
   on_conflict?: Maybe<Active_Roles_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_InventoryArgs = {
+  objects: Array<Inventory_Insert_Input>;
+  on_conflict?: Maybe<Inventory_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Inventory_OneArgs = {
+  object: Inventory_Insert_Input;
+  on_conflict?: Maybe<Inventory_On_Conflict>;
 };
 
 
@@ -724,6 +1054,22 @@ export type Mutation_RootUpdate_Active_RolesArgs = {
 export type Mutation_RootUpdate_Active_Roles_By_PkArgs = {
   _set?: Maybe<Active_Roles_Set_Input>;
   pk_columns: Active_Roles_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_InventoryArgs = {
+  _inc?: Maybe<Inventory_Inc_Input>;
+  _set?: Maybe<Inventory_Set_Input>;
+  where: Inventory_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Inventory_By_PkArgs = {
+  _inc?: Maybe<Inventory_Inc_Input>;
+  _set?: Maybe<Inventory_Set_Input>;
+  pk_columns: Inventory_Pk_Columns_Input;
 };
 
 
@@ -1063,11 +1409,35 @@ export type Products = {
   code: Scalars['String'];
   createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
+  /** An array relationship */
+  inventories: Array<Inventory>;
+  /** An aggregate relationship */
+  inventories_aggregate: Inventory_Aggregate;
   name: Scalars['String'];
   org: Scalars['uuid'];
   /** An object relationship */
   orgByOrg: Orgs;
   updatedAt: Scalars['timestamptz'];
+};
+
+
+/** holds product information */
+export type ProductsInventoriesArgs = {
+  distinct_on?: Maybe<Array<Inventory_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Inventory_Order_By>>;
+  where?: Maybe<Inventory_Bool_Exp>;
+};
+
+
+/** holds product information */
+export type ProductsInventories_AggregateArgs = {
+  distinct_on?: Maybe<Array<Inventory_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Inventory_Order_By>>;
+  where?: Maybe<Inventory_Bool_Exp>;
 };
 
 /** aggregated selection of "products" */
@@ -1142,6 +1512,7 @@ export type Products_Bool_Exp = {
   code?: Maybe<String_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
+  inventories?: Maybe<Inventory_Bool_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   org?: Maybe<Uuid_Comparison_Exp>;
   orgByOrg?: Maybe<Orgs_Bool_Exp>;
@@ -1151,7 +1522,9 @@ export type Products_Bool_Exp = {
 /** unique or primary key constraints on table "products" */
 export enum Products_Constraint {
   /** unique or primary key constraint */
-  ProductPkey = 'product_pkey'
+  ProductPkey = 'product_pkey',
+  /** unique or primary key constraint */
+  ProductsCodeKey = 'products_code_key'
 }
 
 /** input type for incrementing numeric columns in table "products" */
@@ -1165,6 +1538,7 @@ export type Products_Insert_Input = {
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
+  inventories?: Maybe<Inventory_Arr_Rel_Insert_Input>;
   name?: Maybe<Scalars['String']>;
   org?: Maybe<Scalars['uuid']>;
   orgByOrg?: Maybe<Orgs_Obj_Rel_Insert_Input>;
@@ -1226,6 +1600,13 @@ export type Products_Mutation_Response = {
   returning: Array<Products>;
 };
 
+/** input type for inserting object relation for remote table "products" */
+export type Products_Obj_Rel_Insert_Input = {
+  data: Products_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Products_On_Conflict>;
+};
+
 /** on_conflict condition type for table "products" */
 export type Products_On_Conflict = {
   constraint: Products_Constraint;
@@ -1239,6 +1620,7 @@ export type Products_Order_By = {
   code?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  inventories_aggregate?: Maybe<Inventory_Aggregate_Order_By>;
   name?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
   orgByOrg?: Maybe<Orgs_Order_By>;
@@ -1388,6 +1770,12 @@ export type Query_Root = {
   active_roles_aggregate: Active_Roles_Aggregate;
   /** fetch data from the table: "active_roles" using primary key columns */
   active_roles_by_pk?: Maybe<Active_Roles>;
+  /** fetch data from the table: "inventory" */
+  inventory: Array<Inventory>;
+  /** fetch aggregated fields from the table: "inventory" */
+  inventory_aggregate: Inventory_Aggregate;
+  /** fetch data from the table: "inventory" using primary key columns */
+  inventory_by_pk?: Maybe<Inventory>;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
   /** fetch aggregated fields from the table: "orgs" */
@@ -1469,6 +1857,29 @@ export type Query_RootActive_Roles_AggregateArgs = {
 
 
 export type Query_RootActive_Roles_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootInventoryArgs = {
+  distinct_on?: Maybe<Array<Inventory_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Inventory_Order_By>>;
+  where?: Maybe<Inventory_Bool_Exp>;
+};
+
+
+export type Query_RootInventory_AggregateArgs = {
+  distinct_on?: Maybe<Array<Inventory_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Inventory_Order_By>>;
+  where?: Maybe<Inventory_Bool_Exp>;
+};
+
+
+export type Query_RootInventory_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -2081,6 +2492,12 @@ export type Subscription_Root = {
   active_roles_aggregate: Active_Roles_Aggregate;
   /** fetch data from the table: "active_roles" using primary key columns */
   active_roles_by_pk?: Maybe<Active_Roles>;
+  /** fetch data from the table: "inventory" */
+  inventory: Array<Inventory>;
+  /** fetch aggregated fields from the table: "inventory" */
+  inventory_aggregate: Inventory_Aggregate;
+  /** fetch data from the table: "inventory" using primary key columns */
+  inventory_by_pk?: Maybe<Inventory>;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
   /** fetch aggregated fields from the table: "orgs" */
@@ -2162,6 +2579,29 @@ export type Subscription_RootActive_Roles_AggregateArgs = {
 
 
 export type Subscription_RootActive_Roles_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootInventoryArgs = {
+  distinct_on?: Maybe<Array<Inventory_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Inventory_Order_By>>;
+  where?: Maybe<Inventory_Bool_Exp>;
+};
+
+
+export type Subscription_RootInventory_AggregateArgs = {
+  distinct_on?: Maybe<Array<Inventory_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Inventory_Order_By>>;
+  where?: Maybe<Inventory_Bool_Exp>;
+};
+
+
+export type Subscription_RootInventory_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -2961,6 +3401,44 @@ export type AddshopMutation = (
   )> }
 );
 
+export type GetinventoryQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  _iregex?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetinventoryQuery = (
+  { __typename?: 'query_root' }
+  & { products: Array<(
+    { __typename?: 'products' }
+    & Pick<Products, 'amount' | 'code' | 'createdAt' | 'id' | 'name' | 'org'>
+    & { inventories_aggregate: (
+      { __typename?: 'inventory_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'inventory_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'inventory_sum_fields' }
+          & Pick<Inventory_Sum_Fields, 'count'>
+        )> }
+      )> }
+    ) }
+  )> }
+);
+
+export type AddinventoryMutationVariables = Exact<{
+  object?: Maybe<Inventory_Insert_Input>;
+}>;
+
+
+export type AddinventoryMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_inventory_one?: Maybe<(
+    { __typename?: 'inventory' }
+    & Pick<Inventory, 'count' | 'createdAt' | 'id' | 'p_code' | 'updatedAt'>
+  )> }
+);
+
 export type GetusersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3272,6 +3750,92 @@ export function useAddshopMutation(baseOptions?: Apollo.MutationHookOptions<Adds
 export type AddshopMutationHookResult = ReturnType<typeof useAddshopMutation>;
 export type AddshopMutationResult = Apollo.MutationResult<AddshopMutation>;
 export type AddshopMutationOptions = Apollo.BaseMutationOptions<AddshopMutation, AddshopMutationVariables>;
+export const GetinventoryDocument = gql`
+    query getinventory($limit: Int = 10, $offset: Int = 10, $_iregex: String = "") {
+  products(limit: $limit, offset: $offset, where: {name: {_iregex: $_iregex}}) {
+    amount
+    code
+    createdAt
+    id
+    inventories_aggregate {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    name
+    org
+  }
+}
+    `;
+
+/**
+ * __useGetinventoryQuery__
+ *
+ * To run a query within a React component, call `useGetinventoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetinventoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetinventoryQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      _iregex: // value for '_iregex'
+ *   },
+ * });
+ */
+export function useGetinventoryQuery(baseOptions?: Apollo.QueryHookOptions<GetinventoryQuery, GetinventoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetinventoryQuery, GetinventoryQueryVariables>(GetinventoryDocument, options);
+      }
+export function useGetinventoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetinventoryQuery, GetinventoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetinventoryQuery, GetinventoryQueryVariables>(GetinventoryDocument, options);
+        }
+export type GetinventoryQueryHookResult = ReturnType<typeof useGetinventoryQuery>;
+export type GetinventoryLazyQueryHookResult = ReturnType<typeof useGetinventoryLazyQuery>;
+export type GetinventoryQueryResult = Apollo.QueryResult<GetinventoryQuery, GetinventoryQueryVariables>;
+export const AddinventoryDocument = gql`
+    mutation addinventory($object: inventory_insert_input = {}) {
+  insert_inventory_one(object: $object) {
+    count
+    createdAt
+    id
+    p_code
+    updatedAt
+  }
+}
+    `;
+export type AddinventoryMutationFn = Apollo.MutationFunction<AddinventoryMutation, AddinventoryMutationVariables>;
+
+/**
+ * __useAddinventoryMutation__
+ *
+ * To run a mutation, you first call `useAddinventoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddinventoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addinventoryMutation, { data, loading, error }] = useAddinventoryMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useAddinventoryMutation(baseOptions?: Apollo.MutationHookOptions<AddinventoryMutation, AddinventoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddinventoryMutation, AddinventoryMutationVariables>(AddinventoryDocument, options);
+      }
+export type AddinventoryMutationHookResult = ReturnType<typeof useAddinventoryMutation>;
+export type AddinventoryMutationResult = Apollo.MutationResult<AddinventoryMutation>;
+export type AddinventoryMutationOptions = Apollo.BaseMutationOptions<AddinventoryMutation, AddinventoryMutationVariables>;
 export const GetusersDocument = gql`
     query getusers {
   users {

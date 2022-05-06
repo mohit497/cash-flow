@@ -1,3 +1,4 @@
+import Loading from "components/loader/loader";
 import { useGetproductsQuery } from "generated/graphql";
 import { Container, Table } from "react-bootstrap";
 import ActionsHeader from "./actionsHeader";
@@ -5,10 +6,11 @@ import AddProduct from "./addProduct";
 
 export default function Products() {
 
-    const { data } = useGetproductsQuery()
+    const { data, loading } = useGetproductsQuery()
 
     return (
         <Container>
+            { loading &&  <Loading />}
             <h1 className='p-3 pull-left'> Products</h1>
             <AddProduct />
             <ActionsHeader />

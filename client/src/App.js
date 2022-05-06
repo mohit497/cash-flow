@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import Products from 'components/product/products';
 import Cashier from 'components/cashier/cashier';
+import Store from 'components/store/store';
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
         <Header />
         <Container fluid>
           <Row className='w-100'>
-            {!!role &&
+            {!role &&
               <Col xs={2} md={3}>
                 <SideMenu />
               </Col>
@@ -38,7 +39,8 @@ function App() {
                 </Route>
                 <Route exact path="/shops" element={<Shops />}>
                 </Route>
-                <Route exact path="/cashier" element={<Cashier />}>
+                <Route exact path="/cashier" element={<Cashier />}></Route>
+                <Route exact path="/store" element={<Store />}>
                 </Route>
               </Routes>
             </Col>

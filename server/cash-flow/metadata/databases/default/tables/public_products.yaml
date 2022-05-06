@@ -5,3 +5,11 @@ object_relationships:
   - name: orgByOrg
     using:
       foreign_key_constraint_on: org
+array_relationships:
+  - name: inventories
+    using:
+      foreign_key_constraint_on:
+        column: p_code
+        table:
+          schema: public
+          name: inventory

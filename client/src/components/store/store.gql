@@ -1,0 +1,27 @@
+query getinventory($limit: Int = 10, $offset: Int = 10, $_iregex: String = "") {
+  products(limit: $limit, offset: $offset, where: {name: {_iregex: $_iregex}}) {
+    amount
+    code
+    createdAt
+    id
+    inventories_aggregate {
+      aggregate {
+        sum {
+          count
+        }
+              }
+    }
+    name
+    org
+  }
+}
+
+mutation addinventory($object: inventory_insert_input = {}) {
+  insert_inventory_one(object: $object) {
+    count
+    createdAt
+    id
+    p_code
+    updatedAt
+  }
+}

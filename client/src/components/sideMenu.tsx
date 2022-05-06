@@ -6,8 +6,8 @@ export default function SideMenu() {
             <Nav defaultActiveKey="/home" className="flex-column">
                 <Nav.Link href="/products">Products</Nav.Link>
                 <Nav.Link href="/shops">Shops</Nav.Link>
-                <Nav.Link eventKey="disabled" disabled>
-                    Disabled
+                <Nav.Link href="/store">
+                    store
                 </Nav.Link>
             </Nav>
         </div>
