@@ -14,6 +14,7 @@ import {
 import Products from 'components/product/products';
 import Cashier from 'components/cashier/cashier';
 import Store from 'components/store/store';
+import Login from 'components/login';
 
 function App() {
 
@@ -41,6 +42,8 @@ function App() {
                 </Route>
                 <Route exact path="/cashier" element={<Cashier />}></Route>
                 <Route exact path="/store" element={<Store />}>
+                </Route>
+                <Route exact path="/login" element={<Login />}>
                 </Route>
               </Routes>
             </Col>
