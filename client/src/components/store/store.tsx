@@ -1,7 +1,7 @@
 import Loading from "components/loader/loader";
 import { Products, useGetinventoryQuery } from "generated/graphql";
 import { useState } from "react";
-import { Container, FormControl, Table } from "react-bootstrap";
+import { Container, FormControl, Row, Table } from "react-bootstrap";
 import AddItem from "./addItem";
 
 export default function Store() {
@@ -22,6 +22,7 @@ export default function Store() {
         <Container>
             { loading &&  <Loading />}
             <h1 className='p-3 pull-left'> Products</h1>
+            <Row className="my-2">
             <FormControl
                     placeholder="search by product name"
                     aria-label="no of items"
@@ -29,6 +30,7 @@ export default function Store() {
                     onChange={ handleChange}
                     value={name}
                 />
+                </Row>
             <Table striped bordered hover>
                 <thead>
                     <tr>

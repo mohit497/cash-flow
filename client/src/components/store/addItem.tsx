@@ -29,6 +29,7 @@ export default function AddItem(product: Products) {
         <div>
             <InputGroup className="mb-3">
                 <FormControl
+                    size="sm"
                     placeholder="no of items"
                     aria-label="no of items"
                     aria-describedby="basic-addon2"
