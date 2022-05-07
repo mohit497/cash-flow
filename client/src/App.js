@@ -15,10 +15,13 @@ import Products from 'components/product/products';
 import Cashier from 'components/cashier/cashier';
 import Store from 'components/store/store';
 import Login from 'components/login';
+import { useAuth } from 'hooks/useAuth';
 
 function App() {
-
+  
+  const { isLoggedIn } = useAuth()
   const role = getUserRole()
+
 
   return (
     <div className="App">
@@ -26,12 +29,11 @@ function App() {
         <Header />
         <Container fluid>
           <Row className='w-100'>
-            {!role &&
+            {!role && isLoggedIn() &&
               <Col xs={2} md={3}>
                 <SideMenu />
               </Col>
             }
-
             <Col>
               <Routes>
                 <Route exact path="/" element={<Home />}>
