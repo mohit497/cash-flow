@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "concurrently \"cd client && npm run start\" \" cd server && npm run start \"",
+    "start": "concurrently \"cd client && npm run start\" \" cd server && npm run start:dev \"",
     "start:con": "concurrently \"cd server && npm run start:console:staging\" "
 
   },
