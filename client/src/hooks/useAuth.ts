@@ -11,7 +11,6 @@ export function useAuth() {
     const login = (username: string, password: string) => {
         return axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { username, password })
             .then((res) => {
-                console.log(res.status, '$$$$')
                 if (res.status === 201) {
                     localStorage.setItem('token', res.data.access_token);
                     navigate('/')

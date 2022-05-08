@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import BarcodeReader from 'react-barcode-reader'
 import './style.scss'
 import { useAddproductMutation , GetproductsDocument } from "generated/graphql";
+import useNotifications from "hooks/useNotifications";
 
 var Barcode = require('react-barcode');
 
@@ -14,6 +15,7 @@ interface ProductForm {
 
 export default function AddProduct() {
     const [barcode, setbarcode] = useState('123456789012');
+    const { showNotifications  } = useNotifications()
 
     const [form, setform] = useState<ProductForm>({
         name: '',
@@ -44,6 +46,8 @@ export default function AddProduct() {
             refetchQueries:[{ query: GetproductsDocument}]
         }).catch((e)=>{
             console.error(e)
+        }).then(()=>{
+            showNotifications('product added ', "success")
         })
     }
 
