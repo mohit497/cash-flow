@@ -68,7 +68,7 @@ export default function AddProduct() {
                 <Col xs={3} className="bar-code">
                     <Barcode value={barcode} />
                 </Col>
-                <Col >
+                <Col  >
                     <Form.Control onChange={handleChange}  name="total" value={form.total} type="text" placeholder="total units" />
                 </Col>
                 <Col>

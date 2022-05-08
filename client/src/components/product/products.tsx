@@ -1,6 +1,6 @@
 import Loading from "components/loader/loader";
 import { useGetproductsQuery } from "generated/graphql";
-import { Container, Table } from "react-bootstrap";
+import { Breadcrumb, Container, Table } from "react-bootstrap";
 import ActionsHeader from "./actionsHeader";
 import AddProduct from "./addProduct";
 
@@ -10,8 +10,10 @@ export default function Products() {
 
     return (
         <Container>
-            { loading &&  <Loading />}
-            <h1 className='p-3 pull-left'> Products</h1>
+            {loading && <Loading />}
+            <Breadcrumb>
+                <Breadcrumb.Item active>Products</Breadcrumb.Item>
+            </Breadcrumb>
             <AddProduct />
             <ActionsHeader />
             <Table striped bordered hover>

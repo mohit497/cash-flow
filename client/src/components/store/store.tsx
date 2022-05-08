@@ -1,7 +1,7 @@
 import Loading from "components/loader/loader";
 import { Products, useGetinventoryQuery } from "generated/graphql";
 import { useState } from "react";
-import { Container, FormControl, Row, Table } from "react-bootstrap";
+import { Breadcrumb, Col, Container, FormControl, Row, Table } from "react-bootstrap";
 import AddItem from "./addItem";
 
 export default function Store() {
@@ -11,26 +11,30 @@ export default function Store() {
     }
 
     const { data, loading } = useGetinventoryQuery({
-        variables:{
+        variables: {
             limit: 10,
-            offset:0,
+            offset: 0,
             _iregex: name
         }
     })
 
     return (
         <Container>
-            { loading &&  <Loading />}
-            <h1 className='p-3 pull-left'> Products</h1>
-            <Row className="my-2">
-            <FormControl
-                    placeholder="search by product name"
-                    aria-label="no of items"
-                    aria-describedby="basic-addon2"
-                    onChange={ handleChange}
-                    value={name}
-                />
-                </Row>
+            {loading && <Loading />}
+            <Breadcrumb>
+                <Breadcrumb.Item active>Store</Breadcrumb.Item>
+            </Breadcrumb>
+            <Row className="my-2 justify-content-center">
+                <Col lg={9}>
+                    <FormControl
+                        placeholder="search by product name"
+                        aria-label="no of items"
+                        aria-describedby="basic-addon2"
+                        onChange={handleChange}
+                        value={name}
+                    />
+                </Col>
+            </Row>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -51,7 +55,7 @@ export default function Store() {
                                 <td>{item.amount}</td>
                                 <td>{item.code}</td>
                                 <td>{item.inventories_aggregate.aggregate?.sum?.count}</td>
-                                <td><AddItem {...item as Products}/> </td>
+                                <td><AddItem {...item as Products} /> </td>
 
                             </tr>
                         })

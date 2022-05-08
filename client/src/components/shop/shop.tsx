@@ -1,6 +1,6 @@
 import ActionsHeader from "components/product/actionsHeader"
 import { useGetshopsQuery } from "generated/graphql"
-import { Container, Table } from "react-bootstrap"
+import { Breadcrumb, Container, Table } from "react-bootstrap"
 import AddShop from "./addShop"
 
 
@@ -15,6 +15,9 @@ export default function Shops() {
     return (
 
         <Container>
+            <Breadcrumb>
+                <Breadcrumb.Item active>Shops</Breadcrumb.Item>
+            </Breadcrumb>
             <AddShop />
             <ActionsHeader />
             <Table striped bordered hover>

@@ -22,9 +22,7 @@ export default function Login() {
     }
 
     const handleSubmit = () => {
-        login(form.username, form.password).then((a)=>{
-            navigate('/')
-        })
+        login(form.username, form.password);
     }
 
     useEffect(() => {

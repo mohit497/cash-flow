@@ -78,7 +78,7 @@ export default function Cashier() {
                 </Col>
                 <Col md={3} className="info-col">
                     <Numpad />
-                    <Row>
+                    <Row className="my-1">
                         {
                             data?.sales.map((sale) => {
                                 return <Col xs={12}><SaleCard {...sale as Sales} /></Col>

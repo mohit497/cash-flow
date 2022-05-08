@@ -7,7 +7,7 @@ export default function SideMenu() {
                 <Nav.Link href="/products">Products</Nav.Link>
                 <Nav.Link href="/shops">Shops</Nav.Link>
                 <Nav.Link href="/store">
-                    store
+                    Store
                 </Nav.Link>
             </Nav>
         </div>
