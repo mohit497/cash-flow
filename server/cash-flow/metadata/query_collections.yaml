@@ -3,8 +3,8 @@
     queries:
       - name: user
         query: |
-          query MyQuery {
-          	users {
+          query MyQuery ($user: String = "") {
+          	users(where: {email:{_eq:$user}}) {
           		id
           		name
           		pwd

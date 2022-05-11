@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
-
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const superagent = require('superagent');
 // This should be a real class/interface representing a user entity
 export type User = any;
 
@@ -16,9 +17,28 @@ export class UsersService {
       username: 'maria',
       password: 'guess',
     },
+    {
+      userId: 2,
+      username: 'test@test.com',
+      password: 'guess',
+    },
   ];
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+    let res;
+    try {
+      res = await superagent
+        .get(`${process.env.HASURA_ENDPOINT}/api/rest/user/${username}`)
+        .set('x-hasura-admin-secret', process.env.HASURA_SECRET);
+    } catch (e) {
+      console.log(e);
+    }
+    const data = JSON.parse(res.text);
+
+    //  check if user exists
+    if (data.users.length === 0 || data.users.length > 1) {
+      throw new UnauthorizedException('User not found');
+    }
+    return { ...data.users[0], password: data.users[0].pwd };
   }
 }

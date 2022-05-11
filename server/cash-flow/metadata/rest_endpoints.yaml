@@ -2,7 +2,7 @@
     query:
       collection_name: allowed-queries
       query_name: user
-  url: user
+  url: user/:user
   methods:
     - GET
   name: user
