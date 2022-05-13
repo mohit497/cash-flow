@@ -9,7 +9,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "concurrently \"cd client && npm run start\" \" cd server && npm run start:dev \"",
-    "start:prod": "concurrently  \"cp -R ./client/build ./server/react  \" \"cd server && npm i && npm run build && npm run start:prod\" ",
+    "start:prod": "concurrently  \"cp -R ./client/build ./server/react  \" \"cd server && npm ci && npm run build && npm run start:prod\" ",
     "start:con": "concurrently \"cd server && echo n &&  npm run start:console:staging\" "
 
   },
