@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "cash-flow-docker" 
+          heroku_email: "mohit.official497@gmail.com"
+          usedocker: true
+          docker_build_args: |
+            NODE_ENV
+            HASURA_SECRET
+            JWT_SECRET
+        env:
+          NODE_ENV: production
+          SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET_KEY }}
+          HASURA_SECRET: ${{ secrets.HASURA_SECRET_KEY }}
+
+
+          
