@@ -4,7 +4,8 @@ ADD ./server /app
 ADD ./client ./client
 
 WORKDIR /client
-RUN npm install && npm run build
+RUN npm i
+RUN npm run build
  
 
 #  setup
@@ -17,7 +18,8 @@ RUN npm run build
 
 # copy client
 WORKDIR /
-COPY ./client/build ./app/dist/react
+COPY client/build app/dist/react
+
 
 WORKDIR /app
 
