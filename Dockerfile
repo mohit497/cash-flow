@@ -6,7 +6,6 @@ ADD ./client ./frontend
 WORKDIR /frontend
 RUN npm i
 RUN npm run build
- 
 
 #  setup
 WORKDIR /app
@@ -16,9 +15,9 @@ EXPOSE $PORT
 # build app
 RUN npm run build
 
-# copy client
 WORKDIR /
-COPY frontend/build app/dist/react
+COPY ./client/build ./app/dist/react
+
 
 
 WORKDIR /app
