@@ -39,6 +39,11 @@ export class UsersService {
     if (data.users.length === 0 || data.users.length > 1) {
       throw new UnauthorizedException('User not found');
     }
-    return { ...data.users[0], password: data.users[0].pwd };
+    return {
+      ...data.users[0],
+      password: data.users[0].pwd,
+      role: data.users[0].activeRolesByUser[0].role,
+      org: data.users[0].activeRolesByUser[0].org,
+    };
   }
 }

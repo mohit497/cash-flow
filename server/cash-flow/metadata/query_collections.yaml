@@ -8,5 +8,10 @@
           		id
           		name
           		pwd
+          		activeRolesByUser {
+          			id
+          			org
+          			role
+          		}
           	}
           }

@@ -2,6 +2,13 @@ table:
   schema: public
   name: orgs
 array_relationships:
+  - name: active_roles
+    using:
+      foreign_key_constraint_on:
+        column: org
+        table:
+          schema: public
+          name: active_roles
   - name: products
     using:
       foreign_key_constraint_on:
