@@ -1,9 +1,9 @@
 FROM node:14-alpine3.12
 ADD ./server /app
 
-ADD ./client ./client
+ADD ./client ./frontend
 
-WORKDIR /client
+WORKDIR /frontend
 RUN npm i
 RUN npm run build
  
@@ -18,7 +18,7 @@ RUN npm run build
 
 # copy client
 WORKDIR /
-COPY client/build app/dist/react
+COPY frontend/build app/dist/react
 
 
 WORKDIR /app
