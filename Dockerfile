@@ -16,7 +16,7 @@ EXPOSE $PORT
 RUN npm run build
 
 WORKDIR /
-ADD ./frontend/build ./app/dist/react/
+RUN  cp ./frontend/build ./app/dist/react -r
 
 
 
