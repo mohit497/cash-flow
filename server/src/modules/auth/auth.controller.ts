@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @ApiTags('auth')
-@Controller()
+@Controller('/auth')
 export class AuthController {
   constructor(private authService: AuthService, private jwt: JwtService) {}
 
@@ -30,7 +30,7 @@ export class AuthController {
     },
   })
   @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
+  @Post('/login')
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
@@ -45,7 +45,6 @@ export class AuthController {
     if (!!token) {
       try {
         if (this.jwt.verify(token)) {
-          console.log('author');
           const { username, org, role } = this.jwt.decode(token) as {
             username: string;
             org: string;
@@ -61,22 +60,6 @@ export class AuthController {
       } catch (e) {
         console.log(' not author', e);
       }
-    }
-
-    try {
-      if (this.jwt.verify(req.headers['x-hasura-student-token'])) {
-        console.log('student access');
-        const { username } = (await this.jwt.decode(token)) as {
-          username: string;
-        };
-
-        return {
-          'X-Hasura-Role': 'student',
-          'X-Hasura-User-Id': username,
-        };
-      }
-    } catch (e) {
-      console.log('not student', e);
     }
 
     console.log('public access');
