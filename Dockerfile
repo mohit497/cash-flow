@@ -15,10 +15,9 @@ EXPOSE $PORT
 # build app
 RUN npm run build
 
+#copy frontend build
 WORKDIR /
 RUN  cp ./frontend/build ./app/dist/react -r
-
-
 
 WORKDIR /app
 

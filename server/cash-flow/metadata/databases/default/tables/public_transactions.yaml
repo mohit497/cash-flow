@@ -5,3 +5,51 @@ object_relationships:
   - name: saleBySale
     using:
       foreign_key_constraint_on: sale
+insert_permissions:
+  - role: org-admin
+    permission:
+      check:
+        saleBySale:
+          org:
+            _eq: X-Hasura-Org-Id
+      columns:
+        - count
+        - p_code
+        - id
+        - sale
+      backend_only: false
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - count
+        - p_code
+        - id
+        - sale
+      filter:
+        saleBySale:
+          org:
+            _eq: X-Hasura-Org-Id
+update_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - count
+        - p_code
+        - id
+        - sale
+      filter:
+        saleBySale:
+          org:
+            _eq: X-Hasura-Org-Id
+      check:
+        saleBySale:
+          org:
+            _eq: X-Hasura-Org-Id
+delete_permissions:
+  - role: org-admin
+    permission:
+      filter:
+        saleBySale:
+          org:
+            _eq: X-Hasura-Org-Id

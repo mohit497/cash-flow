@@ -13,3 +13,55 @@ array_relationships:
         table:
           schema: public
           name: inventory
+insert_permissions:
+  - role: org-admin
+    permission:
+      check:
+        org:
+          _eq: X-Hasura-Org-Id
+      columns:
+        - code
+        - name
+        - amount
+        - createdAt
+        - updatedAt
+        - id
+        - org
+      backend_only: false
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - code
+        - name
+        - amount
+        - createdAt
+        - updatedAt
+        - id
+        - org
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+update_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - code
+        - name
+        - amount
+        - createdAt
+        - updatedAt
+        - id
+        - org
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      check:
+        org:
+          _eq: X-Hasura-Org-Id
+delete_permissions:
+  - role: org-admin
+    permission:
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id

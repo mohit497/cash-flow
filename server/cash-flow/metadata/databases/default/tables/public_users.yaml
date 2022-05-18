@@ -16,3 +16,16 @@ array_relationships:
         table:
           schema: public
           name: sales
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - email
+        - name
+        - pwd
+        - id
+      filter:
+        activeRolesByUser:
+          org:
+            _eq: X-Hasura-Org-Id
+      allow_aggregations: true
