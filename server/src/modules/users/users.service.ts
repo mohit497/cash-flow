@@ -34,6 +34,7 @@ export class UsersService {
       console.log(e);
     }
     const data = JSON.parse(res.text);
+    console.log('login rquest for', data.users);
 
     //  check if user exists
     if (data.users.length === 0 || data.users.length > 1) {
