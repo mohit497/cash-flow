@@ -28,6 +28,7 @@ export class AuthService {
       role: user.role.toLowerCase(),
       org: user.org,
     };
+    console.log(payload);
     return {
       access_token: this.jwtService.sign(payload),
     };
