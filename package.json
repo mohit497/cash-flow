@@ -6,14 +6,16 @@
   "dependencies": {
     "concurrently": "^7.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "hasura-cli": "^2.6.1"
+  },
   "scripts": {
     "start": "concurrently \"cd client && npm run start\" \" cd server && npm run start:dev \"",
-    "build":"npm i && cd server && npm i",
+    "build": "npm i && cd server && npm i",
     "start:prod": "concurrently  \"cp -R ./client/build ./server/react  \" \"cd server && npm run build && npm run start:prod\" ",
     "start:con": "concurrently \"cd server && echo n &&  npm run start:console:staging\" ",
     "cp:client": "concurrently  \"cp -R ./client/build ./server/dist/react  \"",
-    "postinstall":"concurrently \"cd server && npm i\" \" cd client && npm i \" "
+    "postinstall": "concurrently \"cd server && npm i\" \" cd client && npm i \" "
   },
   "repository": {
     "type": "git",
