@@ -45,15 +45,15 @@ export class AuthController {
     if (!!token) {
       try {
         if (this.jwt.verify(token)) {
-          const { username, org, role } = this.jwt.decode(token) as {
-            username: string;
+          const { id, org, role } = this.jwt.decode(token) as {
+            id: string;
             org: string;
             role: string;
           };
-          console.log(username, org, role);
+          console.log(id, org, role);
           return {
             'X-Hasura-Role': role,
-            'X-Hasura-User-Id': username,
+            'X-Hasura-User-Id': id,
             'X-Hasura-Org-Id': org,
           };
         }
