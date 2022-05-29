@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import useNotifications from './useNotifications'
+import jwt_decode from "jwt-decode";
 
 export function useAuth() {
 
@@ -13,6 +14,10 @@ export function useAuth() {
             .then((res) => {
                 if (res.status === 201) {
                     localStorage.setItem('token', res.data.access_token);
+                    try {
+                        const temp: any = jwt_decode(window.localStorage.getItem("token") as string);
+                        sessionStorage.setItem('role', temp.role.toUpperCase())
+                      } catch {}
                     navigate('/')
                 } else {
                     showNotifications('Wrong UserName or Password', 'danger')
