@@ -45,6 +45,7 @@ export class UsersService {
       password: data.users[0].pwd,
       role: data.users[0].activeRolesByUser[0].role,
       org: data.users[0].activeRolesByUser[0].org,
+      role_id: data.users[0].activeRolesByUser[0].id,
     };
   }
 }

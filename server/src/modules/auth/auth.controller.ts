@@ -5,10 +5,13 @@ import {
   UseGuards,
   HttpCode,
   Body,
+  Req,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @ApiTags('auth')
@@ -47,16 +50,18 @@ export class AuthController {
         if (this.jwt.verify(token)) {
           console.log('jwt verified');
 
-          const { id, org, role } = this.jwt.decode(token) as {
+          const { id, org, role, role_id } = this.jwt.decode(token) as {
             id: string;
             org: string;
             role: string;
+            role_id: string;
           };
           console.log(id, org, role);
           return {
             'X-Hasura-Role': role,
             'X-Hasura-User-Id': id,
             'X-Hasura-Org-Id': org,
+            'X-Hasura-Role-Id': role_id,
           };
         }
       } catch (e) {
@@ -70,9 +75,41 @@ export class AuthController {
     };
   }
 
-  @UseGuards(LocalAuthGuard)
-  @Post('/login/graphql')
-  loginGraphql(@Body() req: { username: string; password: string }) {
-    return this.authService.loginGraphql(req);
+  @Post(`/switch`)
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        roleId: {
+          type: 'string',
+        },
+      },
+    },
+  })
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
+  @ApiBearerAuth('JWT')
+  async switchRole(@Req() req, @Body() body) {
+    console.log(req);
+    const token =
+      req.headers?.Authorization?.toString()?.split(' ')[1] ||
+      req.headers?.authorization?.toString()?.split(' ')[1];
+    if (!!token) {
+      try {
+        if (this.jwt.verify(token)) {
+          const { username, role } = this.jwt.decode(token) as {
+            username: string;
+            org: string;
+            role: string;
+          };
+          console.log('Change Role Request received by  - ', username, role);
+          return this.authService.switchRole(username, body.roleId);
+        }
+      } catch (e) {
+        console.log('not author');
+      }
+    } else {
+      return new UnauthorizedException();
+    }
   }
 }

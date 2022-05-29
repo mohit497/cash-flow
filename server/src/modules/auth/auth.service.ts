@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 
@@ -27,6 +23,7 @@ export class AuthService {
       id: user.id,
       role: user.role.toLowerCase(),
       org: user.org,
+      role_id: user.role_id,
     };
     console.log(payload);
     return {
@@ -34,29 +31,30 @@ export class AuthService {
     };
   }
 
-  async loginGraphql(user: any, internal = false) {
-    const payload = user;
+  /**
+   *
+   * @param email
+   * @param role_id
+   */
+  async switchRole(email: string, role_id: string) {
+    console.log('Switch role to ', email, role_id);
+    const user = await this.usersService.findOne(email);
 
-    try {
-      const user = await this.usersService.findOne(payload.username);
+    const newRole = user.activeRolesByUser.filter((r) => r.id === role_id);
 
-      if (user.password === user?.password || internal) {
-        return {
-          access_token: this.jwtService.sign({
-            username: user.email,
-            org: user.org,
-            sub: user.id,
-            activated: user.activated,
-            role: user.role.toLowerCase(),
-          }),
-        };
-      } else {
-        console.log('graphql login failed password not match', user);
-        throw new UnauthorizedException();
-      }
-    } catch (e) {
-      console.log('Graphql login failed', e);
-      throw new InternalServerErrorException(e);
+    if (newRole.length === 0) {
+      return new NotFoundException('This is not a valid role for this user');
     }
+
+    return {
+      access_token: this.jwtService.sign({
+        username: user.email,
+        org: user.org,
+        sub: user.id,
+        activated: user.activated,
+        role: user.role.toLowerCase(),
+        role_id: newRole.id,
+      }),
+    };
   }
 }

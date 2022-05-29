@@ -30,7 +30,7 @@ export const OrgSelect = () => {
       {data?.active_roles.map((item) => {
         return (
           <NavDropdown.Item key={item.id} value={item.id}>
-            {item.orgByOrg.name}
+            {item.orgByOrg?.name}
             <Badge className="mx-2 small" bg={RoleColor[item.role]}>
               {item.role}
             </Badge>
