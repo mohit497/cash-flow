@@ -45,6 +45,8 @@ export class AuthController {
     if (!!token) {
       try {
         if (this.jwt.verify(token)) {
+          console.log('jwt verified');
+
           const { id, org, role } = this.jwt.decode(token) as {
             id: string;
             org: string;

@@ -11,3 +11,15 @@ object_relationships:
   - name: userByUser
     using:
       foreign_key_constraint_on: user
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - id
+        - role
+        - user
+        - org
+      filter:
+        user:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true

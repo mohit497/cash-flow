@@ -20,6 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "start:console:staging": "cd cash-flow && hasura console --endpoint https://cash-flow-hasura.herokuapp.com  --admin-secret myadminsecretkey ",
+    "start:console:dev": "cd cash-flow && hasura console --endpoint http://localhost:8080  --admin-secret myadminsecretkey ",
+    "migrate:local": " cd cash-flow && hasura migrate apply  --endpoint http://localhost:8080 --admin-secret myadminsecretkey --database-name default && hasura metadata apply  --endpoint http://localhost:8080 --admin-secret myadminsecretkey  && hasura migrate status --database-name default   --endpoint http://localhost:8080 --admin-secret myadminsecretkey",
     "postinstall": "nest build"
   },
   "dependencies": {

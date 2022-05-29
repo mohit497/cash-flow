@@ -30,6 +30,7 @@ select_permissions:
         saleBySale:
           org:
             _eq: X-Hasura-Org-Id
+      allow_aggregations: true
 update_permissions:
   - role: org-admin
     permission:

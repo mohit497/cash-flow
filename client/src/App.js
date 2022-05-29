@@ -4,7 +4,7 @@ import Header from 'components/header';
 import Shops from 'components/shop/shop'
 import { Container, Row, Col } from 'react-bootstrap';
 import SideMenu from 'components/sideMenu';
-import { getUserRole } from './utils'
+import { getUserRole, Roles_ENUM } from './utils'
 import { ReactNotifications } from 'react-notifications-component'
 
 
@@ -17,7 +17,6 @@ import Cashier from 'components/cashier/cashier';
 import Store from 'components/store/store';
 import Login from 'components/login';
 import { useAuth } from 'hooks/useAuth';
-import { Roles_Enum } from 'generated/graphql';
 
 function App() {
 
@@ -31,7 +30,7 @@ function App() {
       <Header />
       <Container fluid>
         <Row className='w-100'>
-          {role === Roles_Enum.OrgAdmin && isLoggedIn() &&
+          {role === Roles_ENUM.ORGADMIN && isLoggedIn() &&
             <Col xs={2} md={3}>
               <SideMenu />
             </Col>
@@ -48,6 +47,8 @@ function App() {
               <Route exact path="/store" element={<Store />}>
               </Route>
               <Route exact path="/login" element={<Login />}>
+              </Route>
+              <Route exact path="/cashier" element={<Cashier />}>
               </Route>
             </Routes>
 

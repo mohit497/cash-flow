@@ -31,10 +31,15 @@ export type Int_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['Int']>>;
 };
 
-/** holds roles details */
+/**
+ * holds roles details
+ *
+ *
+ * columns and relationships of "ROLES"
+ */
 export type Roles = {
   __typename?: 'ROLES';
-  /** An array relationship */
+  /** fetch data from the table: "active_roles" */
   active_roles: Array<Active_Roles>;
   /** An aggregate relationship */
   active_roles_aggregate: Active_Roles_Aggregate;
@@ -42,7 +47,12 @@ export type Roles = {
 };
 
 
-/** holds roles details */
+/**
+ * holds roles details
+ *
+ *
+ * columns and relationships of "ROLES"
+ */
 export type RolesActive_RolesArgs = {
   distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -52,7 +62,12 @@ export type RolesActive_RolesArgs = {
 };
 
 
-/** holds roles details */
+/**
+ * holds roles details
+ *
+ *
+ * columns and relationships of "ROLES"
+ */
 export type RolesActive_Roles_AggregateArgs = {
   distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -98,19 +113,6 @@ export enum Roles_Constraint {
   RolesPkey = 'ROLES_pkey'
 }
 
-export enum Roles_Enum {
-  OrgAdmin = 'ORG_ADMIN'
-}
-
-/** Boolean expression to compare columns of type "ROLES_enum". All fields are combined with logical 'AND'. */
-export type Roles_Enum_Comparison_Exp = {
-  _eq?: Maybe<Roles_Enum>;
-  _in?: Maybe<Array<Roles_Enum>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Roles_Enum>;
-  _nin?: Maybe<Array<Roles_Enum>>;
-};
-
 /** input type for inserting data into table "ROLES" */
 export type Roles_Insert_Input = {
   active_roles?: Maybe<Active_Roles_Arr_Rel_Insert_Input>;
@@ -141,11 +143,11 @@ export type Roles_Mutation_Response = {
 /** input type for inserting object relation for remote table "ROLES" */
 export type Roles_Obj_Rel_Insert_Input = {
   data: Roles_Insert_Input;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Roles_On_Conflict>;
 };
 
-/** on_conflict condition type for table "ROLES" */
+/** on conflict condition type for table "ROLES" */
 export type Roles_On_Conflict = {
   constraint: Roles_Constraint;
   update_columns?: Array<Roles_Update_Column>;
@@ -213,17 +215,22 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
-/** active users with role */
+/**
+ * active users with role
+ *
+ *
+ * columns and relationships of "active_roles"
+ */
 export type Active_Roles = {
   __typename?: 'active_roles';
   /** An object relationship */
   ROLE: Roles;
   id: Scalars['uuid'];
   org: Scalars['uuid'];
-  role: Roles_Enum;
-  user: Scalars['uuid'];
   /** An object relationship */
-  userByOrg: Users;
+  orgByOrg: Orgs;
+  role: Scalars['String'];
+  user: Scalars['uuid'];
   /** An object relationship */
   userByUser: Users;
 };
@@ -260,7 +267,7 @@ export type Active_Roles_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "active_roles" */
 export type Active_Roles_Arr_Rel_Insert_Input = {
   data: Array<Active_Roles_Insert_Input>;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Active_Roles_On_Conflict>;
 };
 
@@ -272,9 +279,9 @@ export type Active_Roles_Bool_Exp = {
   _or?: Maybe<Array<Active_Roles_Bool_Exp>>;
   id?: Maybe<Uuid_Comparison_Exp>;
   org?: Maybe<Uuid_Comparison_Exp>;
-  role?: Maybe<Roles_Enum_Comparison_Exp>;
+  orgByOrg?: Maybe<Orgs_Bool_Exp>;
+  role?: Maybe<String_Comparison_Exp>;
   user?: Maybe<Uuid_Comparison_Exp>;
-  userByOrg?: Maybe<Users_Bool_Exp>;
   userByUser?: Maybe<Users_Bool_Exp>;
 };
 
@@ -289,9 +296,9 @@ export type Active_Roles_Insert_Input = {
   ROLE?: Maybe<Roles_Obj_Rel_Insert_Input>;
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
-  role?: Maybe<Roles_Enum>;
+  orgByOrg?: Maybe<Orgs_Obj_Rel_Insert_Input>;
+  role?: Maybe<Scalars['String']>;
   user?: Maybe<Scalars['uuid']>;
-  userByOrg?: Maybe<Users_Obj_Rel_Insert_Input>;
   userByUser?: Maybe<Users_Obj_Rel_Insert_Input>;
 };
 
@@ -300,6 +307,7 @@ export type Active_Roles_Max_Fields = {
   __typename?: 'active_roles_max_fields';
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
+  role?: Maybe<Scalars['String']>;
   user?: Maybe<Scalars['uuid']>;
 };
 
@@ -307,6 +315,7 @@ export type Active_Roles_Max_Fields = {
 export type Active_Roles_Max_Order_By = {
   id?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
+  role?: Maybe<Order_By>;
   user?: Maybe<Order_By>;
 };
 
@@ -315,6 +324,7 @@ export type Active_Roles_Min_Fields = {
   __typename?: 'active_roles_min_fields';
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
+  role?: Maybe<Scalars['String']>;
   user?: Maybe<Scalars['uuid']>;
 };
 
@@ -322,6 +332,7 @@ export type Active_Roles_Min_Fields = {
 export type Active_Roles_Min_Order_By = {
   id?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
+  role?: Maybe<Order_By>;
   user?: Maybe<Order_By>;
 };
 
@@ -334,7 +345,7 @@ export type Active_Roles_Mutation_Response = {
   returning: Array<Active_Roles>;
 };
 
-/** on_conflict condition type for table "active_roles" */
+/** on conflict condition type for table "active_roles" */
 export type Active_Roles_On_Conflict = {
   constraint: Active_Roles_Constraint;
   update_columns?: Array<Active_Roles_Update_Column>;
@@ -346,9 +357,9 @@ export type Active_Roles_Order_By = {
   ROLE?: Maybe<Roles_Order_By>;
   id?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
+  orgByOrg?: Maybe<Orgs_Order_By>;
   role?: Maybe<Order_By>;
   user?: Maybe<Order_By>;
-  userByOrg?: Maybe<Users_Order_By>;
   userByUser?: Maybe<Users_Order_By>;
 };
 
@@ -373,7 +384,7 @@ export enum Active_Roles_Select_Column {
 export type Active_Roles_Set_Input = {
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
-  role?: Maybe<Roles_Enum>;
+  role?: Maybe<Scalars['String']>;
   user?: Maybe<Scalars['uuid']>;
 };
 
@@ -389,7 +400,12 @@ export enum Active_Roles_Update_Column {
   User = 'user'
 }
 
-/** holds product inventory */
+/**
+ * holds product inventory
+ *
+ *
+ * columns and relationships of "inventory"
+ */
 export type Inventory = {
   __typename?: 'inventory';
   count: Scalars['Int'];
@@ -449,7 +465,7 @@ export type Inventory_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "inventory" */
 export type Inventory_Arr_Rel_Insert_Input = {
   data: Array<Inventory_Insert_Input>;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Inventory_On_Conflict>;
 };
 
@@ -545,7 +561,7 @@ export type Inventory_Mutation_Response = {
   returning: Array<Inventory>;
 };
 
-/** on_conflict condition type for table "inventory" */
+/** on conflict condition type for table "inventory" */
 export type Inventory_On_Conflict = {
   constraint: Inventory_Constraint;
   update_columns?: Array<Inventory_Update_Column>;
@@ -1190,9 +1206,18 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
-/** holds organisation data */
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
 export type Orgs = {
   __typename?: 'orgs';
+  /** fetch data from the table: "active_roles" */
+  active_roles: Array<Active_Roles>;
+  /** An aggregate relationship */
+  active_roles_aggregate: Active_Roles_Aggregate;
   email: Scalars['String'];
   id: Scalars['uuid'];
   name: Scalars['String'];
@@ -1211,7 +1236,42 @@ export type Orgs = {
 };
 
 
-/** holds organisation data */
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
+export type OrgsActive_RolesArgs = {
+  distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Active_Roles_Order_By>>;
+  where?: Maybe<Active_Roles_Bool_Exp>;
+};
+
+
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
+export type OrgsActive_Roles_AggregateArgs = {
+  distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Active_Roles_Order_By>>;
+  where?: Maybe<Active_Roles_Bool_Exp>;
+};
+
+
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
 export type OrgsProductsArgs = {
   distinct_on?: Maybe<Array<Products_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1221,7 +1281,12 @@ export type OrgsProductsArgs = {
 };
 
 
-/** holds organisation data */
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
 export type OrgsProducts_AggregateArgs = {
   distinct_on?: Maybe<Array<Products_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1231,7 +1296,12 @@ export type OrgsProducts_AggregateArgs = {
 };
 
 
-/** holds organisation data */
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
 export type OrgsSalesArgs = {
   distinct_on?: Maybe<Array<Sales_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1241,7 +1311,12 @@ export type OrgsSalesArgs = {
 };
 
 
-/** holds organisation data */
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
 export type OrgsSales_AggregateArgs = {
   distinct_on?: Maybe<Array<Sales_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1251,7 +1326,12 @@ export type OrgsSales_AggregateArgs = {
 };
 
 
-/** holds organisation data */
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
 export type OrgsShopsArgs = {
   distinct_on?: Maybe<Array<Shops_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1261,7 +1341,12 @@ export type OrgsShopsArgs = {
 };
 
 
-/** holds organisation data */
+/**
+ * holds organisation data
+ *
+ *
+ * columns and relationships of "orgs"
+ */
 export type OrgsShops_AggregateArgs = {
   distinct_on?: Maybe<Array<Shops_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1297,6 +1382,7 @@ export type Orgs_Bool_Exp = {
   _and?: Maybe<Array<Orgs_Bool_Exp>>;
   _not?: Maybe<Orgs_Bool_Exp>;
   _or?: Maybe<Array<Orgs_Bool_Exp>>;
+  active_roles?: Maybe<Active_Roles_Bool_Exp>;
   email?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
@@ -1313,6 +1399,7 @@ export enum Orgs_Constraint {
 
 /** input type for inserting data into table "orgs" */
 export type Orgs_Insert_Input = {
+  active_roles?: Maybe<Active_Roles_Arr_Rel_Insert_Input>;
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -1349,11 +1436,11 @@ export type Orgs_Mutation_Response = {
 /** input type for inserting object relation for remote table "orgs" */
 export type Orgs_Obj_Rel_Insert_Input = {
   data: Orgs_Insert_Input;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Orgs_On_Conflict>;
 };
 
-/** on_conflict condition type for table "orgs" */
+/** on conflict condition type for table "orgs" */
 export type Orgs_On_Conflict = {
   constraint: Orgs_Constraint;
   update_columns?: Array<Orgs_Update_Column>;
@@ -1362,6 +1449,7 @@ export type Orgs_On_Conflict = {
 
 /** Ordering options when selecting data from "orgs". */
 export type Orgs_Order_By = {
+  active_roles_aggregate?: Maybe<Active_Roles_Aggregate_Order_By>;
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
@@ -1402,7 +1490,12 @@ export enum Orgs_Update_Column {
   Name = 'name'
 }
 
-/** holds product information */
+/**
+ * holds product information
+ *
+ *
+ * columns and relationships of "products"
+ */
 export type Products = {
   __typename?: 'products';
   amount: Scalars['numeric'];
@@ -1421,7 +1514,12 @@ export type Products = {
 };
 
 
-/** holds product information */
+/**
+ * holds product information
+ *
+ *
+ * columns and relationships of "products"
+ */
 export type ProductsInventoriesArgs = {
   distinct_on?: Maybe<Array<Inventory_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1431,7 +1529,12 @@ export type ProductsInventoriesArgs = {
 };
 
 
-/** holds product information */
+/**
+ * holds product information
+ *
+ *
+ * columns and relationships of "products"
+ */
 export type ProductsInventories_AggregateArgs = {
   distinct_on?: Maybe<Array<Inventory_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1488,7 +1591,7 @@ export type Products_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "products" */
 export type Products_Arr_Rel_Insert_Input = {
   data: Array<Products_Insert_Input>;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Products_On_Conflict>;
 };
 
@@ -1603,11 +1706,11 @@ export type Products_Mutation_Response = {
 /** input type for inserting object relation for remote table "products" */
 export type Products_Obj_Rel_Insert_Input = {
   data: Products_Insert_Input;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Products_On_Conflict>;
 };
 
-/** on_conflict condition type for table "products" */
+/** on conflict condition type for table "products" */
 export type Products_On_Conflict = {
   constraint: Products_Constraint;
   update_columns?: Array<Products_Update_Column>;
@@ -1764,7 +1867,7 @@ export type Query_Root = {
   ROLES_aggregate: Roles_Aggregate;
   /** fetch data from the table: "ROLES" using primary key columns */
   ROLES_by_pk?: Maybe<Roles>;
-  /** An array relationship */
+  /** fetch data from the table: "active_roles" */
   active_roles: Array<Active_Roles>;
   /** An aggregate relationship */
   active_roles_aggregate: Active_Roles_Aggregate;
@@ -2021,7 +2124,12 @@ export type Query_RootUsers_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
-/** holds sales data */
+/**
+ * holds sales data
+ *
+ *
+ * columns and relationships of "sales"
+ */
 export type Sales = {
   __typename?: 'sales';
   createdAt: Scalars['timestamptz'];
@@ -2043,7 +2151,12 @@ export type Sales = {
 };
 
 
-/** holds sales data */
+/**
+ * holds sales data
+ *
+ *
+ * columns and relationships of "sales"
+ */
 export type SalesTransactionsArgs = {
   distinct_on?: Maybe<Array<Transactions_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2053,7 +2166,12 @@ export type SalesTransactionsArgs = {
 };
 
 
-/** holds sales data */
+/**
+ * holds sales data
+ *
+ *
+ * columns and relationships of "sales"
+ */
 export type SalesTransactions_AggregateArgs = {
   distinct_on?: Maybe<Array<Transactions_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2094,7 +2212,7 @@ export type Sales_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "sales" */
 export type Sales_Arr_Rel_Insert_Input = {
   data: Array<Sales_Insert_Input>;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Sales_On_Conflict>;
 };
 
@@ -2189,11 +2307,11 @@ export type Sales_Mutation_Response = {
 /** input type for inserting object relation for remote table "sales" */
 export type Sales_Obj_Rel_Insert_Input = {
   data: Sales_Insert_Input;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Sales_On_Conflict>;
 };
 
-/** on_conflict condition type for table "sales" */
+/** on conflict condition type for table "sales" */
 export type Sales_On_Conflict = {
   constraint: Sales_Constraint;
   update_columns?: Array<Sales_Update_Column>;
@@ -2261,7 +2379,12 @@ export enum Sales_Update_Column {
   User = 'user'
 }
 
-/** hols shops info */
+/**
+ * hols shops info
+ *
+ *
+ * columns and relationships of "shops"
+ */
 export type Shops = {
   __typename?: 'shops';
   address: Scalars['String'];
@@ -2278,7 +2401,12 @@ export type Shops = {
 };
 
 
-/** hols shops info */
+/**
+ * hols shops info
+ *
+ *
+ * columns and relationships of "shops"
+ */
 export type ShopsSalesArgs = {
   distinct_on?: Maybe<Array<Sales_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2288,7 +2416,12 @@ export type ShopsSalesArgs = {
 };
 
 
-/** hols shops info */
+/**
+ * hols shops info
+ *
+ *
+ * columns and relationships of "shops"
+ */
 export type ShopsSales_AggregateArgs = {
   distinct_on?: Maybe<Array<Sales_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2329,7 +2462,7 @@ export type Shops_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "shops" */
 export type Shops_Arr_Rel_Insert_Input = {
   data: Array<Shops_Insert_Input>;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Shops_On_Conflict>;
 };
 
@@ -2414,11 +2547,11 @@ export type Shops_Mutation_Response = {
 /** input type for inserting object relation for remote table "shops" */
 export type Shops_Obj_Rel_Insert_Input = {
   data: Shops_Insert_Input;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Shops_On_Conflict>;
 };
 
-/** on_conflict condition type for table "shops" */
+/** on conflict condition type for table "shops" */
 export type Shops_On_Conflict = {
   constraint: Shops_Constraint;
   update_columns?: Array<Shops_Update_Column>;
@@ -2486,7 +2619,7 @@ export type Subscription_Root = {
   ROLES_aggregate: Roles_Aggregate;
   /** fetch data from the table: "ROLES" using primary key columns */
   ROLES_by_pk?: Maybe<Roles>;
-  /** An array relationship */
+  /** fetch data from the table: "active_roles" */
   active_roles: Array<Active_Roles>;
   /** An aggregate relationship */
   active_roles_aggregate: Active_Roles_Aggregate;
@@ -2757,7 +2890,12 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
 
-/** holds transactions data */
+/**
+ * holds transactions data
+ *
+ *
+ * columns and relationships of "transactions"
+ */
 export type Transactions = {
   __typename?: 'transactions';
   count: Scalars['Int'];
@@ -2816,7 +2954,7 @@ export type Transactions_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "transactions" */
 export type Transactions_Arr_Rel_Insert_Input = {
   data: Array<Transactions_Insert_Input>;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Transactions_On_Conflict>;
 };
 
@@ -2906,7 +3044,7 @@ export type Transactions_Mutation_Response = {
   returning: Array<Transactions>;
 };
 
-/** on_conflict condition type for table "transactions" */
+/** on conflict condition type for table "transactions" */
 export type Transactions_On_Conflict = {
   constraint: Transactions_Constraint;
   update_columns?: Array<Transactions_Update_Column>;
@@ -3036,17 +3174,18 @@ export type Transactions_Variance_Order_By = {
   count?: Maybe<Order_By>;
 };
 
-/** holds user data */
+/**
+ * holds user data
+ *
+ *
+ * columns and relationships of "users"
+ */
 export type Users = {
   __typename?: 'users';
   /** An array relationship */
   activeRolesByUser: Array<Active_Roles>;
   /** An aggregate relationship */
   activeRolesByUser_aggregate: Active_Roles_Aggregate;
-  /** An array relationship */
-  active_roles: Array<Active_Roles>;
-  /** An aggregate relationship */
-  active_roles_aggregate: Active_Roles_Aggregate;
   email: Scalars['String'];
   id: Scalars['uuid'];
   name: Scalars['String'];
@@ -3058,7 +3197,12 @@ export type Users = {
 };
 
 
-/** holds user data */
+/**
+ * holds user data
+ *
+ *
+ * columns and relationships of "users"
+ */
 export type UsersActiveRolesByUserArgs = {
   distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3068,7 +3212,12 @@ export type UsersActiveRolesByUserArgs = {
 };
 
 
-/** holds user data */
+/**
+ * holds user data
+ *
+ *
+ * columns and relationships of "users"
+ */
 export type UsersActiveRolesByUser_AggregateArgs = {
   distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3078,27 +3227,12 @@ export type UsersActiveRolesByUser_AggregateArgs = {
 };
 
 
-/** holds user data */
-export type UsersActive_RolesArgs = {
-  distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Active_Roles_Order_By>>;
-  where?: Maybe<Active_Roles_Bool_Exp>;
-};
-
-
-/** holds user data */
-export type UsersActive_Roles_AggregateArgs = {
-  distinct_on?: Maybe<Array<Active_Roles_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Active_Roles_Order_By>>;
-  where?: Maybe<Active_Roles_Bool_Exp>;
-};
-
-
-/** holds user data */
+/**
+ * holds user data
+ *
+ *
+ * columns and relationships of "users"
+ */
 export type UsersSalesArgs = {
   distinct_on?: Maybe<Array<Sales_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3108,7 +3242,12 @@ export type UsersSalesArgs = {
 };
 
 
-/** holds user data */
+/**
+ * holds user data
+ *
+ *
+ * columns and relationships of "users"
+ */
 export type UsersSales_AggregateArgs = {
   distinct_on?: Maybe<Array<Sales_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3145,7 +3284,6 @@ export type Users_Bool_Exp = {
   _not?: Maybe<Users_Bool_Exp>;
   _or?: Maybe<Array<Users_Bool_Exp>>;
   activeRolesByUser?: Maybe<Active_Roles_Bool_Exp>;
-  active_roles?: Maybe<Active_Roles_Bool_Exp>;
   email?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
@@ -3162,7 +3300,6 @@ export enum Users_Constraint {
 /** input type for inserting data into table "users" */
 export type Users_Insert_Input = {
   activeRolesByUser?: Maybe<Active_Roles_Arr_Rel_Insert_Input>;
-  active_roles?: Maybe<Active_Roles_Arr_Rel_Insert_Input>;
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
@@ -3200,11 +3337,11 @@ export type Users_Mutation_Response = {
 /** input type for inserting object relation for remote table "users" */
 export type Users_Obj_Rel_Insert_Input = {
   data: Users_Insert_Input;
-  /** upsert condition */
+  /** on conflict condition */
   on_conflict?: Maybe<Users_On_Conflict>;
 };
 
-/** on_conflict condition type for table "users" */
+/** on conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
   update_columns?: Array<Users_Update_Column>;
@@ -3214,7 +3351,6 @@ export type Users_On_Conflict = {
 /** Ordering options when selecting data from "users". */
 export type Users_Order_By = {
   activeRolesByUser_aggregate?: Maybe<Active_Roles_Aggregate_Order_By>;
-  active_roles_aggregate?: Maybe<Active_Roles_Aggregate_Order_By>;
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
@@ -3366,6 +3502,19 @@ export type AddproductMutation = (
   )> }
 );
 
+export type FindProductByCodeQueryVariables = Exact<{
+  _eq?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FindProductByCodeQuery = (
+  { __typename?: 'query_root' }
+  & { products: Array<(
+    { __typename?: 'products' }
+    & Pick<Products, 'code' | 'amount' | 'createdAt' | 'name'>
+  )> }
+);
+
 export type GetshopsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -3436,6 +3585,32 @@ export type AddinventoryMutation = (
   & { insert_inventory_one?: Maybe<(
     { __typename?: 'inventory' }
     & Pick<Inventory, 'count' | 'createdAt' | 'id' | 'p_code' | 'updatedAt'>
+  )> }
+);
+
+export type GetRolesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRolesQuery = (
+  { __typename?: 'query_root' }
+  & { active_roles: Array<(
+    { __typename?: 'active_roles' }
+    & Pick<Active_Roles, 'id' | 'org' | 'role'>
+    & { orgByOrg: (
+      { __typename?: 'orgs' }
+      & Pick<Orgs, 'name'>
+    ) }
+  )> }
+);
+
+export type GetUserInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserInfoQuery = (
+  { __typename?: 'query_root' }
+  & { users: Array<(
+    { __typename?: 'users' }
+    & Pick<Users, 'email' | 'id' | 'name'>
   )> }
 );
 
@@ -3671,6 +3846,44 @@ export function useAddproductMutation(baseOptions?: Apollo.MutationHookOptions<A
 export type AddproductMutationHookResult = ReturnType<typeof useAddproductMutation>;
 export type AddproductMutationResult = Apollo.MutationResult<AddproductMutation>;
 export type AddproductMutationOptions = Apollo.BaseMutationOptions<AddproductMutation, AddproductMutationVariables>;
+export const FindProductByCodeDocument = gql`
+    query findProductByCode($_eq: String = "") {
+  products(where: {code: {_eq: $_eq}}) {
+    code
+    amount
+    createdAt
+    name
+  }
+}
+    `;
+
+/**
+ * __useFindProductByCodeQuery__
+ *
+ * To run a query within a React component, call `useFindProductByCodeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindProductByCodeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindProductByCodeQuery({
+ *   variables: {
+ *      _eq: // value for '_eq'
+ *   },
+ * });
+ */
+export function useFindProductByCodeQuery(baseOptions?: Apollo.QueryHookOptions<FindProductByCodeQuery, FindProductByCodeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindProductByCodeQuery, FindProductByCodeQueryVariables>(FindProductByCodeDocument, options);
+      }
+export function useFindProductByCodeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindProductByCodeQuery, FindProductByCodeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindProductByCodeQuery, FindProductByCodeQueryVariables>(FindProductByCodeDocument, options);
+        }
+export type FindProductByCodeQueryHookResult = ReturnType<typeof useFindProductByCodeQuery>;
+export type FindProductByCodeLazyQueryHookResult = ReturnType<typeof useFindProductByCodeLazyQuery>;
+export type FindProductByCodeQueryResult = Apollo.QueryResult<FindProductByCodeQuery, FindProductByCodeQueryVariables>;
 export const GetshopsDocument = gql`
     query getshops($limit: Int = 10, $offset: Int = 0) {
   shops(offset: $offset, limit: $limit) {
@@ -3836,6 +4049,81 @@ export function useAddinventoryMutation(baseOptions?: Apollo.MutationHookOptions
 export type AddinventoryMutationHookResult = ReturnType<typeof useAddinventoryMutation>;
 export type AddinventoryMutationResult = Apollo.MutationResult<AddinventoryMutation>;
 export type AddinventoryMutationOptions = Apollo.BaseMutationOptions<AddinventoryMutation, AddinventoryMutationVariables>;
+export const GetRolesDocument = gql`
+    query getRoles {
+  active_roles {
+    id
+    org
+    role
+    orgByOrg {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetRolesQuery__
+ *
+ * To run a query within a React component, call `useGetRolesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRolesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRolesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetRolesQuery(baseOptions?: Apollo.QueryHookOptions<GetRolesQuery, GetRolesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRolesQuery, GetRolesQueryVariables>(GetRolesDocument, options);
+      }
+export function useGetRolesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRolesQuery, GetRolesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRolesQuery, GetRolesQueryVariables>(GetRolesDocument, options);
+        }
+export type GetRolesQueryHookResult = ReturnType<typeof useGetRolesQuery>;
+export type GetRolesLazyQueryHookResult = ReturnType<typeof useGetRolesLazyQuery>;
+export type GetRolesQueryResult = Apollo.QueryResult<GetRolesQuery, GetRolesQueryVariables>;
+export const GetUserInfoDocument = gql`
+    query getUserInfo {
+  users {
+    email
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetUserInfoQuery__
+ *
+ * To run a query within a React component, call `useGetUserInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserInfoQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserInfoQuery(baseOptions?: Apollo.QueryHookOptions<GetUserInfoQuery, GetUserInfoQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserInfoQuery, GetUserInfoQueryVariables>(GetUserInfoDocument, options);
+      }
+export function useGetUserInfoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserInfoQuery, GetUserInfoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserInfoQuery, GetUserInfoQueryVariables>(GetUserInfoDocument, options);
+        }
+export type GetUserInfoQueryHookResult = ReturnType<typeof useGetUserInfoQuery>;
+export type GetUserInfoLazyQueryHookResult = ReturnType<typeof useGetUserInfoLazyQuery>;
+export type GetUserInfoQueryResult = Apollo.QueryResult<GetUserInfoQuery, GetUserInfoQueryVariables>;
 export const GetusersDocument = gql`
     query getusers {
   users {

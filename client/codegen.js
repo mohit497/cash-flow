@@ -1,7 +1,7 @@
 module.exports = {
     schema: [
       {
-        "https://cash-flow-hasura.herokuapp.com/v1/graphql": {
+        "http://localhost:8080/v1/graphql": {
           headers: {
             "x-hasura-admin-secret": "myadminsecretkey",
           },

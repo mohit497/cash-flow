@@ -1,0 +1,1 @@
+INSERT INTO "public"."active_roles"("id", "role", "user", "org") VALUES (E'db3fe4e3-0b48-436b-b170-fcc7a8a62fbd', E'ORG_ADMIN', E'dda031eb-f8b4-4e29-8b52-de2a46cfb8c2', E'26e434c0-4114-44c8-adb7-adeaea4e7d70');

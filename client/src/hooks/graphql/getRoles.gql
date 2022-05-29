@@ -1,0 +1,10 @@
+query getRoles {
+  active_roles {
+    id
+    org
+    role
+    orgByOrg {
+      name
+    }
+  }
+}

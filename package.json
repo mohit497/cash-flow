@@ -14,6 +14,8 @@
     "build": "npm i && cd server && npm i",
     "start:prod": "concurrently  \"cp -R ./client/build ./server/react  \" \"cd server && npm run build && npm run start:prod\" ",
     "start:con": "concurrently \"cd server && echo n &&  npm run start:console:staging\" ",
+    "start:con:dev": "concurrently \"cd server && echo n &&  npm run start:console:dev\" ",
+    "mig:local": "concurrently \"cd server && npm run migrate:local\" ",
     "cp:client": "concurrently  \"cp -R ./client/build ./server/dist/react  \"",
     "postinstall": "concurrently \"cd server && npm i\" \" cd client && npm i \" "
   },

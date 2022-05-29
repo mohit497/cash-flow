@@ -9,6 +9,9 @@ export default function SideMenu() {
                 <Nav.Link href="/store">
                     Store
                 </Nav.Link>
+                <Nav.Link href="/cashier">
+                    Cashier
+                </Nav.Link>
             </Nav>
         </div>
     )

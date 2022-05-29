@@ -178,11 +178,11 @@
       {
         "kind": "OBJECT",
         "name": "ROLES",
-        "description": "holds roles details",
+        "description": "holds roles details\n\n\ncolumns and relationships of \"ROLES\"\n",
         "fields": [
           {
             "name": "active_roles",
-            "description": "An array relationship",
+            "description": "fetch data from the table: \"active_roles\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -632,110 +632,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "ROLES_enum",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "ORG_ADMIN",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ROLES_enum_comparison_exp",
-        "description": "Boolean expression to compare columns of type \"ROLES_enum\". All fields are combined with logical 'AND'.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "_eq",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "ROLES_enum",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "ROLES_enum",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_is_null",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_neq",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "ROLES_enum",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "_nin",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "ROLES_enum",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "INPUT_OBJECT",
         "name": "ROLES_insert_input",
         "description": "input type for inserting data into table \"ROLES\"",
@@ -891,7 +787,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "ROLES_on_conflict",
@@ -909,7 +805,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ROLES_on_conflict",
-        "description": "on_conflict condition type for table \"ROLES\"",
+        "description": "on conflict condition type for table \"ROLES\"",
         "fields": null,
         "inputFields": [
           {
@@ -2263,7 +2159,7 @@
       {
         "kind": "OBJECT",
         "name": "active_roles",
-        "description": "active users with role",
+        "description": "active users with role\n\n\ncolumns and relationships of \"active_roles\"\n",
         "fields": [
           {
             "name": "ROLE",
@@ -2314,6 +2210,22 @@
             "deprecationReason": null
           },
           {
+            "name": "orgByOrg",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "orgs",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "role",
             "description": null,
             "args": [],
@@ -2321,8 +2233,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "ENUM",
-                "name": "ROLES_enum",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -2339,22 +2251,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "uuid",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userByOrg",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "users",
                 "ofType": null
               }
             },
@@ -2593,7 +2489,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "active_roles_on_conflict",
@@ -2703,11 +2599,23 @@
             "deprecationReason": null
           },
           {
+            "name": "orgByOrg",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "orgs_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "role",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "ROLES_enum_comparison_exp",
+              "name": "String_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -2720,18 +2628,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "uuid_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userByOrg",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "users_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -2815,11 +2711,23 @@
             "deprecationReason": null
           },
           {
+            "name": "orgByOrg",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "orgs_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "role",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "ROLES_enum",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -2832,18 +2740,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "uuid",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userByOrg",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "users_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -2897,6 +2793,18 @@
             "deprecationReason": null
           },
           {
+            "name": "role",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "user",
             "description": null,
             "args": [],
@@ -2934,6 +2842,18 @@
           },
           {
             "name": "org",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "role",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -2991,6 +2911,18 @@
             "deprecationReason": null
           },
           {
+            "name": "role",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "user",
             "description": null,
             "args": [],
@@ -3028,6 +2960,18 @@
           },
           {
             "name": "org",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "role",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3109,7 +3053,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "active_roles_on_conflict",
-        "description": "on_conflict condition type for table \"active_roles\"",
+        "description": "on conflict condition type for table \"active_roles\"",
         "fields": null,
         "inputFields": [
           {
@@ -3212,6 +3156,18 @@
             "deprecationReason": null
           },
           {
+            "name": "orgByOrg",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "orgs_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "role",
             "description": null,
             "type": {
@@ -3229,18 +3185,6 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userByOrg",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "users_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -3360,8 +3304,8 @@
             "name": "role",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "ROLES_enum",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -3423,7 +3367,7 @@
       {
         "kind": "OBJECT",
         "name": "inventory",
-        "description": "holds product inventory",
+        "description": "holds product inventory\n\n\ncolumns and relationships of \"inventory\"\n",
         "fields": [
           {
             "name": "count",
@@ -3929,7 +3873,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "inventory_on_conflict",
@@ -4586,7 +4530,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "inventory_on_conflict",
-        "description": "on_conflict condition type for table \"inventory\"",
+        "description": "on conflict condition type for table \"inventory\"",
         "fields": null,
         "inputFields": [
           {
@@ -5788,7 +5732,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "ROLES_on_conflict",
@@ -5829,7 +5773,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "ROLES_on_conflict",
@@ -5878,7 +5822,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "active_roles_on_conflict",
@@ -5919,7 +5863,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "active_roles_on_conflict",
@@ -5968,7 +5912,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "inventory_on_conflict",
@@ -6009,7 +5953,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "inventory_on_conflict",
@@ -6058,7 +6002,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "orgs_on_conflict",
@@ -6099,7 +6043,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "orgs_on_conflict",
@@ -6148,7 +6092,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "products_on_conflict",
@@ -6189,7 +6133,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "products_on_conflict",
@@ -6238,7 +6182,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "sales_on_conflict",
@@ -6279,7 +6223,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "sales_on_conflict",
@@ -6328,7 +6272,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "shops_on_conflict",
@@ -6369,7 +6313,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "shops_on_conflict",
@@ -6418,7 +6362,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "transactions_on_conflict",
@@ -6459,7 +6403,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "transactions_on_conflict",
@@ -6508,7 +6452,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "users_on_conflict",
@@ -6549,7 +6493,7 @@
               },
               {
                 "name": "on_conflict",
-                "description": "upsert condition",
+                "description": "on conflict condition",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "users_on_conflict",
@@ -7579,8 +7523,202 @@
       {
         "kind": "OBJECT",
         "name": "orgs",
-        "description": "holds organisation data",
+        "description": "holds organisation data\n\n\ncolumns and relationships of \"orgs\"\n",
         "fields": [
+          {
+            "name": "active_roles",
+            "description": "fetch data from the table: \"active_roles\"",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "active_roles_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "active_roles_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "active_roles_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "active_roles",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "active_roles_aggregate",
+            "description": "An aggregate relationship",
+            "args": [
+              {
+                "name": "distinct_on",
+                "description": "distinct select on columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "active_roles_select_column",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "limit",
+                "description": "limit the number of rows returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "offset",
+                "description": "skip the first n rows. Use only with order_by",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "order_by",
+                "description": "sort the rows by one or more columns",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "active_roles_order_by",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": "filter the rows returned",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "active_roles_bool_exp",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "active_roles_aggregate",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "email",
             "description": null,
@@ -8407,6 +8545,18 @@
             "deprecationReason": null
           },
           {
+            "name": "active_roles",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "active_roles_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "email",
             "description": null,
             "type": {
@@ -8506,6 +8656,18 @@
         "description": "input type for inserting data into table \"orgs\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "active_roles",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "active_roles_arr_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "email",
             "description": null,
@@ -8752,7 +8914,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "orgs_on_conflict",
@@ -8770,7 +8932,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "orgs_on_conflict",
-        "description": "on_conflict condition type for table \"orgs\"",
+        "description": "on conflict condition type for table \"orgs\"",
         "fields": null,
         "inputFields": [
           {
@@ -8836,6 +8998,18 @@
         "description": "Ordering options when selecting data from \"orgs\".",
         "fields": null,
         "inputFields": [
+          {
+            "name": "active_roles_aggregate",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "active_roles_aggregate_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "email",
             "description": null,
@@ -9048,7 +9222,7 @@
       {
         "kind": "OBJECT",
         "name": "products",
-        "description": "holds product information",
+        "description": "holds product information\n\n\ncolumns and relationships of \"products\"\n",
         "fields": [
           {
             "name": "amount",
@@ -9780,7 +9954,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "products_on_conflict",
@@ -10632,7 +10806,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "products_on_conflict",
@@ -10650,7 +10824,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "products_on_conflict",
-        "description": "on_conflict condition type for table \"products\"",
+        "description": "on conflict condition type for table \"products\"",
         "fields": null,
         "inputFields": [
           {
@@ -11609,7 +11783,7 @@
           },
           {
             "name": "active_roles",
-            "description": "An array relationship",
+            "description": "fetch data from the table: \"active_roles\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -13400,7 +13574,7 @@
       {
         "kind": "OBJECT",
         "name": "sales",
-        "description": "holds sales data",
+        "description": "holds sales data\n\n\ncolumns and relationships of \"sales\"\n",
         "fields": [
           {
             "name": "createdAt",
@@ -13956,7 +14130,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "sales_on_conflict",
@@ -14709,7 +14883,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "sales_on_conflict",
@@ -14727,7 +14901,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "sales_on_conflict",
-        "description": "on_conflict condition type for table \"sales\"",
+        "description": "on conflict condition type for table \"sales\"",
         "fields": null,
         "inputFields": [
           {
@@ -15125,7 +15299,7 @@
       {
         "kind": "OBJECT",
         "name": "shops",
-        "description": "hols shops info",
+        "description": "hols shops info\n\n\ncolumns and relationships of \"shops\"\n",
         "fields": [
           {
             "name": "address",
@@ -15629,7 +15803,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "shops_on_conflict",
@@ -16262,7 +16436,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "shops_on_conflict",
@@ -16280,7 +16454,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "shops_on_conflict",
-        "description": "on_conflict condition type for table \"shops\"",
+        "description": "on conflict condition type for table \"shops\"",
         "fields": null,
         "inputFields": [
           {
@@ -16845,7 +17019,7 @@
           },
           {
             "name": "active_roles",
-            "description": "An array relationship",
+            "description": "fetch data from the table: \"active_roles\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -18781,7 +18955,7 @@
       {
         "kind": "OBJECT",
         "name": "transactions",
-        "description": "holds transactions data",
+        "description": "holds transactions data\n\n\ncolumns and relationships of \"transactions\"\n",
         "fields": [
           {
             "name": "count",
@@ -19271,7 +19445,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "transactions_on_conflict",
@@ -19856,7 +20030,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "transactions_on_conflict",
-        "description": "on_conflict condition type for table \"transactions\"",
+        "description": "on conflict condition type for table \"transactions\"",
         "fields": null,
         "inputFields": [
           {
@@ -20468,7 +20642,7 @@
       {
         "kind": "OBJECT",
         "name": "users",
-        "description": "holds user data",
+        "description": "holds user data\n\n\ncolumns and relationships of \"users\"\n",
         "fields": [
           {
             "name": "activeRolesByUser",
@@ -20573,200 +20747,6 @@
           },
           {
             "name": "activeRolesByUser_aggregate",
-            "description": "An aggregate relationship",
-            "args": [
-              {
-                "name": "distinct_on",
-                "description": "distinct select on columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "active_roles_select_column",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "limit",
-                "description": "limit the number of rows returned",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "offset",
-                "description": "skip the first n rows. Use only with order_by",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "order_by",
-                "description": "sort the rows by one or more columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "active_roles_order_by",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": "filter the rows returned",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "active_roles_bool_exp",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "active_roles_aggregate",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "active_roles",
-            "description": "An array relationship",
-            "args": [
-              {
-                "name": "distinct_on",
-                "description": "distinct select on columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "active_roles_select_column",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "limit",
-                "description": "limit the number of rows returned",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "offset",
-                "description": "skip the first n rows. Use only with order_by",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "order_by",
-                "description": "sort the rows by one or more columns",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "active_roles_order_by",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": "filter the rows returned",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "active_roles_bool_exp",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "active_roles",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "active_roles_aggregate",
             "description": "An aggregate relationship",
             "args": [
               {
@@ -21324,18 +21304,6 @@
             "deprecationReason": null
           },
           {
-            "name": "active_roles",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "active_roles_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "email",
             "description": null,
             "type": {
@@ -21425,18 +21393,6 @@
         "inputFields": [
           {
             "name": "activeRolesByUser",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "active_roles_arr_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "active_roles",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -21705,7 +21661,7 @@
           },
           {
             "name": "on_conflict",
-            "description": "upsert condition",
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "users_on_conflict",
@@ -21723,7 +21679,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "users_on_conflict",
-        "description": "on_conflict condition type for table \"users\"",
+        "description": "on conflict condition type for table \"users\"",
         "fields": null,
         "inputFields": [
           {
@@ -21791,18 +21747,6 @@
         "inputFields": [
           {
             "name": "activeRolesByUser_aggregate",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "active_roles_aggregate_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "active_roles_aggregate",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
