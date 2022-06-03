@@ -31,13 +31,13 @@ function App() {
       <ViewBatchShopModal />
       <Header />
       <Container  fluid>
-        <Row className='w-100'>
+        <Row >
           {role === Roles_ENUM.ORGADMIN && isLoggedIn() &&
-            <Col xs={2} lg={2}>
+            <Col xs={1} lg={1} md={3}>
               <SideMenu />
             </Col>
           }
-          <Col>
+          <Col xs={11} lg={11} md={9}>
             <Routes>
               <Route exact path="/" element={<Home />}>
               </Route>
@@ -51,7 +51,7 @@ function App() {
               <Route exact path="/login" element={<Login />}>
               </Route>
               <Route exact path="/cashier" element={<Cashier />}>
-              </Route>
+            </Route>
             </Routes>
 
           </Col>

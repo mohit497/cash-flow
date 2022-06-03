@@ -1,21 +1,21 @@
 query transactionbyshop($_eq: uuid = "") {
-  sales(where: {shop: {_eq: $_eq}}) {
+  sales(where: { shop: { _eq: $_eq } }) {
     id
     org
     shop
     role_id
     updatedAt
     createdAt
+    active_role {
+      userByUser {
+        name
+      }
+    }
     transactions {
       id
       count
       product {
         amount
-      }
-    }
-    active_role {
-      userByUser {
-        name
       }
     }
   }

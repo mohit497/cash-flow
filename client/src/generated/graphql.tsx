@@ -495,6 +495,7 @@ export type Inventory = {
   p_code: Scalars['String'];
   /** An object relationship */
   product: Products;
+  role_id?: Maybe<Scalars['uuid']>;
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -571,6 +572,7 @@ export type Inventory_Bool_Exp = {
   id?: Maybe<Uuid_Comparison_Exp>;
   p_code?: Maybe<String_Comparison_Exp>;
   product?: Maybe<Products_Bool_Exp>;
+  role_id?: Maybe<Uuid_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -592,6 +594,7 @@ export type Inventory_Insert_Input = {
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
   product?: Maybe<Products_Obj_Rel_Insert_Input>;
+  role_id?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -602,6 +605,7 @@ export type Inventory_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  role_id?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -611,6 +615,7 @@ export type Inventory_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
+  role_id?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -621,6 +626,7 @@ export type Inventory_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  role_id?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -630,6 +636,7 @@ export type Inventory_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
+  role_id?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -656,6 +663,7 @@ export type Inventory_Order_By = {
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
   product?: Maybe<Products_Order_By>;
+  role_id?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -675,6 +683,8 @@ export enum Inventory_Select_Column {
   /** column name */
   PCode = 'p_code',
   /** column name */
+  RoleId = 'role_id',
+  /** column name */
   UpdatedAt = 'updatedAt'
 }
 
@@ -684,6 +694,7 @@ export type Inventory_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  role_id?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -741,6 +752,8 @@ export enum Inventory_Update_Column {
   Id = 'id',
   /** column name */
   PCode = 'p_code',
+  /** column name */
+  RoleId = 'role_id',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
@@ -3665,18 +3678,18 @@ export type TransactionbyshopQuery = (
   & { sales: Array<(
     { __typename?: 'sales' }
     & Pick<Sales, 'id' | 'org' | 'shop' | 'role_id' | 'updatedAt' | 'createdAt'>
-    & { transactions: Array<(
+    & { active_role?: Maybe<(
+      { __typename?: 'active_roles' }
+      & { userByUser: (
+        { __typename?: 'users' }
+        & Pick<Users, 'name'>
+      ) }
+    )>, transactions: Array<(
       { __typename?: 'transactions' }
       & Pick<Transactions, 'id' | 'count'>
       & { product: (
         { __typename?: 'products' }
         & Pick<Products, 'amount'>
-      ) }
-    )>, active_role?: Maybe<(
-      { __typename?: 'active_roles' }
-      & { userByUser: (
-        { __typename?: 'users' }
-        & Pick<Users, 'name'>
       ) }
     )> }
   )> }
@@ -4072,16 +4085,16 @@ export const TransactionbyshopDocument = gql`
     role_id
     updatedAt
     createdAt
+    active_role {
+      userByUser {
+        name
+      }
+    }
     transactions {
       id
       count
       product {
         amount
-      }
-    }
-    active_role {
-      userByUser {
-        name
       }
     }
   }

@@ -12,6 +12,9 @@ import {
 } from "react-bootstrap";
 import AddItem from "./addItem";
 
+var Barcode = require("react-barcode");
+
+
 export default function Store() {
   const [name, setname] = useState();
   const handleChange = (e) => {
@@ -67,7 +70,9 @@ export default function Store() {
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.amount}</td>
-                <td>{item.code}</td>
+                <td className="bar-code">
+                  <Barcode value={item.code} />
+                </td>
                 <td>{item.inventories_aggregate.aggregate?.sum?.count}</td>
                 <td>
                   <AddItem {...(item as Products)} />{" "}

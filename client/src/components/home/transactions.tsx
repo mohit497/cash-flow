@@ -1,5 +1,6 @@
 import { Transactions, useTransactionbyshopQuery } from "generated/graphql";
 import { Table } from "react-bootstrap";
+import { FaClock, FaDollarSign, FaList, FaUser } from "react-icons/fa";
 import Moment from "react-moment";
 
 export const TransactionsTable = ({ shop_id }) => {
@@ -14,16 +15,22 @@ export const TransactionsTable = ({ shop_id }) => {
 
     return temp.reduce((partialSum, a) => partialSum + a, 0);
   };
+  const calculateItemCount = (transaction: Transactions[]) => {
+    const temp: number[] = transaction.map((t) => t.count);
+
+    return temp.reduce((partialSum, a) => partialSum + a, 0);
+  };
 
   return (
     <div className="transactions my-2">
-      <Table responsive hover size="sm">
+      <Table responsive  hover size="md">
         <thead>
           <tr>
             <th>#</th>
-            <th>Created At</th>
-            <th>Sold By</th>
-            <th>Amount</th>
+            <th><FaClock /> Created At</th>
+            <th><FaUser /> Sold By</th>
+            <th><FaList /> Items</th>
+            <th><FaDollarSign /> Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +42,7 @@ export const TransactionsTable = ({ shop_id }) => {
                   <Moment format="LLL">{record.createdAt}</Moment>
                 </td>
                 <td>{record.active_role?.userByUser.name}</td>
+                <td>{calculateItemCount(record.transactions as Transactions[])}</td>
                 <td>
                   {calculateTotalAmount(record.transactions as Transactions[])}{" "}
                   Rs

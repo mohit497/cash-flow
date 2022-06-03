@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "./style.scss";
 
 import BarcodeReader from "react-barcode-reader";
@@ -67,8 +67,8 @@ export default function Cashier() {
   });
 
   return (
-    <div>
-      <BarcodeReader  onError={handleError} onScan={handleScan} />
+    <Container>
+      <BarcodeReader onError={handleError} onScan={handleScan} />
       <Row>
         <Col xs={12} md={9} className="bill-col">
           <AddProduct onFoundProduct={onCustomFindProduct} />
@@ -95,6 +95,6 @@ export default function Cashier() {
         })}
       </Row>
       <SelectShopModal show={!Boolean(state.selectedShop?.id)} />
-    </div>
+    </Container>
   );
 }

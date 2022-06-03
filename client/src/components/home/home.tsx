@@ -1,13 +1,15 @@
 import { useMyShopsQuery } from "generated/graphql";
-import { Tabs, Tab } from "react-bootstrap";
-import {  TransactionsTable } from "./transactions";
+import { Tabs, Tab, Breadcrumb, Container } from "react-bootstrap";
+import { TransactionsTable } from "./transactions";
 
 export default function Home() {
   const { data } = useMyShopsQuery();
 
   return (
-    <div>
-      <Tabs
+    <Container>
+      <Breadcrumb>
+        <Breadcrumb.Item active>Home</Breadcrumb.Item>
+      </Breadcrumb>      <Tabs
         defaultActiveKey={data?.shops[0].id}
         transition={false}
         id="noanim-tab-example"
@@ -15,11 +17,13 @@ export default function Home() {
         variant="pills"
       >
         {data?.shops.map((shop) => {
-          return <Tab eventKey={shop.id} title={shop.name}>
+          return (
+            <Tab eventKey={shop.id} title={shop.name}>
               <TransactionsTable shop_id={shop.id} />
-          </Tab>;
+            </Tab>
+          );
         })}
       </Tabs>
-    </div>
+    </Container>
   );
 }

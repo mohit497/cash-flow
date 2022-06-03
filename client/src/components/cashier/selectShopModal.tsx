@@ -1,5 +1,6 @@
 import { useAppState } from "appstate/useAppstate";
 import { Shops, useMyShopsQuery } from "generated/graphql";
+import { useEffect } from "react";
 import { Modal, Form } from "react-bootstrap";
 
 interface Props {
@@ -13,9 +14,19 @@ export const SelectShopModal = (props: Props) => {
   const handleChange = (e) => {
     setSelectedShop(shops?.shops.find((i) => i.id === e.target.value) as Shops);
   };
+
+  useEffect(() => {
+    return () => {
+      setSelectedShop(undefined);
+    };
+  }, []);
+
+  const onHide = () => {
+    setSelectedShop(shops?.shops[0] as Shops);
+  };
   return (
-    <Modal show={props.show}>
-      <Modal.Header closeButton>
+    <Modal onHide={onHide} show={!state.selectedShop?.id}>
+      <Modal.Header>
         <Modal.Title>Select Shop</Modal.Title>
       </Modal.Header>
       <Modal.Body>
