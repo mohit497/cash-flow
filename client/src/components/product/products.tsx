@@ -1,10 +1,10 @@
+import { Divider } from "components/divider";
 import Loading from "components/loader/loader";
 import { useGetproductsQuery } from "generated/graphql";
 import { Breadcrumb, Container, Table } from "react-bootstrap";
 import ActionsHeader from "./actionsHeader";
 import AddProduct from "./addProduct";
-import './style.scss'
-
+import "./style.scss";
 
 var Barcode = require("react-barcode");
 
@@ -18,6 +18,7 @@ export default function Products() {
         <Breadcrumb.Item active>Products</Breadcrumb.Item>
       </Breadcrumb>
       <AddProduct />
+      <Divider />
       <ActionsHeader />
       <Table striped bordered hover>
         <thead>
@@ -37,7 +38,7 @@ export default function Products() {
                 <td>{item.name}</td>
                 <td>{item.amount}</td>
                 <td className="bar-code">
-                  <Barcode  value={item.code} />
+                  <Barcode value={item.code} />
                 </td>
                 <td>{item.id}</td>
               </tr>

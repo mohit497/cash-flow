@@ -10,6 +10,7 @@ import AddProduct from "./addProduct";
 import ItemsTable from "./itemsTable";
 import { useAppState } from "appstate/useAppstate";
 import SaleCard from "./saleCard";
+import { SelectShopModal } from "./selectShopModal";
 
 
 export default function Cashier() {
@@ -87,6 +88,7 @@ export default function Cashier() {
                     </Row>
                 </Col>
             </Row>
+            <SelectShopModal show={!Boolean(state.selectedShop?.id)} />
         </div>
     )
 }

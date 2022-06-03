@@ -2,6 +2,9 @@ table:
   schema: public
   name: sales
 object_relationships:
+  - name: active_role
+    using:
+      foreign_key_constraint_on: role_id
   - name: orgByOrg
     using:
       foreign_key_constraint_on: org
@@ -27,6 +30,8 @@ insert_permissions:
           activeRolesByUser:
             org:
               _eq: X-Hasura-Org-Id
+      set:
+        role_id: x-hasura-Role-Id
       columns:
         - createdAt
         - updatedAt

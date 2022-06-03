@@ -1,0 +1,8 @@
+query myShops {
+  shops {
+    id
+    name
+    location
+    org
+  }
+}

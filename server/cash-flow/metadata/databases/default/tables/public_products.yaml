@@ -2,6 +2,9 @@ table:
   schema: public
   name: products
 object_relationships:
+  - name: active_role
+    using:
+      foreign_key_constraint_on: added_by
   - name: orgByOrg
     using:
       foreign_key_constraint_on: org
@@ -19,6 +22,8 @@ insert_permissions:
       check:
         org:
           _eq: X-Hasura-Org-Id
+      set:
+        added_by: x-hasura-Role-Id
       columns:
         - code
         - name

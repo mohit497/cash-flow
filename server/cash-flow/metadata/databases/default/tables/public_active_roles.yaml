@@ -11,6 +11,21 @@ object_relationships:
   - name: userByUser
     using:
       foreign_key_constraint_on: user
+array_relationships:
+  - name: products
+    using:
+      foreign_key_constraint_on:
+        column: added_by
+        table:
+          schema: public
+          name: products
+  - name: sales
+    using:
+      foreign_key_constraint_on:
+        column: role_id
+        table:
+          schema: public
+          name: sales
 select_permissions:
   - role: org-admin
     permission:

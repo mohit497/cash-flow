@@ -1,3 +1,4 @@
+import { Divider } from "components/divider"
 import ActionsHeader from "components/product/actionsHeader"
 import { useGetshopsQuery } from "generated/graphql"
 import { Breadcrumb, Container, Table } from "react-bootstrap"
@@ -19,6 +20,7 @@ export default function Shops() {
                 <Breadcrumb.Item active>Shops</Breadcrumb.Item>
             </Breadcrumb>
             <AddShop />
+            <Divider />
             <ActionsHeader />
             <Table striped bordered hover>
                 <thead>

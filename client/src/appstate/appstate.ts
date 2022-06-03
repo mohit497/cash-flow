@@ -1,4 +1,5 @@
 import { makeVar } from "@apollo/client";
+import { Shops } from "generated/graphql";
 import jwt_decode from "jwt-decode";
 
 let temp: any;
@@ -9,12 +10,16 @@ try {
 
 export interface AppState {
   products: any[];
-  token: { role: string}
+  token: { role: string};
+  role: string;
+  selectedShop: Shops | undefined;
 }
 
 const initialState: AppState = {
   products: [],
-  token: temp
+  token: temp,
+  role: temp.role,
+  selectedShop: undefined
 };
 
 export const appState = makeVar<AppState>(initialState);

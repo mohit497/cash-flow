@@ -229,10 +229,78 @@ export type Active_Roles = {
   org: Scalars['uuid'];
   /** An object relationship */
   orgByOrg: Orgs;
+  /** An array relationship */
+  products: Array<Products>;
+  /** An aggregate relationship */
+  products_aggregate: Products_Aggregate;
   role: Scalars['String'];
+  /** An array relationship */
+  sales: Array<Sales>;
+  /** An aggregate relationship */
+  sales_aggregate: Sales_Aggregate;
   user: Scalars['uuid'];
   /** An object relationship */
   userByUser: Users;
+};
+
+
+/**
+ * active users with role
+ *
+ *
+ * columns and relationships of "active_roles"
+ */
+export type Active_RolesProductsArgs = {
+  distinct_on?: Maybe<Array<Products_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Products_Order_By>>;
+  where?: Maybe<Products_Bool_Exp>;
+};
+
+
+/**
+ * active users with role
+ *
+ *
+ * columns and relationships of "active_roles"
+ */
+export type Active_RolesProducts_AggregateArgs = {
+  distinct_on?: Maybe<Array<Products_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Products_Order_By>>;
+  where?: Maybe<Products_Bool_Exp>;
+};
+
+
+/**
+ * active users with role
+ *
+ *
+ * columns and relationships of "active_roles"
+ */
+export type Active_RolesSalesArgs = {
+  distinct_on?: Maybe<Array<Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sales_Order_By>>;
+  where?: Maybe<Sales_Bool_Exp>;
+};
+
+
+/**
+ * active users with role
+ *
+ *
+ * columns and relationships of "active_roles"
+ */
+export type Active_RolesSales_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sales_Order_By>>;
+  where?: Maybe<Sales_Bool_Exp>;
 };
 
 /** aggregated selection of "active_roles" */
@@ -280,7 +348,9 @@ export type Active_Roles_Bool_Exp = {
   id?: Maybe<Uuid_Comparison_Exp>;
   org?: Maybe<Uuid_Comparison_Exp>;
   orgByOrg?: Maybe<Orgs_Bool_Exp>;
+  products?: Maybe<Products_Bool_Exp>;
   role?: Maybe<String_Comparison_Exp>;
+  sales?: Maybe<Sales_Bool_Exp>;
   user?: Maybe<Uuid_Comparison_Exp>;
   userByUser?: Maybe<Users_Bool_Exp>;
 };
@@ -297,7 +367,9 @@ export type Active_Roles_Insert_Input = {
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
   orgByOrg?: Maybe<Orgs_Obj_Rel_Insert_Input>;
+  products?: Maybe<Products_Arr_Rel_Insert_Input>;
   role?: Maybe<Scalars['String']>;
+  sales?: Maybe<Sales_Arr_Rel_Insert_Input>;
   user?: Maybe<Scalars['uuid']>;
   userByUser?: Maybe<Users_Obj_Rel_Insert_Input>;
 };
@@ -345,6 +417,13 @@ export type Active_Roles_Mutation_Response = {
   returning: Array<Active_Roles>;
 };
 
+/** input type for inserting object relation for remote table "active_roles" */
+export type Active_Roles_Obj_Rel_Insert_Input = {
+  data: Active_Roles_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Active_Roles_On_Conflict>;
+};
+
 /** on conflict condition type for table "active_roles" */
 export type Active_Roles_On_Conflict = {
   constraint: Active_Roles_Constraint;
@@ -358,7 +437,9 @@ export type Active_Roles_Order_By = {
   id?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
   orgByOrg?: Maybe<Orgs_Order_By>;
+  products_aggregate?: Maybe<Products_Aggregate_Order_By>;
   role?: Maybe<Order_By>;
+  sales_aggregate?: Maybe<Sales_Aggregate_Order_By>;
   user?: Maybe<Order_By>;
   userByUser?: Maybe<Users_Order_By>;
 };
@@ -1498,6 +1579,9 @@ export enum Orgs_Update_Column {
  */
 export type Products = {
   __typename?: 'products';
+  /** An object relationship */
+  active_role?: Maybe<Active_Roles>;
+  added_by?: Maybe<Scalars['uuid']>;
   amount: Scalars['numeric'];
   code: Scalars['String'];
   createdAt: Scalars['timestamptz'];
@@ -1611,6 +1695,8 @@ export type Products_Bool_Exp = {
   _and?: Maybe<Array<Products_Bool_Exp>>;
   _not?: Maybe<Products_Bool_Exp>;
   _or?: Maybe<Array<Products_Bool_Exp>>;
+  active_role?: Maybe<Active_Roles_Bool_Exp>;
+  added_by?: Maybe<Uuid_Comparison_Exp>;
   amount?: Maybe<Numeric_Comparison_Exp>;
   code?: Maybe<String_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -1637,6 +1723,8 @@ export type Products_Inc_Input = {
 
 /** input type for inserting data into table "products" */
 export type Products_Insert_Input = {
+  active_role?: Maybe<Active_Roles_Obj_Rel_Insert_Input>;
+  added_by?: Maybe<Scalars['uuid']>;
   amount?: Maybe<Scalars['numeric']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
@@ -1651,6 +1739,7 @@ export type Products_Insert_Input = {
 /** aggregate max on columns */
 export type Products_Max_Fields = {
   __typename?: 'products_max_fields';
+  added_by?: Maybe<Scalars['uuid']>;
   amount?: Maybe<Scalars['numeric']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
@@ -1662,6 +1751,7 @@ export type Products_Max_Fields = {
 
 /** order by max() on columns of table "products" */
 export type Products_Max_Order_By = {
+  added_by?: Maybe<Order_By>;
   amount?: Maybe<Order_By>;
   code?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
@@ -1674,6 +1764,7 @@ export type Products_Max_Order_By = {
 /** aggregate min on columns */
 export type Products_Min_Fields = {
   __typename?: 'products_min_fields';
+  added_by?: Maybe<Scalars['uuid']>;
   amount?: Maybe<Scalars['numeric']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
@@ -1685,6 +1776,7 @@ export type Products_Min_Fields = {
 
 /** order by min() on columns of table "products" */
 export type Products_Min_Order_By = {
+  added_by?: Maybe<Order_By>;
   amount?: Maybe<Order_By>;
   code?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
@@ -1719,6 +1811,8 @@ export type Products_On_Conflict = {
 
 /** Ordering options when selecting data from "products". */
 export type Products_Order_By = {
+  active_role?: Maybe<Active_Roles_Order_By>;
+  added_by?: Maybe<Order_By>;
   amount?: Maybe<Order_By>;
   code?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
@@ -1738,6 +1832,8 @@ export type Products_Pk_Columns_Input = {
 /** select columns of table "products" */
 export enum Products_Select_Column {
   /** column name */
+  AddedBy = 'added_by',
+  /** column name */
   Amount = 'amount',
   /** column name */
   Code = 'code',
@@ -1755,6 +1851,7 @@ export enum Products_Select_Column {
 
 /** input type for updating data in table "products" */
 export type Products_Set_Input = {
+  added_by?: Maybe<Scalars['uuid']>;
   amount?: Maybe<Scalars['numeric']>;
   code?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
@@ -1810,6 +1907,8 @@ export type Products_Sum_Order_By = {
 
 /** update columns of table "products" */
 export enum Products_Update_Column {
+  /** column name */
+  AddedBy = 'added_by',
   /** column name */
   Amount = 'amount',
   /** column name */
@@ -2132,11 +2231,14 @@ export type Query_RootUsers_By_PkArgs = {
  */
 export type Sales = {
   __typename?: 'sales';
+  /** An object relationship */
+  active_role?: Maybe<Active_Roles>;
   createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
   org: Scalars['uuid'];
   /** An object relationship */
   orgByOrg: Orgs;
+  role_id?: Maybe<Scalars['uuid']>;
   shop: Scalars['uuid'];
   /** An object relationship */
   shopByShop: Shops;
@@ -2221,10 +2323,12 @@ export type Sales_Bool_Exp = {
   _and?: Maybe<Array<Sales_Bool_Exp>>;
   _not?: Maybe<Sales_Bool_Exp>;
   _or?: Maybe<Array<Sales_Bool_Exp>>;
+  active_role?: Maybe<Active_Roles_Bool_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   org?: Maybe<Uuid_Comparison_Exp>;
   orgByOrg?: Maybe<Orgs_Bool_Exp>;
+  role_id?: Maybe<Uuid_Comparison_Exp>;
   shop?: Maybe<Uuid_Comparison_Exp>;
   shopByShop?: Maybe<Shops_Bool_Exp>;
   transactions?: Maybe<Transactions_Bool_Exp>;
@@ -2241,10 +2345,12 @@ export enum Sales_Constraint {
 
 /** input type for inserting data into table "sales" */
 export type Sales_Insert_Input = {
+  active_role?: Maybe<Active_Roles_Obj_Rel_Insert_Input>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
   orgByOrg?: Maybe<Orgs_Obj_Rel_Insert_Input>;
+  role_id?: Maybe<Scalars['uuid']>;
   shop?: Maybe<Scalars['uuid']>;
   shopByShop?: Maybe<Shops_Obj_Rel_Insert_Input>;
   transactions?: Maybe<Transactions_Arr_Rel_Insert_Input>;
@@ -2259,6 +2365,7 @@ export type Sales_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
+  role_id?: Maybe<Scalars['uuid']>;
   shop?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Scalars['uuid']>;
@@ -2269,6 +2376,7 @@ export type Sales_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
+  role_id?: Maybe<Order_By>;
   shop?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   user?: Maybe<Order_By>;
@@ -2280,6 +2388,7 @@ export type Sales_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
+  role_id?: Maybe<Scalars['uuid']>;
   shop?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Scalars['uuid']>;
@@ -2290,6 +2399,7 @@ export type Sales_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
+  role_id?: Maybe<Order_By>;
   shop?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   user?: Maybe<Order_By>;
@@ -2320,10 +2430,12 @@ export type Sales_On_Conflict = {
 
 /** Ordering options when selecting data from "sales". */
 export type Sales_Order_By = {
+  active_role?: Maybe<Active_Roles_Order_By>;
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
   orgByOrg?: Maybe<Orgs_Order_By>;
+  role_id?: Maybe<Order_By>;
   shop?: Maybe<Order_By>;
   shopByShop?: Maybe<Shops_Order_By>;
   transactions_aggregate?: Maybe<Transactions_Aggregate_Order_By>;
@@ -2346,6 +2458,8 @@ export enum Sales_Select_Column {
   /** column name */
   Org = 'org',
   /** column name */
+  RoleId = 'role_id',
+  /** column name */
   Shop = 'shop',
   /** column name */
   UpdatedAt = 'updatedAt',
@@ -2358,6 +2472,7 @@ export type Sales_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   org?: Maybe<Scalars['uuid']>;
+  role_id?: Maybe<Scalars['uuid']>;
   shop?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Scalars['uuid']>;
@@ -2371,6 +2486,8 @@ export enum Sales_Update_Column {
   Id = 'id',
   /** column name */
   Org = 'org',
+  /** column name */
+  RoleId = 'role_id',
   /** column name */
   Shop = 'shop',
   /** column name */
@@ -2899,11 +3016,13 @@ export type Timestamptz_Comparison_Exp = {
 export type Transactions = {
   __typename?: 'transactions';
   count: Scalars['Int'];
+  createdAt?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   p_code: Scalars['String'];
   sale: Scalars['uuid'];
   /** An object relationship */
   saleBySale: Sales;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregated selection of "transactions" */
@@ -2975,10 +3094,12 @@ export type Transactions_Bool_Exp = {
   _not?: Maybe<Transactions_Bool_Exp>;
   _or?: Maybe<Array<Transactions_Bool_Exp>>;
   count?: Maybe<Int_Comparison_Exp>;
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   p_code?: Maybe<String_Comparison_Exp>;
   sale?: Maybe<Uuid_Comparison_Exp>;
   saleBySale?: Maybe<Sales_Bool_Exp>;
+  updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "transactions" */
@@ -2995,44 +3116,54 @@ export type Transactions_Inc_Input = {
 /** input type for inserting data into table "transactions" */
 export type Transactions_Insert_Input = {
   count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
   sale?: Maybe<Scalars['uuid']>;
   saleBySale?: Maybe<Sales_Obj_Rel_Insert_Input>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
 export type Transactions_Max_Fields = {
   __typename?: 'transactions_max_fields';
   count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
   sale?: Maybe<Scalars['uuid']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by max() on columns of table "transactions" */
 export type Transactions_Max_Order_By = {
   count?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
   sale?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Transactions_Min_Fields = {
   __typename?: 'transactions_min_fields';
   count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
   sale?: Maybe<Scalars['uuid']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** order by min() on columns of table "transactions" */
 export type Transactions_Min_Order_By = {
   count?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
   sale?: Maybe<Order_By>;
+  updatedAt?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "transactions" */
@@ -3054,10 +3185,12 @@ export type Transactions_On_Conflict = {
 /** Ordering options when selecting data from "transactions". */
 export type Transactions_Order_By = {
   count?: Maybe<Order_By>;
+  createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
   sale?: Maybe<Order_By>;
   saleBySale?: Maybe<Sales_Order_By>;
+  updatedAt?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: transactions */
@@ -3070,19 +3203,25 @@ export enum Transactions_Select_Column {
   /** column name */
   Count = 'count',
   /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
   Id = 'id',
   /** column name */
   PCode = 'p_code',
   /** column name */
-  Sale = 'sale'
+  Sale = 'sale',
+  /** column name */
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "transactions" */
 export type Transactions_Set_Input = {
   count?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
   sale?: Maybe<Scalars['uuid']>;
+  updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -3134,11 +3273,15 @@ export enum Transactions_Update_Column {
   /** column name */
   Count = 'count',
   /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
   Id = 'id',
   /** column name */
   PCode = 'p_code',
   /** column name */
-  Sale = 'sale'
+  Sale = 'sale',
+  /** column name */
+  UpdatedAt = 'updatedAt'
 }
 
 /** aggregate var_pop on columns */
@@ -3485,6 +3628,17 @@ export type GetsalesQuery = (
   )> }
 );
 
+export type MyShopsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyShopsQuery = (
+  { __typename?: 'query_root' }
+  & { shops: Array<(
+    { __typename?: 'shops' }
+    & Pick<Shops, 'id' | 'name' | 'location' | 'org'>
+  )> }
+);
+
 export type AddproductMutationVariables = Exact<{
   objects?: Maybe<Array<Products_Insert_Input> | Products_Insert_Input>;
 }>;
@@ -3804,6 +3958,43 @@ export function useGetsalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetsalesQueryHookResult = ReturnType<typeof useGetsalesQuery>;
 export type GetsalesLazyQueryHookResult = ReturnType<typeof useGetsalesLazyQuery>;
 export type GetsalesQueryResult = Apollo.QueryResult<GetsalesQuery, GetsalesQueryVariables>;
+export const MyShopsDocument = gql`
+    query myShops {
+  shops {
+    id
+    name
+    location
+    org
+  }
+}
+    `;
+
+/**
+ * __useMyShopsQuery__
+ *
+ * To run a query within a React component, call `useMyShopsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMyShopsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMyShopsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMyShopsQuery(baseOptions?: Apollo.QueryHookOptions<MyShopsQuery, MyShopsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MyShopsQuery, MyShopsQueryVariables>(MyShopsDocument, options);
+      }
+export function useMyShopsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MyShopsQuery, MyShopsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MyShopsQuery, MyShopsQueryVariables>(MyShopsDocument, options);
+        }
+export type MyShopsQueryHookResult = ReturnType<typeof useMyShopsQuery>;
+export type MyShopsLazyQueryHookResult = ReturnType<typeof useMyShopsLazyQuery>;
+export type MyShopsQueryResult = Apollo.QueryResult<MyShopsQuery, MyShopsQueryVariables>;
 export const AddproductDocument = gql`
     mutation addproduct($objects: [products_insert_input!] = {}) {
   insert_products(objects: $objects) {
