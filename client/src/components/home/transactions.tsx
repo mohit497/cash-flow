@@ -25,7 +25,7 @@ export const TransactionsTable = ({ shop_id }) => {
     <div className="transactions my-2">
       <Table responsive  hover size="md">
         <thead>
-          <tr>
+          <tr >
             <th>#</th>
             <th><FaClock /> Created At</th>
             <th><FaUser /> Sold By</th>

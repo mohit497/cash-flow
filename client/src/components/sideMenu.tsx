@@ -22,8 +22,7 @@ export default function SideMenu() {
           <FaTshirt /> <span className="d-none d-md-block"> Products</span>
         </Nav.Link>
         <Nav.Link href="/shops">
-          {" "}
-          <FaStore /> <span className="d-none d-md-block">Shops</span>{" "}
+          <FaStore /> <span className="d-none d-md-block">Shops</span>
         </Nav.Link>
         <Nav.Link href="/store">
           <FaWarehouse /> <span className="d-none d-md-block">Store</span>
