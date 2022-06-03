@@ -13,13 +13,17 @@ export interface AppState {
   token: { role: string};
   role: string;
   selectedShop: Shops | undefined;
+  org: string;
+  selectedProduct: string | undefined;
 }
 
 const initialState: AppState = {
   products: [],
   token: temp,
   role: temp.role,
-  selectedShop: undefined
+  selectedShop: undefined,
+  org: temp.org,
+  selectedProduct: undefined
 };
 
 export const appState = makeVar<AppState>(initialState);

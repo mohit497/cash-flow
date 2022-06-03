@@ -17,6 +17,7 @@ import Cashier from 'components/cashier/cashier';
 import Store from 'components/store/store';
 import Login from 'components/login';
 import { useAuth } from 'hooks/useAuth';
+import { ViewBatchShopModal } from 'components/viewBatchModal';
 
 function App() {
 
@@ -25,13 +26,14 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="App vh-50">
       <ReactNotifications />
+      <ViewBatchShopModal />
       <Header />
-      <Container fluid>
+      <Container  fluid>
         <Row className='w-100'>
           {role === Roles_ENUM.ORGADMIN && isLoggedIn() &&
-            <Col xs={2} md={3}>
+            <Col xs={2} lg={2}>
               <SideMenu />
             </Col>
           }

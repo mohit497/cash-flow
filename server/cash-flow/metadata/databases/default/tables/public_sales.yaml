@@ -11,9 +11,6 @@ object_relationships:
   - name: shopByShop
     using:
       foreign_key_constraint_on: shop
-  - name: userByUser
-    using:
-      foreign_key_constraint_on: user
 array_relationships:
   - name: transactions
     using:
@@ -26,12 +23,12 @@ insert_permissions:
   - role: org-admin
     permission:
       check:
-        userByUser:
-          activeRolesByUser:
-            org:
-              _eq: X-Hasura-Org-Id
+        active_role:
+          org:
+            _eq: X-Hasura-Org-Id
       set:
         role_id: x-hasura-Role-Id
+        user: x-hasura-User-Id
       columns:
         - createdAt
         - updatedAt
@@ -45,16 +42,16 @@ select_permissions:
     permission:
       columns:
         - createdAt
-        - updatedAt
         - id
         - org
+        - role_id
         - shop
+        - updatedAt
         - user
       filter:
-        userByUser:
-          activeRolesByUser:
-            org:
-              _eq: X-Hasura-Org-Id
+        active_role:
+          org:
+            _eq: X-Hasura-Org-Id
 update_permissions:
   - role: org-admin
     permission:
@@ -66,20 +63,17 @@ update_permissions:
         - shop
         - user
       filter:
-        userByUser:
-          activeRolesByUser:
-            org:
-              _eq: X-Hasura-Org-Id
+        active_role:
+          org:
+            _eq: X-Hasura-Org-Id
       check:
-        userByUser:
-          activeRolesByUser:
-            org:
-              _eq: X-Hasura-Org-Id
+        active_role:
+          org:
+            _eq: X-Hasura-Org-Id
 delete_permissions:
   - role: org-admin
     permission:
       filter:
-        userByUser:
-          activeRolesByUser:
-            org:
-              _eq: X-Hasura-Org-Id
+        active_role:
+          org:
+            _eq: X-Hasura-Org-Id

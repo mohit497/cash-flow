@@ -21,7 +21,7 @@ export default function Shops() {
             </Breadcrumb>
             <AddShop />
             <Divider />
-            <ActionsHeader />
+            <ActionsHeader onSearch={()=>{}} />
             <Table striped bordered hover>
                 <thead>
                     <tr>

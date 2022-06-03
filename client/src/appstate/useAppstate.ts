@@ -1,6 +1,6 @@
 import { useReactiveVar } from "@apollo/client";
 import { Shops } from "generated/graphql";
-import { appState } from "./appstate";
+import { AppState, appState } from "./appstate";
 
 export function useAppState() {
   const state = useReactiveVar(appState);
@@ -11,10 +11,14 @@ export function useAppState() {
   const setSelectedShop = (shop: Shops | undefined) => {
     appState({ ...appState(), selectedShop: shop });
   };
+  const setState = (state: AppState) => {
+    appState(state);
+  };
 
   return {
     state,
     setProducts,
-    setSelectedShop
+    setSelectedShop,
+    setState
   };
 }

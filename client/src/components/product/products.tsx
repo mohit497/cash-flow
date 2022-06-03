@@ -1,7 +1,10 @@
 import { Divider } from "components/divider";
 import Loading from "components/loader/loader";
+import { PaginationBasic } from "components/paginationBasic";
 import { useGetproductsQuery } from "generated/graphql";
+import { useState } from "react";
 import { Breadcrumb, Container, Table } from "react-bootstrap";
+import { PAGE_SIZE } from "utils";
 import ActionsHeader from "./actionsHeader";
 import AddProduct from "./addProduct";
 import "./style.scss";
@@ -9,7 +12,18 @@ import "./style.scss";
 var Barcode = require("react-barcode");
 
 export default function Products() {
-  const { data, loading } = useGetproductsQuery();
+  const [srchstring, setsrchstring] = useState("");
+  const { data, loading, refetch } = useGetproductsQuery({
+    variables: {
+      limit: PAGE_SIZE,
+      offset: 0,
+      _iregex: srchstring,
+    },
+  });
+
+  const onPageChange = (page: number) => {
+    refetch({ offset: (page - 1) * PAGE_SIZE });
+  };
 
   return (
     <Container>
@@ -19,8 +33,8 @@ export default function Products() {
       </Breadcrumb>
       <AddProduct />
       <Divider />
-      <ActionsHeader />
-      <Table striped bordered hover>
+      <ActionsHeader onSearch={setsrchstring} />
+      <Table responsive hover>
         <thead>
           <tr>
             <th>#</th>
@@ -46,6 +60,7 @@ export default function Products() {
           })}
         </tbody>
       </Table>
+      <PaginationBasic onPageChange={onPageChange} active={1} total={50} />
     </Container>
   );
 }

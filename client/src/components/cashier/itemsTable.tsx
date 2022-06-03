@@ -10,7 +10,7 @@ interface Props {
 
 export default function ItemsTable(props: Props) {
     return (
-        <Table variant='dark' striped bordered hover size="sm">
+        <Table responsive size="sm">
             <thead>
                 <tr>
                     <th>#</th>

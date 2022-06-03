@@ -2,6 +2,9 @@ table:
   schema: public
   name: transactions
 object_relationships:
+  - name: product
+    using:
+      foreign_key_constraint_on: p_code
   - name: saleBySale
     using:
       foreign_key_constraint_on: sale

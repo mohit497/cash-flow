@@ -1,5 +1,9 @@
 query findproduct($_iregex: String = "", $_iregex1: String = "") {
-  products(where: {_or: {name: {_iregex: $_iregex}, code: {_iregex: $_iregex1}}}) {
+  products(
+    where: {
+      _or: { name: { _iregex: $_iregex }, code: { _iregex: $_iregex1 } }
+    }
+  ) {
     amount
     code
     createdAt
@@ -17,8 +21,18 @@ mutation addtransaction($objects: [transactions_insert_input!] = {}) {
   }
 }
 
-mutation sold($org: uuid = "", $shop: uuid = "", $user: uuid = "", $data: [transactions_insert_input!] = {}) {
-  insert_sales(objects: {org: $org, shop: $shop, user: $user, transactions: {data: $data}}) {
+mutation sold(
+  $org: uuid = ""
+  $shop: uuid = ""
+  $data: [transactions_insert_input!] = {}
+) {
+  insert_sales(
+    objects: {
+      org: $org
+      shop: $shop
+      transactions: { data: $data }
+    }
+  ) {
     affected_rows
     returning {
       id
@@ -27,7 +41,7 @@ mutation sold($org: uuid = "", $shop: uuid = "", $user: uuid = "", $data: [trans
 }
 
 query getsales($limit: Int = 2) {
-  sales(order_by: {createdAt: desc}, limit: $limit) {
+  sales(order_by: { createdAt: desc }, limit: $limit) {
     createdAt
     id
     org
@@ -36,13 +50,15 @@ query getsales($limit: Int = 2) {
       id
       p_code
     }
+    active_role {
+      userByUser {
+        name
+      }
+    }
     transactions_aggregate(limit: $limit) {
       aggregate {
         count
       }
-    }
-    userByUser {
-      name
     }
   }
 }

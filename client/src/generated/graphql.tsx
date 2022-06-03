@@ -1594,6 +1594,10 @@ export type Products = {
   org: Scalars['uuid'];
   /** An object relationship */
   orgByOrg: Orgs;
+  /** An array relationship */
+  transactions: Array<Transactions>;
+  /** An aggregate relationship */
+  transactions_aggregate: Transactions_Aggregate;
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -1625,6 +1629,36 @@ export type ProductsInventories_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Inventory_Order_By>>;
   where?: Maybe<Inventory_Bool_Exp>;
+};
+
+
+/**
+ * holds product information
+ *
+ *
+ * columns and relationships of "products"
+ */
+export type ProductsTransactionsArgs = {
+  distinct_on?: Maybe<Array<Transactions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transactions_Order_By>>;
+  where?: Maybe<Transactions_Bool_Exp>;
+};
+
+
+/**
+ * holds product information
+ *
+ *
+ * columns and relationships of "products"
+ */
+export type ProductsTransactions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Transactions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Transactions_Order_By>>;
+  where?: Maybe<Transactions_Bool_Exp>;
 };
 
 /** aggregated selection of "products" */
@@ -1705,6 +1739,7 @@ export type Products_Bool_Exp = {
   name?: Maybe<String_Comparison_Exp>;
   org?: Maybe<Uuid_Comparison_Exp>;
   orgByOrg?: Maybe<Orgs_Bool_Exp>;
+  transactions?: Maybe<Transactions_Bool_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -1733,6 +1768,7 @@ export type Products_Insert_Input = {
   name?: Maybe<Scalars['String']>;
   org?: Maybe<Scalars['uuid']>;
   orgByOrg?: Maybe<Orgs_Obj_Rel_Insert_Input>;
+  transactions?: Maybe<Transactions_Arr_Rel_Insert_Input>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -1821,6 +1857,7 @@ export type Products_Order_By = {
   name?: Maybe<Order_By>;
   org?: Maybe<Order_By>;
   orgByOrg?: Maybe<Orgs_Order_By>;
+  transactions_aggregate?: Maybe<Transactions_Aggregate_Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
 
@@ -2248,8 +2285,6 @@ export type Sales = {
   transactions_aggregate: Transactions_Aggregate;
   updatedAt: Scalars['timestamptz'];
   user: Scalars['uuid'];
-  /** An object relationship */
-  userByUser: Users;
 };
 
 
@@ -2334,7 +2369,6 @@ export type Sales_Bool_Exp = {
   transactions?: Maybe<Transactions_Bool_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<Uuid_Comparison_Exp>;
-  userByUser?: Maybe<Users_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "sales" */
@@ -2356,7 +2390,6 @@ export type Sales_Insert_Input = {
   transactions?: Maybe<Transactions_Arr_Rel_Insert_Input>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Scalars['uuid']>;
-  userByUser?: Maybe<Users_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -2441,7 +2474,6 @@ export type Sales_Order_By = {
   transactions_aggregate?: Maybe<Transactions_Aggregate_Order_By>;
   updatedAt?: Maybe<Order_By>;
   user?: Maybe<Order_By>;
-  userByUser?: Maybe<Users_Order_By>;
 };
 
 /** primary key columns input for table: sales */
@@ -3019,6 +3051,8 @@ export type Transactions = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   p_code: Scalars['String'];
+  /** An object relationship */
+  product: Products;
   sale: Scalars['uuid'];
   /** An object relationship */
   saleBySale: Sales;
@@ -3097,6 +3131,7 @@ export type Transactions_Bool_Exp = {
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   p_code?: Maybe<String_Comparison_Exp>;
+  product?: Maybe<Products_Bool_Exp>;
   sale?: Maybe<Uuid_Comparison_Exp>;
   saleBySale?: Maybe<Sales_Bool_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -3119,6 +3154,7 @@ export type Transactions_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  product?: Maybe<Products_Obj_Rel_Insert_Input>;
   sale?: Maybe<Scalars['uuid']>;
   saleBySale?: Maybe<Sales_Obj_Rel_Insert_Input>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -3188,6 +3224,7 @@ export type Transactions_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
+  product?: Maybe<Products_Order_By>;
   sale?: Maybe<Order_By>;
   saleBySale?: Maybe<Sales_Order_By>;
   updatedAt?: Maybe<Order_By>;
@@ -3333,10 +3370,6 @@ export type Users = {
   id: Scalars['uuid'];
   name: Scalars['String'];
   pwd: Scalars['String'];
-  /** An array relationship */
-  sales: Array<Sales>;
-  /** An aggregate relationship */
-  sales_aggregate: Sales_Aggregate;
 };
 
 
@@ -3367,36 +3400,6 @@ export type UsersActiveRolesByUser_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Active_Roles_Order_By>>;
   where?: Maybe<Active_Roles_Bool_Exp>;
-};
-
-
-/**
- * holds user data
- *
- *
- * columns and relationships of "users"
- */
-export type UsersSalesArgs = {
-  distinct_on?: Maybe<Array<Sales_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sales_Order_By>>;
-  where?: Maybe<Sales_Bool_Exp>;
-};
-
-
-/**
- * holds user data
- *
- *
- * columns and relationships of "users"
- */
-export type UsersSales_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sales_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sales_Order_By>>;
-  where?: Maybe<Sales_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -3431,7 +3434,6 @@ export type Users_Bool_Exp = {
   id?: Maybe<Uuid_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   pwd?: Maybe<String_Comparison_Exp>;
-  sales?: Maybe<Sales_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -3447,7 +3449,6 @@ export type Users_Insert_Input = {
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   pwd?: Maybe<Scalars['String']>;
-  sales?: Maybe<Sales_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -3498,7 +3499,6 @@ export type Users_Order_By = {
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   pwd?: Maybe<Order_By>;
-  sales_aggregate?: Maybe<Sales_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: users */
@@ -3552,6 +3552,31 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
+export type InventoryByProductQueryVariables = Exact<{
+  _eq?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type InventoryByProductQuery = (
+  { __typename?: 'query_root' }
+  & { inventory: Array<(
+    { __typename?: 'inventory' }
+    & Pick<Inventory, 'id' | 'count' | 'createdAt'>
+    & { product: (
+      { __typename?: 'products' }
+      & Pick<Products, 'added_by' | 'code'>
+    ) }
+  )>, total: (
+    { __typename?: 'inventory_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'inventory_aggregate_fields' }
+      & Pick<Inventory_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
 export type FindproductQueryVariables = Exact<{
   _iregex?: Maybe<Scalars['String']>;
   _iregex1?: Maybe<Scalars['String']>;
@@ -3585,7 +3610,6 @@ export type AddtransactionMutation = (
 export type SoldMutationVariables = Exact<{
   org?: Maybe<Scalars['uuid']>;
   shop?: Maybe<Scalars['uuid']>;
-  user?: Maybe<Scalars['uuid']>;
   data?: Maybe<Array<Transactions_Insert_Input> | Transactions_Insert_Input>;
 }>;
 
@@ -3615,16 +3639,46 @@ export type GetsalesQuery = (
     & { transactions: Array<(
       { __typename?: 'transactions' }
       & Pick<Transactions, 'count' | 'id' | 'p_code'>
+    )>, active_role?: Maybe<(
+      { __typename?: 'active_roles' }
+      & { userByUser: (
+        { __typename?: 'users' }
+        & Pick<Users, 'name'>
+      ) }
     )>, transactions_aggregate: (
       { __typename?: 'transactions_aggregate' }
       & { aggregate?: Maybe<(
         { __typename?: 'transactions_aggregate_fields' }
         & Pick<Transactions_Aggregate_Fields, 'count'>
       )> }
-    ), userByUser: (
-      { __typename?: 'users' }
-      & Pick<Users, 'name'>
     ) }
+  )> }
+);
+
+export type TransactionbyshopQueryVariables = Exact<{
+  _eq?: Maybe<Scalars['uuid']>;
+}>;
+
+
+export type TransactionbyshopQuery = (
+  { __typename?: 'query_root' }
+  & { sales: Array<(
+    { __typename?: 'sales' }
+    & Pick<Sales, 'id' | 'org' | 'shop' | 'role_id' | 'updatedAt' | 'createdAt'>
+    & { transactions: Array<(
+      { __typename?: 'transactions' }
+      & Pick<Transactions, 'id' | 'count'>
+      & { product: (
+        { __typename?: 'products' }
+        & Pick<Products, 'amount'>
+      ) }
+    )>, active_role?: Maybe<(
+      { __typename?: 'active_roles' }
+      & { userByUser: (
+        { __typename?: 'users' }
+        & Pick<Users, 'name'>
+      ) }
+    )> }
   )> }
 );
 
@@ -3779,7 +3833,11 @@ export type GetusersQuery = (
   )> }
 );
 
-export type GetproductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetproductsQueryVariables = Exact<{
+  _iregex?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
 
 
 export type GetproductsQuery = (
@@ -3791,6 +3849,54 @@ export type GetproductsQuery = (
 );
 
 
+export const InventoryByProductDocument = gql`
+    query inventoryByProduct($_eq: String = "", $limit: Int = 10, $offset: Int = 0) {
+  inventory(where: {p_code: {_eq: $_eq}}, limit: $limit, offset: $offset) {
+    id
+    product {
+      added_by
+      code
+    }
+    count
+    createdAt
+  }
+  total: inventory_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useInventoryByProductQuery__
+ *
+ * To run a query within a React component, call `useInventoryByProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useInventoryByProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useInventoryByProductQuery({
+ *   variables: {
+ *      _eq: // value for '_eq'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useInventoryByProductQuery(baseOptions?: Apollo.QueryHookOptions<InventoryByProductQuery, InventoryByProductQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<InventoryByProductQuery, InventoryByProductQueryVariables>(InventoryByProductDocument, options);
+      }
+export function useInventoryByProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<InventoryByProductQuery, InventoryByProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<InventoryByProductQuery, InventoryByProductQueryVariables>(InventoryByProductDocument, options);
+        }
+export type InventoryByProductQueryHookResult = ReturnType<typeof useInventoryByProductQuery>;
+export type InventoryByProductLazyQueryHookResult = ReturnType<typeof useInventoryByProductLazyQuery>;
+export type InventoryByProductQueryResult = Apollo.QueryResult<InventoryByProductQuery, InventoryByProductQueryVariables>;
 export const FindproductDocument = gql`
     query findproduct($_iregex: String = "", $_iregex1: String = "") {
   products(where: {_or: {name: {_iregex: $_iregex}, code: {_iregex: $_iregex1}}}) {
@@ -3868,10 +3974,8 @@ export type AddtransactionMutationHookResult = ReturnType<typeof useAddtransacti
 export type AddtransactionMutationResult = Apollo.MutationResult<AddtransactionMutation>;
 export type AddtransactionMutationOptions = Apollo.BaseMutationOptions<AddtransactionMutation, AddtransactionMutationVariables>;
 export const SoldDocument = gql`
-    mutation sold($org: uuid = "", $shop: uuid = "", $user: uuid = "", $data: [transactions_insert_input!] = {}) {
-  insert_sales(
-    objects: {org: $org, shop: $shop, user: $user, transactions: {data: $data}}
-  ) {
+    mutation sold($org: uuid = "", $shop: uuid = "", $data: [transactions_insert_input!] = {}) {
+  insert_sales(objects: {org: $org, shop: $shop, transactions: {data: $data}}) {
     affected_rows
     returning {
       id
@@ -3896,7 +4000,6 @@ export type SoldMutationFn = Apollo.MutationFunction<SoldMutation, SoldMutationV
  *   variables: {
  *      org: // value for 'org'
  *      shop: // value for 'shop'
- *      user: // value for 'user'
  *      data: // value for 'data'
  *   },
  * });
@@ -3919,13 +4022,15 @@ export const GetsalesDocument = gql`
       id
       p_code
     }
+    active_role {
+      userByUser {
+        name
+      }
+    }
     transactions_aggregate(limit: $limit) {
       aggregate {
         count
       }
-    }
-    userByUser {
-      name
     }
   }
 }
@@ -3958,6 +4063,58 @@ export function useGetsalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetsalesQueryHookResult = ReturnType<typeof useGetsalesQuery>;
 export type GetsalesLazyQueryHookResult = ReturnType<typeof useGetsalesLazyQuery>;
 export type GetsalesQueryResult = Apollo.QueryResult<GetsalesQuery, GetsalesQueryVariables>;
+export const TransactionbyshopDocument = gql`
+    query transactionbyshop($_eq: uuid = "") {
+  sales(where: {shop: {_eq: $_eq}}) {
+    id
+    org
+    shop
+    role_id
+    updatedAt
+    createdAt
+    transactions {
+      id
+      count
+      product {
+        amount
+      }
+    }
+    active_role {
+      userByUser {
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTransactionbyshopQuery__
+ *
+ * To run a query within a React component, call `useTransactionbyshopQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTransactionbyshopQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTransactionbyshopQuery({
+ *   variables: {
+ *      _eq: // value for '_eq'
+ *   },
+ * });
+ */
+export function useTransactionbyshopQuery(baseOptions?: Apollo.QueryHookOptions<TransactionbyshopQuery, TransactionbyshopQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TransactionbyshopQuery, TransactionbyshopQueryVariables>(TransactionbyshopDocument, options);
+      }
+export function useTransactionbyshopLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TransactionbyshopQuery, TransactionbyshopQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TransactionbyshopQuery, TransactionbyshopQueryVariables>(TransactionbyshopDocument, options);
+        }
+export type TransactionbyshopQueryHookResult = ReturnType<typeof useTransactionbyshopQuery>;
+export type TransactionbyshopLazyQueryHookResult = ReturnType<typeof useTransactionbyshopLazyQuery>;
+export type TransactionbyshopQueryResult = Apollo.QueryResult<TransactionbyshopQuery, TransactionbyshopQueryVariables>;
 export const MyShopsDocument = gql`
     query myShops {
   shops {
@@ -4350,8 +4507,8 @@ export type GetusersQueryHookResult = ReturnType<typeof useGetusersQuery>;
 export type GetusersLazyQueryHookResult = ReturnType<typeof useGetusersLazyQuery>;
 export type GetusersQueryResult = Apollo.QueryResult<GetusersQuery, GetusersQueryVariables>;
 export const GetproductsDocument = gql`
-    query getproducts {
-  products(limit: 10, offset: 0) {
+    query getproducts($_iregex: String = "", $limit: Int = 10, $offset: Int = 0) {
+  products(limit: $limit, offset: $offset, where: {name: {_iregex: $_iregex}}) {
     amount
     code
     createdAt
@@ -4374,6 +4531,9 @@ export const GetproductsDocument = gql`
  * @example
  * const { data, loading, error } = useGetproductsQuery({
  *   variables: {
+ *      _iregex: // value for '_iregex'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */

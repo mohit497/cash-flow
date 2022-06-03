@@ -16,6 +16,13 @@ array_relationships:
         table:
           schema: public
           name: inventory
+  - name: transactions
+    using:
+      foreign_key_constraint_on:
+        column: p_code
+        table:
+          schema: public
+          name: transactions
 insert_permissions:
   - role: org-admin
     permission:
@@ -37,16 +44,18 @@ select_permissions:
   - role: org-admin
     permission:
       columns:
-        - code
-        - name
+        - added_by
         - amount
+        - code
         - createdAt
-        - updatedAt
         - id
+        - name
         - org
+        - updatedAt
       filter:
         org:
           _eq: X-Hasura-Org-Id
+      allow_aggregations: true
 update_permissions:
   - role: org-admin
     permission:

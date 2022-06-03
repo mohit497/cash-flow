@@ -12,6 +12,8 @@ insert_permissions:
         product:
           org:
             _eq: X-Hasura-Org-Id
+      set:
+        role_id: x-hasura-Role-Id
       columns:
         - count
         - p_code

@@ -9,13 +9,6 @@ array_relationships:
         table:
           schema: public
           name: active_roles
-  - name: sales
-    using:
-      foreign_key_constraint_on:
-        column: user
-        table:
-          schema: public
-          name: sales
 select_permissions:
   - role: org-admin
     permission:
