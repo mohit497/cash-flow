@@ -1,7 +1,7 @@
 import { useAuth } from "hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface LoginForm {
   username: string;
@@ -63,6 +63,9 @@ export default function Login() {
             Login
           </Button>
         </Col>
+      </Row>
+      <Row className=" justify-content-center my-2">
+        <Link to="/register"> Register</Link>
       </Row>
     </Container>
   );

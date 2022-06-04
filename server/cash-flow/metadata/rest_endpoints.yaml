@@ -1,6 +1,24 @@
 - definition:
     query:
       collection_name: allowed-queries
+      query_name: adduser
+  url: adduser
+  methods:
+    - POST
+  name: adduser
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: register
+  url: register
+  methods:
+    - POST
+  name: register
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
       query_name: user
   url: user/:user
   methods:

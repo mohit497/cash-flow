@@ -9,7 +9,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiHeader, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -111,5 +111,36 @@ export class AuthController {
     } else {
       return new UnauthorizedException();
     }
+  }
+
+  @Post(`/register`)
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+        },
+        orgname: {
+          type: 'string',
+        },
+        email: {
+          type: 'string',
+        },
+        password: {
+          type: 'string',
+        },
+      },
+    },
+  })
+  @ApiHeader({ name: 'x-hasura-admin-secret' })
+  @HttpCode(200)
+  async registerOrg(@Req() req, @Body() body) {
+    return this.authService.registerOrg(
+      body.email,
+      body.orgname,
+      body.name,
+      body.password,
+    );
   }
 }

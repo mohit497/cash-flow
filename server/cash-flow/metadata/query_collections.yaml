@@ -16,3 +16,21 @@
           		}
           	}
           }
+      - name: adduser
+        query: |
+          mutation addUser ($email: String = "", $name: String = "", $pwd: String = "", $role: String = "", $org: uuid = "") {
+          	insert_users_one(object: {email:$email,name:$name,pwd:$pwd,activeRolesByUser:{data:{role:$role,org:$org}}}) {
+          		id
+          	}
+          }
+      - name: register
+        query: |
+          mutation register ($email: String = "", $name: String = "") {
+          	insert_orgs(objects: {email:$email,name:$name}) {
+          		affected_rows
+          		returning {
+          			email
+          			id
+          		}
+          	}
+          }

@@ -1,6 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const superagent = require('superagent');
 
 @Injectable()
 export class AuthService {
@@ -56,5 +62,34 @@ export class AuthService {
         role_id: newRole.id,
       }),
     };
+  }
+  /**
+   *
+   * @param email
+   * @param orgname
+   * @param name
+   */
+  async registerOrg(
+    email: string,
+    orgname: string,
+    name: string,
+    password: string,
+  ) {
+    let res;
+    try {
+      res = await superagent
+        .post(`${process.env.HASURA_ENDPOINT}/api/rest/register`)
+        .set('x-hasura-admin-secret', process.env.HASURA_SECRET)
+        .send({ email: email, name: orgname });
+    } catch (e) {
+      console.log(e);
+      throw new InternalServerErrorException('register og failed');
+    }
+    console.log(res.body);
+    return this.usersService.addUserWithRole(
+      email,
+      password,
+      res.body.insert_orgs.returning[0].id,
+    );
   }
 }

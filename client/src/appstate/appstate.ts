@@ -20,9 +20,9 @@ export interface AppState {
 const initialState: AppState = {
   products: [],
   token: temp,
-  role: temp.role,
+  role: temp?.role,
   selectedShop: undefined,
-  org: temp.org,
+  org: temp?.org,
   selectedProduct: undefined
 };
 

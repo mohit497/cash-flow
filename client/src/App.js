@@ -18,6 +18,7 @@ import Store from 'components/store/store';
 import Login from 'components/login';
 import { useAuth } from 'hooks/useAuth';
 import { ViewBatchShopModal } from 'components/viewBatchModal';
+import Register from 'components/register';
 
 function App() {
 
@@ -50,6 +51,8 @@ function App() {
               </Route>
               <Route exact path="/login" element={<Login />}>
               </Route>
+              <Route exact path="/register" element={<Register />} />
+
               <Route exact path="/cashier" element={<Cashier />}>
             </Route>
             </Routes>

@@ -9,6 +9,9 @@ export function LogoutLink() {
             console.log('logged out');
         });
     console.log("network-error", networkError);
+    if(!window.location.href.includes('/login')){
+      window.location.href= '/login'
+    }
   });
 
   return { logoutLink };

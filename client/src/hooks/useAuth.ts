@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import useNotifications from './useNotifications'
 import jwt_decode from "jwt-decode";
+import { RegisterForm } from 'components/register';
 
 export function useAuth() {
 
@@ -43,8 +44,13 @@ export function useAuth() {
         sessionStorage.clear();
         navigate('/login')
     }
+    const register = (fomr: RegisterForm) => {
+        localStorage.clear();
+        sessionStorage.clear();
+        navigate('/login')
+    }
 
-    return { login, isLoggedIn, logout }
+    return { login, isLoggedIn, logout, register }
 
 
 
