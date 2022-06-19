@@ -1,0 +1,16 @@
+.nav.nav-pills{
+    font-size: .8em;
+}
+
+.total-card{
+    font-size: .8em;
+    justify-content: space-between;
+    flex-grow: 1;
+    .name{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 900;
+    }
+    .total{
+        font-family: 'roboto'
+    }
+}

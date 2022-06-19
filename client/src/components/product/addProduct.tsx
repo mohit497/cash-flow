@@ -6,6 +6,8 @@ import {
   useAddproductMutation,
   GetproductsDocument,
   useFindProductByCodeQuery,
+  Products,
+  useUpdateProductMutation,
 } from "generated/graphql";
 import useNotifications from "hooks/useNotifications";
 
@@ -16,17 +18,23 @@ interface ProductForm {
   code: number | undefined;
 }
 
-export default function AddProduct() {
+interface Props {
+  product?: Products | undefined;
+}
+
+export default function AddProduct(props: Props) {
   const { showNotifications } = useNotifications();
+  const { product } = props;
 
   const [form, setform] = useState<ProductForm>({
-    name: "",
-    price: undefined,
+    name: product?.name,
+    price: product?.amount,
     total: undefined,
-    code: undefined,
+    code: Number(product?.code) || undefined,
   });
 
   const [addproductMutation] = useAddproductMutation();
+  const [updateProduct] = useUpdateProductMutation();
 
   const handleScan = (data) => {
     setform({ ...form, code: data });
@@ -39,18 +47,15 @@ export default function AddProduct() {
     variables: {
       _eq: form.code?.toString() || "",
     },
-    skip: !form.code,
+    skip: !form.code || product?.id,
   });
 
   const handleAddProduct = () => {
     addproductMutation({
       variables: {
-        objects: {
-          name: form.name,
-          amount: form.price,
-          code: form.code?.toString(),
-          org: "26e434c0-4114-44c8-adb7-adeaea4e7d70",
-        },
+        name: form.name,
+        code: form.code?.toString() || "",
+        amount: form.price,
       },
       refetchQueries: [{ query: GetproductsDocument }],
     })
@@ -64,6 +69,38 @@ export default function AddProduct() {
           "danger"
         );
       });
+  };
+
+  const handleUpdateProduct = () => {
+    updateProduct({
+      variables: {
+        _set: {
+          name: form.name,
+          amount: form.price,
+        },
+        id: product?.id,
+      },
+
+      refetchQueries: [{ query: GetproductsDocument }],
+    })
+      .then(() => {
+        showNotifications("product updated ", "success");
+      })
+      .catch((e: Error) => {
+        console.error(e);
+        showNotifications(
+          `Adding Product Failed  with error ${e.message}`,
+          "danger"
+        );
+      });
+  };
+
+  const handleProductChange = () => {
+    if (product) {
+      handleUpdateProduct();
+    } else {
+      handleAddProduct();
+    }
   };
 
   const handleChange = (e) => {
@@ -87,9 +124,9 @@ export default function AddProduct() {
           <Form.Control
             name="price"
             onChange={handleChange}
-            value={form.price}
             type="text"
             placeholder="Price"
+            value={form.price }
           />
         </Col>
         <Col xs={3} className="bar-code">
@@ -99,9 +136,10 @@ export default function AddProduct() {
             value={form.code}
             type="text"
             placeholder="bar code"
+            disabled={Boolean(product?.code)}
           />
         </Col>
-        <Col>
+        <Col hidden={Boolean(product?.id)}>
           <Form.Control
             onChange={handleChange}
             name="total"
@@ -114,9 +152,9 @@ export default function AddProduct() {
           <Button
             disabled={Boolean(existingProduct?.products.length)}
             variant="primary"
-            onClick={handleAddProduct}
+            onClick={handleProductChange}
           >
-            Add
+            {product ? "update " : "add"}
           </Button>
         </Col>
       </Row>

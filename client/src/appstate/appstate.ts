@@ -10,11 +10,12 @@ try {
 
 export interface AppState {
   products: any[];
-  token: { role: string};
+  token: { role: string, role_id: string};
   role: string;
   selectedShop: Shops | undefined;
   org: string;
   selectedProduct: string | undefined;
+  editProduct: string | undefined;
 }
 
 const initialState: AppState = {
@@ -23,7 +24,8 @@ const initialState: AppState = {
   role: temp?.role,
   selectedShop: undefined,
   org: temp?.org,
-  selectedProduct: undefined
+  selectedProduct: undefined,
+  editProduct: undefined
 };
 
 export const appState = makeVar<AppState>(initialState);

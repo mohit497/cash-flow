@@ -1,0 +1,38 @@
+query transactionbyshop($_eq: uuid = "", $limit: Int = 10, $offset: Int = 0, $_eq1: uuid = "") {
+  sales(where: {shop: {_eq: $_eq}}, limit: $limit, offset: $offset, order_by: {createdAt: desc}) {
+    id
+    org
+    shop
+    role_id
+    updatedAt
+    createdAt
+    active_role {
+      userByUser {
+        name
+      }
+    }
+    transactions {
+      id
+      count
+      product {
+        amount
+        name
+      }
+    }
+  }
+  sales_aggregate(where: {shop: {_eq: $_eq}}) {
+    aggregate {
+      count
+    }
+  }
+}
+
+
+query getTotalByShops($limit: Int = 10) {
+  total_sales_by_shop(limit: $limit) {
+    total
+    shop_name
+    org
+  }
+}
+

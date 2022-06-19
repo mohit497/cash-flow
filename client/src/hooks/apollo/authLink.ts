@@ -7,7 +7,7 @@ export function AuthLink() {
     return {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "x-hasura-student-token": window.sessionStorage.getItem(
+        "x-hasura-student-token": window.localStorage.getItem(
           "student_access_token"
         ),
       },

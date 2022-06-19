@@ -17,8 +17,9 @@ import Cashier from 'components/cashier/cashier';
 import Store from 'components/store/store';
 import Login from 'components/login';
 import { useAuth } from 'hooks/useAuth';
-import { ViewBatchShopModal } from 'components/viewBatchModal';
+import { ViewBatchShopModal } from 'components/modals/viewBatchModal';
 import Register from 'components/register';
+import { EditProductModal } from 'components/modals/editProductModal';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
     <div className="App vh-50">
       <ReactNotifications />
       <ViewBatchShopModal />
+      <EditProductModal />
       <Header />
       <Container  fluid>
         <Row >

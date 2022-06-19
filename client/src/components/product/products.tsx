@@ -1,9 +1,11 @@
+import { useAppState } from "appstate/useAppstate";
 import { Divider } from "components/divider";
 import Loading from "components/loader/loader";
 import { PaginationBasic } from "components/paginationBasic";
 import { useGetproductsQuery } from "generated/graphql";
 import { useState } from "react";
-import { Breadcrumb, Container, Table } from "react-bootstrap";
+import { Breadcrumb, Container, Table, Badge, Button } from "react-bootstrap";
+import { FaPencilAlt } from "react-icons/fa";
 import { PAGE_SIZE } from "utils";
 import ActionsHeader from "./actionsHeader";
 import AddProduct from "./addProduct";
@@ -21,6 +23,13 @@ export default function Products() {
     },
   });
 
+  const { setState, state } = useAppState();
+
+  const editProduct = (id) => {
+    console.log(id, '^^^^')
+    setState({ ...state, editProduct: id });
+  };
+
   const onPageChange = (page: number) => {
     refetch({ offset: (page - 1) * PAGE_SIZE });
   };
@@ -29,19 +38,21 @@ export default function Products() {
     <Container>
       {loading && <Loading />}
       <Breadcrumb>
-        <Breadcrumb.Item active>Products</Breadcrumb.Item>
+        <Breadcrumb.Item active>
+          Products <Badge bg="primary">{data?.products.length}</Badge>
+        </Breadcrumb.Item>
       </Breadcrumb>
       <AddProduct />
       <Divider />
       <ActionsHeader onSearch={setsrchstring} />
-      <Table responsive hover>
+      <Table responsive size="sm" hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Price</th>
+            <th>name</th>
+            <th>price</th>
             <th>code</th>
-            <th>total</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +65,15 @@ export default function Products() {
                 <td className="bar-code">
                   <Barcode value={item.code} />
                 </td>
-                <td>{item.id}</td>
+                <td>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => editProduct(item.code)}
+                  >
+                    <FaPencilAlt /> Edit
+                  </Button>
+                </td>
               </tr>
             );
           })}

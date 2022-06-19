@@ -14,7 +14,7 @@ export interface RegisterForm {
 }
 
 export default function Register() {
-  const { login, isLoggedIn } = useAuth();
+  const { isLoggedIn, register } = useAuth();
   const navigate = useNavigate();
   const [isrealuser, setisrealuser] = useState(false);
   const onCaptchaSuccess = () => {
@@ -34,7 +34,7 @@ export default function Register() {
   };
 
   const handleSubmit = () => {
-    login(form.name, form.password);
+    register(form);
   };
 
   useEffect(() => {
@@ -105,7 +105,7 @@ export default function Register() {
           </Button>
         </Col>
       </Row>
-      <Row >
+      <Row>
         {!isrealuser && (
           <Col xs={12} className="text-center my-1 my-lg-5">
             <h2>Verify that you are a real user</h2>

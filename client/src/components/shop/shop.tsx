@@ -35,7 +35,7 @@ export default function Shops() {
             return (
               <tr>
                 <td>{index + 1}</td>
-                <td>{item.name}</td>
+                <td className="bold">{item.name}</td>
                 <td>{item.orgByOrg.name}</td>
                 <td>{item.address}</td>
                 <td>{item?.location}</td>

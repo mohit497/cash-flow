@@ -10,6 +10,7 @@ export function LogoutLink() {
         });
     console.log("network-error", networkError);
     if(!window.location.href.includes('/login')){
+      localStorage.clear()
       window.location.href= '/login'
     }
   });

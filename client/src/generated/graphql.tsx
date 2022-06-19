@@ -12,6 +12,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  bigint: any;
+  date: any;
   numeric: any;
   timestamptz: any;
   uuid: any;
@@ -480,6 +482,34 @@ export enum Active_Roles_Update_Column {
   /** column name */
   User = 'user'
 }
+
+
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type Bigint_Comparison_Exp = {
+  _eq?: Maybe<Scalars['bigint']>;
+  _gt?: Maybe<Scalars['bigint']>;
+  _gte?: Maybe<Scalars['bigint']>;
+  _in?: Maybe<Array<Scalars['bigint']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['bigint']>;
+  _lte?: Maybe<Scalars['bigint']>;
+  _neq?: Maybe<Scalars['bigint']>;
+  _nin?: Maybe<Array<Scalars['bigint']>>;
+};
+
+
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
+};
 
 /**
  * holds product inventory
@@ -1584,6 +1614,154 @@ export enum Orgs_Update_Column {
   Name = 'name'
 }
 
+/** columns and relationships of "product_left_in_store" */
+export type Product_Left_In_Store = {
+  __typename?: 'product_left_in_store';
+  org?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  product?: Maybe<Products>;
+  sold?: Maybe<Scalars['bigint']>;
+  total?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregated selection of "product_left_in_store" */
+export type Product_Left_In_Store_Aggregate = {
+  __typename?: 'product_left_in_store_aggregate';
+  aggregate?: Maybe<Product_Left_In_Store_Aggregate_Fields>;
+  nodes: Array<Product_Left_In_Store>;
+};
+
+/** aggregate fields of "product_left_in_store" */
+export type Product_Left_In_Store_Aggregate_Fields = {
+  __typename?: 'product_left_in_store_aggregate_fields';
+  avg?: Maybe<Product_Left_In_Store_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Product_Left_In_Store_Max_Fields>;
+  min?: Maybe<Product_Left_In_Store_Min_Fields>;
+  stddev?: Maybe<Product_Left_In_Store_Stddev_Fields>;
+  stddev_pop?: Maybe<Product_Left_In_Store_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Product_Left_In_Store_Stddev_Samp_Fields>;
+  sum?: Maybe<Product_Left_In_Store_Sum_Fields>;
+  var_pop?: Maybe<Product_Left_In_Store_Var_Pop_Fields>;
+  var_samp?: Maybe<Product_Left_In_Store_Var_Samp_Fields>;
+  variance?: Maybe<Product_Left_In_Store_Variance_Fields>;
+};
+
+
+/** aggregate fields of "product_left_in_store" */
+export type Product_Left_In_Store_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Product_Left_In_Store_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Product_Left_In_Store_Avg_Fields = {
+  __typename?: 'product_left_in_store_avg_fields';
+  sold?: Maybe<Scalars['Float']>;
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "product_left_in_store". All fields are combined with a logical 'AND'. */
+export type Product_Left_In_Store_Bool_Exp = {
+  _and?: Maybe<Array<Product_Left_In_Store_Bool_Exp>>;
+  _not?: Maybe<Product_Left_In_Store_Bool_Exp>;
+  _or?: Maybe<Array<Product_Left_In_Store_Bool_Exp>>;
+  org?: Maybe<Uuid_Comparison_Exp>;
+  p_code?: Maybe<String_Comparison_Exp>;
+  product?: Maybe<Products_Bool_Exp>;
+  sold?: Maybe<Bigint_Comparison_Exp>;
+  total?: Maybe<Bigint_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Product_Left_In_Store_Max_Fields = {
+  __typename?: 'product_left_in_store_max_fields';
+  org?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  sold?: Maybe<Scalars['bigint']>;
+  total?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregate min on columns */
+export type Product_Left_In_Store_Min_Fields = {
+  __typename?: 'product_left_in_store_min_fields';
+  org?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  sold?: Maybe<Scalars['bigint']>;
+  total?: Maybe<Scalars['bigint']>;
+};
+
+/** Ordering options when selecting data from "product_left_in_store". */
+export type Product_Left_In_Store_Order_By = {
+  org?: Maybe<Order_By>;
+  p_code?: Maybe<Order_By>;
+  product?: Maybe<Products_Order_By>;
+  sold?: Maybe<Order_By>;
+  total?: Maybe<Order_By>;
+};
+
+/** select columns of table "product_left_in_store" */
+export enum Product_Left_In_Store_Select_Column {
+  /** column name */
+  Org = 'org',
+  /** column name */
+  PCode = 'p_code',
+  /** column name */
+  Sold = 'sold',
+  /** column name */
+  Total = 'total'
+}
+
+/** aggregate stddev on columns */
+export type Product_Left_In_Store_Stddev_Fields = {
+  __typename?: 'product_left_in_store_stddev_fields';
+  sold?: Maybe<Scalars['Float']>;
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Product_Left_In_Store_Stddev_Pop_Fields = {
+  __typename?: 'product_left_in_store_stddev_pop_fields';
+  sold?: Maybe<Scalars['Float']>;
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Product_Left_In_Store_Stddev_Samp_Fields = {
+  __typename?: 'product_left_in_store_stddev_samp_fields';
+  sold?: Maybe<Scalars['Float']>;
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Product_Left_In_Store_Sum_Fields = {
+  __typename?: 'product_left_in_store_sum_fields';
+  sold?: Maybe<Scalars['bigint']>;
+  total?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregate var_pop on columns */
+export type Product_Left_In_Store_Var_Pop_Fields = {
+  __typename?: 'product_left_in_store_var_pop_fields';
+  sold?: Maybe<Scalars['Float']>;
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Product_Left_In_Store_Var_Samp_Fields = {
+  __typename?: 'product_left_in_store_var_samp_fields';
+  sold?: Maybe<Scalars['Float']>;
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Product_Left_In_Store_Variance_Fields = {
+  __typename?: 'product_left_in_store_variance_fields';
+  sold?: Maybe<Scalars['Float']>;
+  total?: Maybe<Scalars['Float']>;
+};
+
 /**
  * holds product information
  *
@@ -2034,6 +2212,10 @@ export type Query_Root = {
   orgs_aggregate: Orgs_Aggregate;
   /** fetch data from the table: "orgs" using primary key columns */
   orgs_by_pk?: Maybe<Orgs>;
+  /** fetch data from the table: "product_left_in_store" */
+  product_left_in_store: Array<Product_Left_In_Store>;
+  /** fetch aggregated fields from the table: "product_left_in_store" */
+  product_left_in_store_aggregate: Product_Left_In_Store_Aggregate;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
@@ -2046,12 +2228,20 @@ export type Query_Root = {
   sales_aggregate: Sales_Aggregate;
   /** fetch data from the table: "sales" using primary key columns */
   sales_by_pk?: Maybe<Sales>;
+  /** fetch data from the table: "shop_sales_by_date" */
+  shop_sales_by_date: Array<Shop_Sales_By_Date>;
+  /** fetch aggregated fields from the table: "shop_sales_by_date" */
+  shop_sales_by_date_aggregate: Shop_Sales_By_Date_Aggregate;
   /** An array relationship */
   shops: Array<Shops>;
   /** An aggregate relationship */
   shops_aggregate: Shops_Aggregate;
   /** fetch data from the table: "shops" using primary key columns */
   shops_by_pk?: Maybe<Shops>;
+  /** fetch data from the table: "total_sales_by_shop" */
+  total_sales_by_shop: Array<Total_Sales_By_Shop>;
+  /** fetch aggregated fields from the table: "total_sales_by_shop" */
+  total_sales_by_shop_aggregate: Total_Sales_By_Shop_Aggregate;
   /** An array relationship */
   transactions: Array<Transactions>;
   /** An aggregate relationship */
@@ -2159,6 +2349,24 @@ export type Query_RootOrgs_By_PkArgs = {
 };
 
 
+export type Query_RootProduct_Left_In_StoreArgs = {
+  distinct_on?: Maybe<Array<Product_Left_In_Store_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Product_Left_In_Store_Order_By>>;
+  where?: Maybe<Product_Left_In_Store_Bool_Exp>;
+};
+
+
+export type Query_RootProduct_Left_In_Store_AggregateArgs = {
+  distinct_on?: Maybe<Array<Product_Left_In_Store_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Product_Left_In_Store_Order_By>>;
+  where?: Maybe<Product_Left_In_Store_Bool_Exp>;
+};
+
+
 export type Query_RootProductsArgs = {
   distinct_on?: Maybe<Array<Products_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2205,6 +2413,24 @@ export type Query_RootSales_By_PkArgs = {
 };
 
 
+export type Query_RootShop_Sales_By_DateArgs = {
+  distinct_on?: Maybe<Array<Shop_Sales_By_Date_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Shop_Sales_By_Date_Order_By>>;
+  where?: Maybe<Shop_Sales_By_Date_Bool_Exp>;
+};
+
+
+export type Query_RootShop_Sales_By_Date_AggregateArgs = {
+  distinct_on?: Maybe<Array<Shop_Sales_By_Date_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Shop_Sales_By_Date_Order_By>>;
+  where?: Maybe<Shop_Sales_By_Date_Bool_Exp>;
+};
+
+
 export type Query_RootShopsArgs = {
   distinct_on?: Maybe<Array<Shops_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2225,6 +2451,24 @@ export type Query_RootShops_AggregateArgs = {
 
 export type Query_RootShops_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootTotal_Sales_By_ShopArgs = {
+  distinct_on?: Maybe<Array<Total_Sales_By_Shop_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Total_Sales_By_Shop_Order_By>>;
+  where?: Maybe<Total_Sales_By_Shop_Bool_Exp>;
+};
+
+
+export type Query_RootTotal_Sales_By_Shop_AggregateArgs = {
+  distinct_on?: Maybe<Array<Total_Sales_By_Shop_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Total_Sales_By_Shop_Order_By>>;
+  where?: Maybe<Total_Sales_By_Shop_Bool_Exp>;
 };
 
 
@@ -2541,6 +2785,149 @@ export enum Sales_Update_Column {
   User = 'user'
 }
 
+/** columns and relationships of "shop_sales_by_date" */
+export type Shop_Sales_By_Date = {
+  __typename?: 'shop_sales_by_date';
+  date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop_name?: Maybe<Scalars['String']>;
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregated selection of "shop_sales_by_date" */
+export type Shop_Sales_By_Date_Aggregate = {
+  __typename?: 'shop_sales_by_date_aggregate';
+  aggregate?: Maybe<Shop_Sales_By_Date_Aggregate_Fields>;
+  nodes: Array<Shop_Sales_By_Date>;
+};
+
+/** aggregate fields of "shop_sales_by_date" */
+export type Shop_Sales_By_Date_Aggregate_Fields = {
+  __typename?: 'shop_sales_by_date_aggregate_fields';
+  avg?: Maybe<Shop_Sales_By_Date_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Shop_Sales_By_Date_Max_Fields>;
+  min?: Maybe<Shop_Sales_By_Date_Min_Fields>;
+  stddev?: Maybe<Shop_Sales_By_Date_Stddev_Fields>;
+  stddev_pop?: Maybe<Shop_Sales_By_Date_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Shop_Sales_By_Date_Stddev_Samp_Fields>;
+  sum?: Maybe<Shop_Sales_By_Date_Sum_Fields>;
+  var_pop?: Maybe<Shop_Sales_By_Date_Var_Pop_Fields>;
+  var_samp?: Maybe<Shop_Sales_By_Date_Var_Samp_Fields>;
+  variance?: Maybe<Shop_Sales_By_Date_Variance_Fields>;
+};
+
+
+/** aggregate fields of "shop_sales_by_date" */
+export type Shop_Sales_By_Date_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Shop_Sales_By_Date_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Shop_Sales_By_Date_Avg_Fields = {
+  __typename?: 'shop_sales_by_date_avg_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "shop_sales_by_date". All fields are combined with a logical 'AND'. */
+export type Shop_Sales_By_Date_Bool_Exp = {
+  _and?: Maybe<Array<Shop_Sales_By_Date_Bool_Exp>>;
+  _not?: Maybe<Shop_Sales_By_Date_Bool_Exp>;
+  _or?: Maybe<Array<Shop_Sales_By_Date_Bool_Exp>>;
+  date?: Maybe<Date_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  org?: Maybe<Uuid_Comparison_Exp>;
+  shop_name?: Maybe<String_Comparison_Exp>;
+  total?: Maybe<Numeric_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Shop_Sales_By_Date_Max_Fields = {
+  __typename?: 'shop_sales_by_date_max_fields';
+  date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop_name?: Maybe<Scalars['String']>;
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate min on columns */
+export type Shop_Sales_By_Date_Min_Fields = {
+  __typename?: 'shop_sales_by_date_min_fields';
+  date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop_name?: Maybe<Scalars['String']>;
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** Ordering options when selecting data from "shop_sales_by_date". */
+export type Shop_Sales_By_Date_Order_By = {
+  date?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  org?: Maybe<Order_By>;
+  shop_name?: Maybe<Order_By>;
+  total?: Maybe<Order_By>;
+};
+
+/** select columns of table "shop_sales_by_date" */
+export enum Shop_Sales_By_Date_Select_Column {
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Org = 'org',
+  /** column name */
+  ShopName = 'shop_name',
+  /** column name */
+  Total = 'total'
+}
+
+/** aggregate stddev on columns */
+export type Shop_Sales_By_Date_Stddev_Fields = {
+  __typename?: 'shop_sales_by_date_stddev_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Shop_Sales_By_Date_Stddev_Pop_Fields = {
+  __typename?: 'shop_sales_by_date_stddev_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Shop_Sales_By_Date_Stddev_Samp_Fields = {
+  __typename?: 'shop_sales_by_date_stddev_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Shop_Sales_By_Date_Sum_Fields = {
+  __typename?: 'shop_sales_by_date_sum_fields';
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate var_pop on columns */
+export type Shop_Sales_By_Date_Var_Pop_Fields = {
+  __typename?: 'shop_sales_by_date_var_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Shop_Sales_By_Date_Var_Samp_Fields = {
+  __typename?: 'shop_sales_by_date_var_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Shop_Sales_By_Date_Variance_Fields = {
+  __typename?: 'shop_sales_by_date_variance_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
 /**
  * hols shops info
  *
@@ -2799,6 +3186,10 @@ export type Subscription_Root = {
   orgs_aggregate: Orgs_Aggregate;
   /** fetch data from the table: "orgs" using primary key columns */
   orgs_by_pk?: Maybe<Orgs>;
+  /** fetch data from the table: "product_left_in_store" */
+  product_left_in_store: Array<Product_Left_In_Store>;
+  /** fetch aggregated fields from the table: "product_left_in_store" */
+  product_left_in_store_aggregate: Product_Left_In_Store_Aggregate;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
@@ -2811,12 +3202,20 @@ export type Subscription_Root = {
   sales_aggregate: Sales_Aggregate;
   /** fetch data from the table: "sales" using primary key columns */
   sales_by_pk?: Maybe<Sales>;
+  /** fetch data from the table: "shop_sales_by_date" */
+  shop_sales_by_date: Array<Shop_Sales_By_Date>;
+  /** fetch aggregated fields from the table: "shop_sales_by_date" */
+  shop_sales_by_date_aggregate: Shop_Sales_By_Date_Aggregate;
   /** An array relationship */
   shops: Array<Shops>;
   /** An aggregate relationship */
   shops_aggregate: Shops_Aggregate;
   /** fetch data from the table: "shops" using primary key columns */
   shops_by_pk?: Maybe<Shops>;
+  /** fetch data from the table: "total_sales_by_shop" */
+  total_sales_by_shop: Array<Total_Sales_By_Shop>;
+  /** fetch aggregated fields from the table: "total_sales_by_shop" */
+  total_sales_by_shop_aggregate: Total_Sales_By_Shop_Aggregate;
   /** An array relationship */
   transactions: Array<Transactions>;
   /** An aggregate relationship */
@@ -2924,6 +3323,24 @@ export type Subscription_RootOrgs_By_PkArgs = {
 };
 
 
+export type Subscription_RootProduct_Left_In_StoreArgs = {
+  distinct_on?: Maybe<Array<Product_Left_In_Store_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Product_Left_In_Store_Order_By>>;
+  where?: Maybe<Product_Left_In_Store_Bool_Exp>;
+};
+
+
+export type Subscription_RootProduct_Left_In_Store_AggregateArgs = {
+  distinct_on?: Maybe<Array<Product_Left_In_Store_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Product_Left_In_Store_Order_By>>;
+  where?: Maybe<Product_Left_In_Store_Bool_Exp>;
+};
+
+
 export type Subscription_RootProductsArgs = {
   distinct_on?: Maybe<Array<Products_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2970,6 +3387,24 @@ export type Subscription_RootSales_By_PkArgs = {
 };
 
 
+export type Subscription_RootShop_Sales_By_DateArgs = {
+  distinct_on?: Maybe<Array<Shop_Sales_By_Date_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Shop_Sales_By_Date_Order_By>>;
+  where?: Maybe<Shop_Sales_By_Date_Bool_Exp>;
+};
+
+
+export type Subscription_RootShop_Sales_By_Date_AggregateArgs = {
+  distinct_on?: Maybe<Array<Shop_Sales_By_Date_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Shop_Sales_By_Date_Order_By>>;
+  where?: Maybe<Shop_Sales_By_Date_Bool_Exp>;
+};
+
+
 export type Subscription_RootShopsArgs = {
   distinct_on?: Maybe<Array<Shops_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2990,6 +3425,24 @@ export type Subscription_RootShops_AggregateArgs = {
 
 export type Subscription_RootShops_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootTotal_Sales_By_ShopArgs = {
+  distinct_on?: Maybe<Array<Total_Sales_By_Shop_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Total_Sales_By_Shop_Order_By>>;
+  where?: Maybe<Total_Sales_By_Shop_Bool_Exp>;
+};
+
+
+export type Subscription_RootTotal_Sales_By_Shop_AggregateArgs = {
+  distinct_on?: Maybe<Array<Total_Sales_By_Shop_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Total_Sales_By_Shop_Order_By>>;
+  where?: Maybe<Total_Sales_By_Shop_Bool_Exp>;
 };
 
 
@@ -3050,6 +3503,142 @@ export type Timestamptz_Comparison_Exp = {
   _lte?: Maybe<Scalars['timestamptz']>;
   _neq?: Maybe<Scalars['timestamptz']>;
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
+};
+
+/** columns and relationships of "total_sales_by_shop" */
+export type Total_Sales_By_Shop = {
+  __typename?: 'total_sales_by_shop';
+  id?: Maybe<Scalars['uuid']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop_name?: Maybe<Scalars['String']>;
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregated selection of "total_sales_by_shop" */
+export type Total_Sales_By_Shop_Aggregate = {
+  __typename?: 'total_sales_by_shop_aggregate';
+  aggregate?: Maybe<Total_Sales_By_Shop_Aggregate_Fields>;
+  nodes: Array<Total_Sales_By_Shop>;
+};
+
+/** aggregate fields of "total_sales_by_shop" */
+export type Total_Sales_By_Shop_Aggregate_Fields = {
+  __typename?: 'total_sales_by_shop_aggregate_fields';
+  avg?: Maybe<Total_Sales_By_Shop_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Total_Sales_By_Shop_Max_Fields>;
+  min?: Maybe<Total_Sales_By_Shop_Min_Fields>;
+  stddev?: Maybe<Total_Sales_By_Shop_Stddev_Fields>;
+  stddev_pop?: Maybe<Total_Sales_By_Shop_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Total_Sales_By_Shop_Stddev_Samp_Fields>;
+  sum?: Maybe<Total_Sales_By_Shop_Sum_Fields>;
+  var_pop?: Maybe<Total_Sales_By_Shop_Var_Pop_Fields>;
+  var_samp?: Maybe<Total_Sales_By_Shop_Var_Samp_Fields>;
+  variance?: Maybe<Total_Sales_By_Shop_Variance_Fields>;
+};
+
+
+/** aggregate fields of "total_sales_by_shop" */
+export type Total_Sales_By_Shop_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Total_Sales_By_Shop_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Total_Sales_By_Shop_Avg_Fields = {
+  __typename?: 'total_sales_by_shop_avg_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "total_sales_by_shop". All fields are combined with a logical 'AND'. */
+export type Total_Sales_By_Shop_Bool_Exp = {
+  _and?: Maybe<Array<Total_Sales_By_Shop_Bool_Exp>>;
+  _not?: Maybe<Total_Sales_By_Shop_Bool_Exp>;
+  _or?: Maybe<Array<Total_Sales_By_Shop_Bool_Exp>>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  org?: Maybe<Uuid_Comparison_Exp>;
+  shop_name?: Maybe<String_Comparison_Exp>;
+  total?: Maybe<Numeric_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Total_Sales_By_Shop_Max_Fields = {
+  __typename?: 'total_sales_by_shop_max_fields';
+  id?: Maybe<Scalars['uuid']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop_name?: Maybe<Scalars['String']>;
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate min on columns */
+export type Total_Sales_By_Shop_Min_Fields = {
+  __typename?: 'total_sales_by_shop_min_fields';
+  id?: Maybe<Scalars['uuid']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop_name?: Maybe<Scalars['String']>;
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** Ordering options when selecting data from "total_sales_by_shop". */
+export type Total_Sales_By_Shop_Order_By = {
+  id?: Maybe<Order_By>;
+  org?: Maybe<Order_By>;
+  shop_name?: Maybe<Order_By>;
+  total?: Maybe<Order_By>;
+};
+
+/** select columns of table "total_sales_by_shop" */
+export enum Total_Sales_By_Shop_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Org = 'org',
+  /** column name */
+  ShopName = 'shop_name',
+  /** column name */
+  Total = 'total'
+}
+
+/** aggregate stddev on columns */
+export type Total_Sales_By_Shop_Stddev_Fields = {
+  __typename?: 'total_sales_by_shop_stddev_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Total_Sales_By_Shop_Stddev_Pop_Fields = {
+  __typename?: 'total_sales_by_shop_stddev_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Total_Sales_By_Shop_Stddev_Samp_Fields = {
+  __typename?: 'total_sales_by_shop_stddev_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Total_Sales_By_Shop_Sum_Fields = {
+  __typename?: 'total_sales_by_shop_sum_fields';
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate var_pop on columns */
+export type Total_Sales_By_Shop_Var_Pop_Fields = {
+  __typename?: 'total_sales_by_shop_var_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Total_Sales_By_Shop_Var_Samp_Fields = {
+  __typename?: 'total_sales_by_shop_var_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Total_Sales_By_Shop_Variance_Fields = {
+  __typename?: 'total_sales_by_shop_variance_fields';
+  total?: Maybe<Scalars['Float']>;
 };
 
 /**
@@ -3579,7 +4168,7 @@ export type InventoryByProductQuery = (
     & Pick<Inventory, 'id' | 'count' | 'createdAt'>
     & { product: (
       { __typename?: 'products' }
-      & Pick<Products, 'added_by' | 'code'>
+      & Pick<Products, 'added_by' | 'code' | 'name'>
     ) }
   )>, total: (
     { __typename?: 'inventory_aggregate' }
@@ -3668,8 +4257,22 @@ export type GetsalesQuery = (
   )> }
 );
 
+export type MyShopsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyShopsQuery = (
+  { __typename?: 'query_root' }
+  & { shops: Array<(
+    { __typename?: 'shops' }
+    & Pick<Shops, 'id' | 'name' | 'location' | 'org'>
+  )> }
+);
+
 export type TransactionbyshopQueryVariables = Exact<{
   _eq?: Maybe<Scalars['uuid']>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  _eq1?: Maybe<Scalars['uuid']>;
 }>;
 
 
@@ -3689,25 +4292,36 @@ export type TransactionbyshopQuery = (
       & Pick<Transactions, 'id' | 'count'>
       & { product: (
         { __typename?: 'products' }
-        & Pick<Products, 'amount'>
+        & Pick<Products, 'amount' | 'name'>
       ) }
     )> }
-  )> }
+  )>, sales_aggregate: (
+    { __typename?: 'sales_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'sales_aggregate_fields' }
+      & Pick<Sales_Aggregate_Fields, 'count'>
+    )> }
+  ) }
 );
 
-export type MyShopsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTotalByShopsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+}>;
 
 
-export type MyShopsQuery = (
+export type GetTotalByShopsQuery = (
   { __typename?: 'query_root' }
-  & { shops: Array<(
-    { __typename?: 'shops' }
-    & Pick<Shops, 'id' | 'name' | 'location' | 'org'>
+  & { total_sales_by_shop: Array<(
+    { __typename?: 'total_sales_by_shop' }
+    & Pick<Total_Sales_By_Shop, 'total' | 'shop_name' | 'org'>
   )> }
 );
 
 export type AddproductMutationVariables = Exact<{
-  objects?: Maybe<Array<Products_Insert_Input> | Products_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
+  inventories?: Maybe<Inventory_Arr_Rel_Insert_Input>;
+  code?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['numeric']>;
 }>;
 
 
@@ -3732,8 +4346,27 @@ export type FindProductByCodeQuery = (
   { __typename?: 'query_root' }
   & { products: Array<(
     { __typename?: 'products' }
-    & Pick<Products, 'code' | 'amount' | 'createdAt' | 'name'>
+    & Pick<Products, 'code' | 'amount' | 'createdAt' | 'name' | 'id'>
   )> }
+);
+
+export type UpdateProductMutationVariables = Exact<{
+  _set?: Maybe<Products_Set_Input>;
+  id?: Maybe<Scalars['uuid']>;
+}>;
+
+
+export type UpdateProductMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_products_by_pk?: Maybe<(
+    { __typename?: 'products' }
+    & ProductsFragmentFragment
+  )> }
+);
+
+export type ProductsFragmentFragment = (
+  { __typename?: 'products' }
+  & Pick<Products, 'amount' | 'code' | 'id' | 'name'>
 );
 
 export type GetshopsQueryVariables = Exact<{
@@ -3775,24 +4408,19 @@ export type GetinventoryQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   _iregex?: Maybe<Scalars['String']>;
+  _iregex1?: Maybe<Scalars['String']>;
 }>;
 
 
 export type GetinventoryQuery = (
   { __typename?: 'query_root' }
-  & { products: Array<(
-    { __typename?: 'products' }
-    & Pick<Products, 'amount' | 'code' | 'createdAt' | 'id' | 'name' | 'org'>
-    & { inventories_aggregate: (
-      { __typename?: 'inventory_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'inventory_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'inventory_sum_fields' }
-          & Pick<Inventory_Sum_Fields, 'count'>
-        )> }
-      )> }
-    ) }
+  & { product_left_in_store: Array<(
+    { __typename?: 'product_left_in_store' }
+    & Pick<Product_Left_In_Store, 'org' | 'p_code' | 'total' | 'sold'>
+    & { product?: Maybe<(
+      { __typename?: 'products' }
+      & Pick<Products, 'amount' | 'code' | 'createdAt' | 'id' | 'added_by' | 'name'>
+    )> }
   )> }
 );
 
@@ -3861,7 +4489,14 @@ export type GetproductsQuery = (
   )> }
 );
 
-
+export const ProductsFragmentFragmentDoc = gql`
+    fragment productsFragment on products {
+  amount
+  code
+  id
+  name
+}
+    `;
 export const InventoryByProductDocument = gql`
     query inventoryByProduct($_eq: String = "", $limit: Int = 10, $offset: Int = 0) {
   inventory(where: {p_code: {_eq: $_eq}}, limit: $limit, offset: $offset) {
@@ -3869,6 +4504,7 @@ export const InventoryByProductDocument = gql`
     product {
       added_by
       code
+      name
     }
     count
     createdAt
@@ -4076,58 +4712,6 @@ export function useGetsalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetsalesQueryHookResult = ReturnType<typeof useGetsalesQuery>;
 export type GetsalesLazyQueryHookResult = ReturnType<typeof useGetsalesLazyQuery>;
 export type GetsalesQueryResult = Apollo.QueryResult<GetsalesQuery, GetsalesQueryVariables>;
-export const TransactionbyshopDocument = gql`
-    query transactionbyshop($_eq: uuid = "") {
-  sales(where: {shop: {_eq: $_eq}}) {
-    id
-    org
-    shop
-    role_id
-    updatedAt
-    createdAt
-    active_role {
-      userByUser {
-        name
-      }
-    }
-    transactions {
-      id
-      count
-      product {
-        amount
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useTransactionbyshopQuery__
- *
- * To run a query within a React component, call `useTransactionbyshopQuery` and pass it any options that fit your needs.
- * When your component renders, `useTransactionbyshopQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTransactionbyshopQuery({
- *   variables: {
- *      _eq: // value for '_eq'
- *   },
- * });
- */
-export function useTransactionbyshopQuery(baseOptions?: Apollo.QueryHookOptions<TransactionbyshopQuery, TransactionbyshopQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TransactionbyshopQuery, TransactionbyshopQueryVariables>(TransactionbyshopDocument, options);
-      }
-export function useTransactionbyshopLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TransactionbyshopQuery, TransactionbyshopQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TransactionbyshopQuery, TransactionbyshopQueryVariables>(TransactionbyshopDocument, options);
-        }
-export type TransactionbyshopQueryHookResult = ReturnType<typeof useTransactionbyshopQuery>;
-export type TransactionbyshopLazyQueryHookResult = ReturnType<typeof useTransactionbyshopLazyQuery>;
-export type TransactionbyshopQueryResult = Apollo.QueryResult<TransactionbyshopQuery, TransactionbyshopQueryVariables>;
 export const MyShopsDocument = gql`
     query myShops {
   shops {
@@ -4165,9 +4749,114 @@ export function useMyShopsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<My
 export type MyShopsQueryHookResult = ReturnType<typeof useMyShopsQuery>;
 export type MyShopsLazyQueryHookResult = ReturnType<typeof useMyShopsLazyQuery>;
 export type MyShopsQueryResult = Apollo.QueryResult<MyShopsQuery, MyShopsQueryVariables>;
+export const TransactionbyshopDocument = gql`
+    query transactionbyshop($_eq: uuid = "", $limit: Int = 10, $offset: Int = 0, $_eq1: uuid = "") {
+  sales(
+    where: {shop: {_eq: $_eq}}
+    limit: $limit
+    offset: $offset
+    order_by: {createdAt: desc}
+  ) {
+    id
+    org
+    shop
+    role_id
+    updatedAt
+    createdAt
+    active_role {
+      userByUser {
+        name
+      }
+    }
+    transactions {
+      id
+      count
+      product {
+        amount
+        name
+      }
+    }
+  }
+  sales_aggregate(where: {shop: {_eq: $_eq}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useTransactionbyshopQuery__
+ *
+ * To run a query within a React component, call `useTransactionbyshopQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTransactionbyshopQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTransactionbyshopQuery({
+ *   variables: {
+ *      _eq: // value for '_eq'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      _eq1: // value for '_eq1'
+ *   },
+ * });
+ */
+export function useTransactionbyshopQuery(baseOptions?: Apollo.QueryHookOptions<TransactionbyshopQuery, TransactionbyshopQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TransactionbyshopQuery, TransactionbyshopQueryVariables>(TransactionbyshopDocument, options);
+      }
+export function useTransactionbyshopLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TransactionbyshopQuery, TransactionbyshopQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TransactionbyshopQuery, TransactionbyshopQueryVariables>(TransactionbyshopDocument, options);
+        }
+export type TransactionbyshopQueryHookResult = ReturnType<typeof useTransactionbyshopQuery>;
+export type TransactionbyshopLazyQueryHookResult = ReturnType<typeof useTransactionbyshopLazyQuery>;
+export type TransactionbyshopQueryResult = Apollo.QueryResult<TransactionbyshopQuery, TransactionbyshopQueryVariables>;
+export const GetTotalByShopsDocument = gql`
+    query getTotalByShops($limit: Int = 10) {
+  total_sales_by_shop(limit: $limit) {
+    total
+    shop_name
+    org
+  }
+}
+    `;
+
+/**
+ * __useGetTotalByShopsQuery__
+ *
+ * To run a query within a React component, call `useGetTotalByShopsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTotalByShopsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTotalByShopsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useGetTotalByShopsQuery(baseOptions?: Apollo.QueryHookOptions<GetTotalByShopsQuery, GetTotalByShopsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTotalByShopsQuery, GetTotalByShopsQueryVariables>(GetTotalByShopsDocument, options);
+      }
+export function useGetTotalByShopsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTotalByShopsQuery, GetTotalByShopsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTotalByShopsQuery, GetTotalByShopsQueryVariables>(GetTotalByShopsDocument, options);
+        }
+export type GetTotalByShopsQueryHookResult = ReturnType<typeof useGetTotalByShopsQuery>;
+export type GetTotalByShopsLazyQueryHookResult = ReturnType<typeof useGetTotalByShopsLazyQuery>;
+export type GetTotalByShopsQueryResult = Apollo.QueryResult<GetTotalByShopsQuery, GetTotalByShopsQueryVariables>;
 export const AddproductDocument = gql`
-    mutation addproduct($objects: [products_insert_input!] = {}) {
-  insert_products(objects: $objects) {
+    mutation addproduct($name: String = "", $inventories: inventory_arr_rel_insert_input = {data: {count: 10}}, $code: String = "", $amount: numeric = "") {
+  insert_products(
+    objects: {amount: $amount, code: $code, name: $name, inventories: $inventories}
+  ) {
     affected_rows
     returning {
       code
@@ -4196,7 +4885,10 @@ export type AddproductMutationFn = Apollo.MutationFunction<AddproductMutation, A
  * @example
  * const [addproductMutation, { data, loading, error }] = useAddproductMutation({
  *   variables: {
- *      objects: // value for 'objects'
+ *      name: // value for 'name'
+ *      inventories: // value for 'inventories'
+ *      code: // value for 'code'
+ *      amount: // value for 'amount'
  *   },
  * });
  */
@@ -4214,6 +4906,7 @@ export const FindProductByCodeDocument = gql`
     amount
     createdAt
     name
+    id
   }
 }
     `;
@@ -4245,6 +4938,40 @@ export function useFindProductByCodeLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type FindProductByCodeQueryHookResult = ReturnType<typeof useFindProductByCodeQuery>;
 export type FindProductByCodeLazyQueryHookResult = ReturnType<typeof useFindProductByCodeLazyQuery>;
 export type FindProductByCodeQueryResult = Apollo.QueryResult<FindProductByCodeQuery, FindProductByCodeQueryVariables>;
+export const UpdateProductDocument = gql`
+    mutation updateProduct($_set: products_set_input = {}, $id: uuid = "") {
+  update_products_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    ...productsFragment
+  }
+}
+    ${ProductsFragmentFragmentDoc}`;
+export type UpdateProductMutationFn = Apollo.MutationFunction<UpdateProductMutation, UpdateProductMutationVariables>;
+
+/**
+ * __useUpdateProductMutation__
+ *
+ * To run a mutation, you first call `useUpdateProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProductMutation, { data, loading, error }] = useUpdateProductMutation({
+ *   variables: {
+ *      _set: // value for '_set'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUpdateProductMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProductMutation, UpdateProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProductMutation, UpdateProductMutationVariables>(UpdateProductDocument, options);
+      }
+export type UpdateProductMutationHookResult = ReturnType<typeof useUpdateProductMutation>;
+export type UpdateProductMutationResult = Apollo.MutationResult<UpdateProductMutation>;
+export type UpdateProductMutationOptions = Apollo.BaseMutationOptions<UpdateProductMutation, UpdateProductMutationVariables>;
 export const GetshopsDocument = gql`
     query getshops($limit: Int = 10, $offset: Int = 0) {
   shops(offset: $offset, limit: $limit) {
@@ -4325,21 +5052,24 @@ export type AddshopMutationHookResult = ReturnType<typeof useAddshopMutation>;
 export type AddshopMutationResult = Apollo.MutationResult<AddshopMutation>;
 export type AddshopMutationOptions = Apollo.BaseMutationOptions<AddshopMutation, AddshopMutationVariables>;
 export const GetinventoryDocument = gql`
-    query getinventory($limit: Int = 10, $offset: Int = 10, $_iregex: String = "") {
-  products(limit: $limit, offset: $offset, where: {name: {_iregex: $_iregex}}) {
-    amount
-    code
-    createdAt
-    id
-    inventories_aggregate {
-      aggregate {
-        sum {
-          count
-        }
-      }
-    }
-    name
+    query getinventory($limit: Int = 10, $offset: Int = 10, $_iregex: String = "", $_iregex1: String = "") {
+  product_left_in_store(
+    limit: $limit
+    offset: $offset
+    where: {_or: {product: {name: {_iregex: $_iregex}}, p_code: {_iregex: $_iregex1}}}
+  ) {
     org
+    p_code
+    total
+    sold
+    product {
+      amount
+      code
+      createdAt
+      id
+      added_by
+      name
+    }
   }
 }
     `;
@@ -4359,6 +5089,7 @@ export const GetinventoryDocument = gql`
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *      _iregex: // value for '_iregex'
+ *      _iregex1: // value for '_iregex1'
  *   },
  * });
  */

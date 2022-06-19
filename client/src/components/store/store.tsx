@@ -4,6 +4,7 @@ import { Products, useGetinventoryQuery } from "generated/graphql";
 import { useState } from "react";
 import {
   Breadcrumb,
+  Button,
   Col,
   Container,
   FormControl,
@@ -11,14 +12,30 @@ import {
   Table,
 } from "react-bootstrap";
 import AddItem from "./addItem";
+import BarcodeReader from "react-barcode-reader";
+import "./style.scss";
 
 var Barcode = require("react-barcode");
 
+export interface SearchForm {
+  name: string;
+  code: string;
+}
 
 export default function Store() {
-  const [name, setname] = useState();
+  const [form, setform] = useState<SearchForm>({
+    name: "",
+    code: "",
+  });
   const handleChange = (e) => {
-    setname(e.target.value);
+    setform({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleScan = (data) => {
+    setform({ ...form, code: data });
+  };
+  const handleError = (err) => {
+    console.error(err);
   };
 
   const { setState, state } = useAppState();
@@ -27,7 +44,8 @@ export default function Store() {
     variables: {
       limit: 10,
       offset: 0,
-      _iregex: name,
+      _iregex: form.name,
+      _iregex1: form.code,
     },
   });
 
@@ -36,19 +54,32 @@ export default function Store() {
   };
 
   return (
-    <Container>
+    <Container className="store">
       {loading && <Loading />}
+      <BarcodeReader onError={handleError} onScan={handleScan} />
+
       <Breadcrumb>
         <Breadcrumb.Item active>Store</Breadcrumb.Item>
       </Breadcrumb>
       <Row className="my-2 justify-content-center">
-        <Col lg={9}>
+        <Col>
+          <FormControl
+            name="name"
+            placeholder="search by product name"
+            aria-label="no of items"
+            aria-describedby="basic-addon2"
+            onChange={handleChange}
+            value={form.name}
+          />
+        </Col>
+        <Col>
           <FormControl
             placeholder="search by product name"
             aria-label="no of items"
             aria-describedby="basic-addon2"
             onChange={handleChange}
-            value={name}
+            name="code"
+            value={form.code}
           />
         </Col>
       </Row>
@@ -59,23 +90,35 @@ export default function Store() {
             <th>Name</th>
             <th>Price</th>
             <th>code</th>
-            <th>count</th>
+            <th>In Stock</th>
+            <th>sold</th>
             <th>Add</th>
+            <th>Batch</th>
           </tr>
         </thead>
         <tbody>
-          {data?.products.map((item, index) => {
+          {data?.product_left_in_store.map((item, index) => {
             return (
-              <tr key={index} onClick={() => onProductSelect(item.code)}>
+              <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{item.name}</td>
-                <td>{item.amount}</td>
+                <td>{item.product?.name}</td>
+                <td>{item.product?.amount}</td>
                 <td className="bar-code">
-                  <Barcode value={item.code} />
+                  <Barcode value={item.p_code} />
                 </td>
-                <td>{item.inventories_aggregate.aggregate?.sum?.count}</td>
-                <td>
-                  <AddItem {...(item as Products)} />{" "}
+                <td>{item.total - item.sold}</td>
+                <td>{item.sold || 0}</td>
+                <td className="add-item">
+                  <AddItem {...(item.product as Products)} />{" "}
+                </td>
+                <td className="add-item align-items-center">
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => onProductSelect(item.p_code)}
+                  >
+                    Batches
+                  </Button>
                 </td>
               </tr>
             );

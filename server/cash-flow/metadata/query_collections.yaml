@@ -16,13 +16,6 @@
           		}
           	}
           }
-      - name: adduser
-        query: |
-          mutation addUser ($email: String = "", $name: String = "", $pwd: String = "", $role: String = "", $org: uuid = "") {
-          	insert_users_one(object: {email:$email,name:$name,pwd:$pwd,activeRolesByUser:{data:{role:$role,org:$org}}}) {
-          		id
-          	}
-          }
       - name: register
         query: |
           mutation register ($email: String = "", $name: String = "") {
@@ -30,6 +23,16 @@
           		affected_rows
           		returning {
           			email
+          			id
+          		}
+          	}
+          }
+      - name: adduser
+        query: |
+          mutation addUser ($email: String = "", $name: String = "", $pwd: String = "", $role: String = "", $org: uuid = "") {
+          	insert_users_one(object: {email:$email,name:$name,pwd:$pwd,activeRolesByUser:{data:{role:$role,org:$org}}}) {
+          		id
+          		activeRolesByUser {
           			id
           		}
           	}

@@ -134,7 +134,7 @@ export class AuthController {
     },
   })
   @ApiHeader({ name: 'x-hasura-admin-secret' })
-  @HttpCode(200)
+  @HttpCode(201)
   async registerOrg(@Req() req, @Body() body) {
     return this.authService.registerOrg(
       body.email,

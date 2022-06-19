@@ -9,7 +9,11 @@ export default function Header() {
   const { isLoggedIn, logout } = useAuth();
 
   const { data } = useGetUserInfoQuery();
-  const { state } = useAppState();
+  const { state , setSelectedShop} = useAppState();
+
+  const changeShop = ()=>{
+    setSelectedShop(undefined)
+  }
 
   return (
     <Navbar bg="light" expand="lg">
@@ -29,7 +33,7 @@ export default function Header() {
                 <FaUserAlt /> {state.role}
               </span>
             </Navbar.Text>
-            <Navbar.Text>
+            <Navbar.Text onClick={changeShop}>
               <span>
                 <FaStore /> {state.selectedShop?.name}
               </span>

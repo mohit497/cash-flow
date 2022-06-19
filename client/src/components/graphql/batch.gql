@@ -4,6 +4,7 @@ query inventoryByProduct($_eq: String = "", $limit: Int = 10, $offset: Int = 0) 
     product {
       added_by
       code
+      name
     }
     count
     createdAt

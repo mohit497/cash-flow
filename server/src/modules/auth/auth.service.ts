@@ -56,10 +56,10 @@ export class AuthService {
       access_token: this.jwtService.sign({
         username: user.email,
         org: user.org,
-        sub: user.id,
+        id: user.id,
         activated: user.activated,
         role: user.role.toLowerCase(),
-        role_id: newRole.id,
+        role_id: newRole[0].id,
       }),
     };
   }
@@ -86,10 +86,15 @@ export class AuthService {
       throw new InternalServerErrorException('register og failed');
     }
     console.log(res.body);
-    return this.usersService.addUserWithRole(
+    const user = await this.usersService.addUserWithRole(
       email,
       password,
       res.body.insert_orgs.returning[0].id,
+    );
+
+    return await this.switchRole(
+      email,
+      user.insert_users_one.activeRolesByUser[0].id,
     );
   }
 }

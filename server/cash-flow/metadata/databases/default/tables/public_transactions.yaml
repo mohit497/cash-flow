@@ -26,9 +26,11 @@ select_permissions:
     permission:
       columns:
         - count
-        - p_code
+        - createdAt
         - id
+        - p_code
         - sale
+        - updatedAt
       filter:
         saleBySale:
           org:

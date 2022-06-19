@@ -1,0 +1,16 @@
+table:
+  schema: public
+  name: shop_sales_by_date
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - total
+        - id
+        - shop_name
+        - org
+        - date
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

@@ -1,0 +1,25 @@
+table:
+  schema: public
+  name: product_left_in_store
+object_relationships:
+  - name: product
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: products
+        insertion_order: null
+        column_mapping:
+          p_code: code
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - org
+        - p_code
+        - sold
+        - total
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

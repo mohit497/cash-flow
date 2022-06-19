@@ -1,5 +1,17 @@
-mutation addproduct($objects: [products_insert_input!] = {}) {
-  insert_products(objects: $objects) {
+mutation addproduct(
+  $name: String = ""
+  $inventories: inventory_arr_rel_insert_input = { data: { count: 10 } }
+  $code: String = ""
+  $amount: numeric = ""
+) {
+  insert_products(
+    objects: {
+      amount: $amount
+      code: $code
+      name: $name
+      inventories: $inventories
+    }
+  ) {
     affected_rows
     returning {
       code
@@ -14,10 +26,25 @@ mutation addproduct($objects: [products_insert_input!] = {}) {
 }
 
 query findProductByCode($_eq: String = "") {
-  products(where: {code: {_eq: $_eq}}) {
+  products(where: { code: { _eq: $_eq } }) {
     code
     amount
     createdAt
     name
+    id
   }
+}
+
+
+mutation updateProduct($_set: products_set_input = {}, $id: uuid = "") {
+  update_products_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    ...productsFragment
+  }
+}
+
+fragment productsFragment on products {
+  amount
+  code
+  id
+  name
 }

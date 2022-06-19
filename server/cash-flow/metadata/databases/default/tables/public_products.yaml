@@ -31,6 +31,7 @@ insert_permissions:
           _eq: X-Hasura-Org-Id
       set:
         added_by: x-hasura-Role-Id
+        org: x-hasura-Org-Id
       columns:
         - code
         - name

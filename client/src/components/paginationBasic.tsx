@@ -22,6 +22,7 @@ export function PaginationBasic(props: Props & HTMLProps<any>) {
     props.onPageChange(page);
   };
 
+  
   useEffect(() => {
     let items: any[] = [];
     for (let i = 1 + (activeset - 1) * 10; i <= activeset * 7; i++) {
@@ -49,5 +50,5 @@ export function PaginationBasic(props: Props & HTMLProps<any>) {
     setitems(items);
   }, [props.active, activeset, props.total]);
 
-  return <Pagination className={props.className}>{items}</Pagination>;
+  return <Pagination size="sm" className={props.className}>{items}</Pagination>;
 }

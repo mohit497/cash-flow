@@ -19,6 +19,8 @@ insert_permissions:
       check:
         org:
           _eq: X-Hasura-Org-Id
+      set:
+        org: x-hasura-Org-Id
       columns:
         - address
         - location

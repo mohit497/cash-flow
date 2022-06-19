@@ -28,8 +28,7 @@ export default function AddShop() {
                 objects: {
                     name: form.name,
                     location: form.location,
-                    address: form.address,
-                    org:"26e434c0-4114-44c8-adb7-adeaea4e7d70"
+                    address: form.address
                 }
             },
             refetchQueries:[{ query: GetshopsDocument}]
