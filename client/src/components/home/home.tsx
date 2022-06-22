@@ -3,9 +3,12 @@ import { Tabs, Tab, Breadcrumb, Container, Badge } from "react-bootstrap";
 import { TransactionsTable } from "./transactions";
 import "./style.scss";
 import { ShopTotal } from "./shopTotal";
+import Sales from "./sales";
+import { useState } from "react";
 
 export default function Home() {
   const { data } = useMyShopsQuery({ variables: {} });
+  const [key, setKey] = useState(data?.shops[0].id);
 
   return (
     <Container fluid>
@@ -16,11 +19,12 @@ export default function Home() {
       <ShopTotal />
 
       <Tabs
-        defaultActiveKey={data?.shops[0]?.id}
+        activeKey={key}
         transition={false}
         id="noanim-tab-example"
         className="my-4"
         variant="pills"
+        onSelect={(k) => setKey(k)}
       >
         {data?.shops.map((shop) => {
           return (
@@ -32,12 +36,12 @@ export default function Home() {
                   <Badge bg="dark">{shop.location}</Badge>
                 </span>
               }
-            >
-              <TransactionsTable shop_id={shop.id} />
-            </Tab>
+            ></Tab>
           );
         })}
       </Tabs>
+      <Sales id={key} activetab={key} />
+      <TransactionsTable shop_id={key} />
     </Container>
   );
 }

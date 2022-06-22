@@ -69,18 +69,8 @@ const createApolloClient = () => {
     ]),
     cache: new InMemoryCache({
       typePolicies: {
-        // Type policy map
-        Query: {
-          fields: {
-            examsonline_assignments: {
-              keyArgs: false,
-              // Concatenate the incoming list items with
-              // the existing list items.
-              merge(existing = [], incoming) {
-                return [...existing, ...incoming];
-              },
-            },
-          },
+        "shop_sales_by_date": {
+          keyFields: ["id", "date"],
         },
       },
     }),

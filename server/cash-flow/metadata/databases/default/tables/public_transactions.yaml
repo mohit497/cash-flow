@@ -16,21 +16,25 @@ insert_permissions:
           org:
             _eq: X-Hasura-Org-Id
       columns:
-        - count
-        - p_code
         - id
         - sale
+        - p_code
+        - count
+        - createdAt
+        - updatedAt
+        - price
       backend_only: false
 select_permissions:
   - role: org-admin
     permission:
       columns:
+        - id
+        - sale
+        - p_code
         - count
         - createdAt
-        - id
-        - p_code
-        - sale
         - updatedAt
+        - price
       filter:
         saleBySale:
           org:
@@ -41,7 +45,10 @@ update_permissions:
     permission:
       columns:
         - count
+        - price
         - p_code
+        - createdAt
+        - updatedAt
         - id
         - sale
       filter:

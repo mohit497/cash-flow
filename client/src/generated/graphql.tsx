@@ -3653,6 +3653,7 @@ export type Transactions = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   p_code: Scalars['String'];
+  price: Scalars['numeric'];
   /** An object relationship */
   product: Products;
   sale: Scalars['uuid'];
@@ -3717,11 +3718,13 @@ export type Transactions_Arr_Rel_Insert_Input = {
 export type Transactions_Avg_Fields = {
   __typename?: 'transactions_avg_fields';
   count?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "transactions" */
 export type Transactions_Avg_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "transactions". All fields are combined with a logical 'AND'. */
@@ -3733,6 +3736,7 @@ export type Transactions_Bool_Exp = {
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   p_code?: Maybe<String_Comparison_Exp>;
+  price?: Maybe<Numeric_Comparison_Exp>;
   product?: Maybe<Products_Bool_Exp>;
   sale?: Maybe<Uuid_Comparison_Exp>;
   saleBySale?: Maybe<Sales_Bool_Exp>;
@@ -3748,6 +3752,7 @@ export enum Transactions_Constraint {
 /** input type for incrementing numeric columns in table "transactions" */
 export type Transactions_Inc_Input = {
   count?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['numeric']>;
 };
 
 /** input type for inserting data into table "transactions" */
@@ -3756,6 +3761,7 @@ export type Transactions_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['numeric']>;
   product?: Maybe<Products_Obj_Rel_Insert_Input>;
   sale?: Maybe<Scalars['uuid']>;
   saleBySale?: Maybe<Sales_Obj_Rel_Insert_Input>;
@@ -3769,6 +3775,7 @@ export type Transactions_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['numeric']>;
   sale?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -3779,6 +3786,7 @@ export type Transactions_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
   sale?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -3790,6 +3798,7 @@ export type Transactions_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['numeric']>;
   sale?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -3800,6 +3809,7 @@ export type Transactions_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
   sale?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
 };
@@ -3826,6 +3836,7 @@ export type Transactions_Order_By = {
   createdAt?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   p_code?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
   product?: Maybe<Products_Order_By>;
   sale?: Maybe<Order_By>;
   saleBySale?: Maybe<Sales_Order_By>;
@@ -3848,6 +3859,8 @@ export enum Transactions_Select_Column {
   /** column name */
   PCode = 'p_code',
   /** column name */
+  Price = 'price',
+  /** column name */
   Sale = 'sale',
   /** column name */
   UpdatedAt = 'updatedAt'
@@ -3859,6 +3872,7 @@ export type Transactions_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   p_code?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['numeric']>;
   sale?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
@@ -3867,44 +3881,52 @@ export type Transactions_Set_Input = {
 export type Transactions_Stddev_Fields = {
   __typename?: 'transactions_stddev_fields';
   count?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "transactions" */
 export type Transactions_Stddev_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Transactions_Stddev_Pop_Fields = {
   __typename?: 'transactions_stddev_pop_fields';
   count?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "transactions" */
 export type Transactions_Stddev_Pop_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Transactions_Stddev_Samp_Fields = {
   __typename?: 'transactions_stddev_samp_fields';
   count?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "transactions" */
 export type Transactions_Stddev_Samp_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Transactions_Sum_Fields = {
   __typename?: 'transactions_sum_fields';
   count?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['numeric']>;
 };
 
 /** order by sum() on columns of table "transactions" */
 export type Transactions_Sum_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /** update columns of table "transactions" */
@@ -3918,6 +3940,8 @@ export enum Transactions_Update_Column {
   /** column name */
   PCode = 'p_code',
   /** column name */
+  Price = 'price',
+  /** column name */
   Sale = 'sale',
   /** column name */
   UpdatedAt = 'updatedAt'
@@ -3927,33 +3951,39 @@ export enum Transactions_Update_Column {
 export type Transactions_Var_Pop_Fields = {
   __typename?: 'transactions_var_pop_fields';
   count?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "transactions" */
 export type Transactions_Var_Pop_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Transactions_Var_Samp_Fields = {
   __typename?: 'transactions_var_samp_fields';
   count?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "transactions" */
 export type Transactions_Var_Samp_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Transactions_Variance_Fields = {
   __typename?: 'transactions_variance_fields';
   count?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "transactions" */
 export type Transactions_Variance_Order_By = {
   count?: Maybe<Order_By>;
+  price?: Maybe<Order_By>;
 };
 
 /**
@@ -4289,7 +4319,7 @@ export type TransactionbyshopQuery = (
       ) }
     )>, transactions: Array<(
       { __typename?: 'transactions' }
-      & Pick<Transactions, 'id' | 'count'>
+      & Pick<Transactions, 'id' | 'count' | 'price'>
       & { product: (
         { __typename?: 'products' }
         & Pick<Products, 'amount' | 'name'>
@@ -4315,6 +4345,32 @@ export type GetTotalByShopsQuery = (
     { __typename?: 'total_sales_by_shop' }
     & Pick<Total_Sales_By_Shop, 'total' | 'shop_name' | 'org'>
   )> }
+);
+
+export type GetSalesByDateQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  _eq?: Maybe<Scalars['uuid']>;
+}>;
+
+
+export type GetSalesByDateQuery = (
+  { __typename?: 'query_root' }
+  & { shop_sales_by_date: Array<(
+    { __typename?: 'shop_sales_by_date' }
+    & Shop_Sales_By_DateFragmentFragment
+  )>, shop_sales_by_date_aggregate: (
+    { __typename?: 'shop_sales_by_date_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'shop_sales_by_date_aggregate_fields' }
+      & Pick<Shop_Sales_By_Date_Aggregate_Fields, 'count'>
+    )> }
+  ) }
+);
+
+export type Shop_Sales_By_DateFragmentFragment = (
+  { __typename?: 'shop_sales_by_date' }
+  & Pick<Shop_Sales_By_Date, 'date' | 'id' | 'shop_name' | 'total'>
 );
 
 export type AddproductMutationVariables = Exact<{
@@ -4489,6 +4545,14 @@ export type GetproductsQuery = (
   )> }
 );
 
+export const Shop_Sales_By_DateFragmentFragmentDoc = gql`
+    fragment shop_sales_by_dateFragment on shop_sales_by_date {
+  date
+  id
+  shop_name
+  total
+}
+    `;
 export const ProductsFragmentFragmentDoc = gql`
     fragment productsFragment on products {
   amount
@@ -4771,6 +4835,7 @@ export const TransactionbyshopDocument = gql`
     transactions {
       id
       count
+      price
       product {
         amount
         name
@@ -4852,6 +4917,54 @@ export function useGetTotalByShopsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetTotalByShopsQueryHookResult = ReturnType<typeof useGetTotalByShopsQuery>;
 export type GetTotalByShopsLazyQueryHookResult = ReturnType<typeof useGetTotalByShopsLazyQuery>;
 export type GetTotalByShopsQueryResult = Apollo.QueryResult<GetTotalByShopsQuery, GetTotalByShopsQueryVariables>;
+export const GetSalesByDateDocument = gql`
+    query getSalesByDate($limit: Int = 10, $offset: Int = 0, $_eq: uuid = "") {
+  shop_sales_by_date(
+    limit: $limit
+    offset: $offset
+    order_by: {date: desc}
+    where: {id: {_eq: $_eq}}
+    distinct_on: date
+  ) {
+    ...shop_sales_by_dateFragment
+  }
+  shop_sales_by_date_aggregate {
+    aggregate {
+      count(columns: date)
+    }
+  }
+}
+    ${Shop_Sales_By_DateFragmentFragmentDoc}`;
+
+/**
+ * __useGetSalesByDateQuery__
+ *
+ * To run a query within a React component, call `useGetSalesByDateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSalesByDateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSalesByDateQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      _eq: // value for '_eq'
+ *   },
+ * });
+ */
+export function useGetSalesByDateQuery(baseOptions?: Apollo.QueryHookOptions<GetSalesByDateQuery, GetSalesByDateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSalesByDateQuery, GetSalesByDateQueryVariables>(GetSalesByDateDocument, options);
+      }
+export function useGetSalesByDateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSalesByDateQuery, GetSalesByDateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSalesByDateQuery, GetSalesByDateQueryVariables>(GetSalesByDateDocument, options);
+        }
+export type GetSalesByDateQueryHookResult = ReturnType<typeof useGetSalesByDateQuery>;
+export type GetSalesByDateLazyQueryHookResult = ReturnType<typeof useGetSalesByDateLazyQuery>;
+export type GetSalesByDateQueryResult = Apollo.QueryResult<GetSalesByDateQuery, GetSalesByDateQueryVariables>;
 export const AddproductDocument = gql`
     mutation addproduct($name: String = "", $inventories: inventory_arr_rel_insert_input = {data: {count: 10}}, $code: String = "", $amount: numeric = "") {
   insert_products(

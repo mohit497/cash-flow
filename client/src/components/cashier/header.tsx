@@ -17,6 +17,7 @@ export default function CashierHeader() {
       return {
         count: 1,
         p_code: item.code,
+        price: item.amount
       };
     });
   };

@@ -8,6 +8,7 @@ import {
   ListGroup,
   Row,
   Col,
+  Container,
 } from "react-bootstrap";
 import { FaClock, FaDollarSign, FaList, FaUser } from "react-icons/fa";
 import Moment from "react-moment";
@@ -19,6 +20,7 @@ export const TransactionsTable = ({ shop_id }) => {
     variables: {
       _eq: shop_id,
     },
+    skip: !shop_id
   });
 
   const onPageChange = (page: number) => {
@@ -27,7 +29,7 @@ export const TransactionsTable = ({ shop_id }) => {
   };
 
   const calculateTotalAmount = (transaction: Transactions[]) => {
-    const temp: number[] = transaction.map((t) => t.product.amount);
+    const temp: number[] = transaction.map((t) => t.price);
 
     return temp.reduce((partialSum, a) => partialSum + a, 0);
   };
@@ -57,7 +59,11 @@ export const TransactionsTable = ({ shop_id }) => {
   };
 
   return (
-    <div className="transactions my-2">
+    <Container fluid className="transactions mt-4 p-2">
+
+      <Row>
+      <h4>Transactions</h4>
+      </Row>
       <Table responsive size="md">
         <thead>
           <tr>
@@ -120,6 +126,6 @@ export const TransactionsTable = ({ shop_id }) => {
           />
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };

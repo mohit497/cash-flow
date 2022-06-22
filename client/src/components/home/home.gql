@@ -14,6 +14,7 @@ query transactionbyshop($_eq: uuid = "", $limit: Int = 10, $offset: Int = 0, $_e
     transactions {
       id
       count
+      price
       product {
         amount
         name
@@ -34,5 +35,25 @@ query getTotalByShops($limit: Int = 10) {
     shop_name
     org
   }
+}
+
+
+
+query getSalesByDate($limit: Int = 10, $offset: Int = 0, $_eq: uuid = "") {
+  shop_sales_by_date(limit: $limit, offset: $offset, order_by: {date: desc}, where: {id: {_eq: $_eq}}, distinct_on: date) {
+    ...shop_sales_by_dateFragment
+  }
+  shop_sales_by_date_aggregate {
+    aggregate {
+      count(columns: date)
+    }
+  }
+}
+
+fragment shop_sales_by_dateFragment on shop_sales_by_date {
+  date
+  id
+  shop_name
+  total
 }
 
