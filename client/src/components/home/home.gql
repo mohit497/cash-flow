@@ -57,3 +57,4 @@ fragment shop_sales_by_dateFragment on shop_sales_by_date {
   total
 }
 
+

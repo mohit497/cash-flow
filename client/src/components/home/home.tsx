@@ -1,10 +1,11 @@
 import { useMyShopsQuery } from "generated/graphql";
-import { Tabs, Tab, Breadcrumb, Container, Badge } from "react-bootstrap";
+import { Tabs, Tab, Container, Badge, Row, Col } from "react-bootstrap";
 import { TransactionsTable } from "./transactions";
 import "./style.scss";
-import { ShopTotal } from "./shopTotal";
+// import { ShopTotal } from "./shopTotal";
 import Sales from "./sales";
 import { useState } from "react";
+import { TopSales } from "./charts/topSales";
 
 export default function Home() {
   const { data } = useMyShopsQuery({ variables: {} });
@@ -12,11 +13,15 @@ export default function Home() {
 
   return (
     <Container fluid>
-      <Breadcrumb>
-        <Breadcrumb.Item active>Home</Breadcrumb.Item>
-      </Breadcrumb>
+      <Row>
+        <Col className="text-left">
+          <h3>Sales</h3>
+        </Col>
+      </Row>
 
-      <ShopTotal />
+      {/* <ShopTotal /> */}
+
+      <TopSales />
 
       <Tabs
         activeKey={key}

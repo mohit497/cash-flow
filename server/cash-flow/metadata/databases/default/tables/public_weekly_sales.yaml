@@ -1,0 +1,16 @@
+table:
+  schema: public
+  name: weekly_sales
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - name
+        - org
+        - shop
+        - total
+        - weekly
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

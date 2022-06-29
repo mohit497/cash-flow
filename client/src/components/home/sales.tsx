@@ -8,7 +8,8 @@ import {
   Legend,
   Bar,
   ResponsiveContainer,
-  Tooltip
+  Tooltip,
+  Area
 } from "recharts";
 
 export default function Sales({ id, activetab }) {
@@ -43,6 +44,7 @@ export default function Sales({ id, activetab }) {
           <YAxis />
           <Tooltip />
           <Legend />
+          <Area type="monotone" dataKey="total" fill="#8884d8" stroke="#8884d8" />
           <Bar dataKey="total" barSize={20} fill="#413ea0" />
         </ComposedChart>
       </ResponsiveContainer>

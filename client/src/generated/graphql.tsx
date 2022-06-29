@@ -821,6 +821,149 @@ export type Inventory_Variance_Order_By = {
   count?: Maybe<Order_By>;
 };
 
+/** columns and relationships of "monthly_sales" */
+export type Monthly_Sales = {
+  __typename?: 'monthly_sales';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  weekly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "monthly_sales" */
+export type Monthly_Sales_Aggregate = {
+  __typename?: 'monthly_sales_aggregate';
+  aggregate?: Maybe<Monthly_Sales_Aggregate_Fields>;
+  nodes: Array<Monthly_Sales>;
+};
+
+/** aggregate fields of "monthly_sales" */
+export type Monthly_Sales_Aggregate_Fields = {
+  __typename?: 'monthly_sales_aggregate_fields';
+  avg?: Maybe<Monthly_Sales_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Monthly_Sales_Max_Fields>;
+  min?: Maybe<Monthly_Sales_Min_Fields>;
+  stddev?: Maybe<Monthly_Sales_Stddev_Fields>;
+  stddev_pop?: Maybe<Monthly_Sales_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Monthly_Sales_Stddev_Samp_Fields>;
+  sum?: Maybe<Monthly_Sales_Sum_Fields>;
+  var_pop?: Maybe<Monthly_Sales_Var_Pop_Fields>;
+  var_samp?: Maybe<Monthly_Sales_Var_Samp_Fields>;
+  variance?: Maybe<Monthly_Sales_Variance_Fields>;
+};
+
+
+/** aggregate fields of "monthly_sales" */
+export type Monthly_Sales_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Monthly_Sales_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Monthly_Sales_Avg_Fields = {
+  __typename?: 'monthly_sales_avg_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "monthly_sales". All fields are combined with a logical 'AND'. */
+export type Monthly_Sales_Bool_Exp = {
+  _and?: Maybe<Array<Monthly_Sales_Bool_Exp>>;
+  _not?: Maybe<Monthly_Sales_Bool_Exp>;
+  _or?: Maybe<Array<Monthly_Sales_Bool_Exp>>;
+  name?: Maybe<String_Comparison_Exp>;
+  org?: Maybe<Uuid_Comparison_Exp>;
+  shop?: Maybe<Uuid_Comparison_Exp>;
+  total?: Maybe<Numeric_Comparison_Exp>;
+  weekly?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Monthly_Sales_Max_Fields = {
+  __typename?: 'monthly_sales_max_fields';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  weekly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Monthly_Sales_Min_Fields = {
+  __typename?: 'monthly_sales_min_fields';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  weekly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** Ordering options when selecting data from "monthly_sales". */
+export type Monthly_Sales_Order_By = {
+  name?: Maybe<Order_By>;
+  org?: Maybe<Order_By>;
+  shop?: Maybe<Order_By>;
+  total?: Maybe<Order_By>;
+  weekly?: Maybe<Order_By>;
+};
+
+/** select columns of table "monthly_sales" */
+export enum Monthly_Sales_Select_Column {
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Org = 'org',
+  /** column name */
+  Shop = 'shop',
+  /** column name */
+  Total = 'total',
+  /** column name */
+  Weekly = 'weekly'
+}
+
+/** aggregate stddev on columns */
+export type Monthly_Sales_Stddev_Fields = {
+  __typename?: 'monthly_sales_stddev_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Monthly_Sales_Stddev_Pop_Fields = {
+  __typename?: 'monthly_sales_stddev_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Monthly_Sales_Stddev_Samp_Fields = {
+  __typename?: 'monthly_sales_stddev_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Monthly_Sales_Sum_Fields = {
+  __typename?: 'monthly_sales_sum_fields';
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate var_pop on columns */
+export type Monthly_Sales_Var_Pop_Fields = {
+  __typename?: 'monthly_sales_var_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Monthly_Sales_Var_Samp_Fields = {
+  __typename?: 'monthly_sales_var_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Monthly_Sales_Variance_Fields = {
+  __typename?: 'monthly_sales_variance_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
@@ -2206,6 +2349,10 @@ export type Query_Root = {
   inventory_aggregate: Inventory_Aggregate;
   /** fetch data from the table: "inventory" using primary key columns */
   inventory_by_pk?: Maybe<Inventory>;
+  /** fetch data from the table: "monthly_sales" */
+  monthly_sales: Array<Monthly_Sales>;
+  /** fetch aggregated fields from the table: "monthly_sales" */
+  monthly_sales_aggregate: Monthly_Sales_Aggregate;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
   /** fetch aggregated fields from the table: "orgs" */
@@ -2254,6 +2401,14 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+  /** fetch data from the table: "weekly_sales" */
+  weekly_sales: Array<Weekly_Sales>;
+  /** fetch aggregated fields from the table: "weekly_sales" */
+  weekly_sales_aggregate: Weekly_Sales_Aggregate;
+  /** fetch data from the table: "yearly_sales" */
+  yearly_sales: Array<Yearly_Sales>;
+  /** fetch aggregated fields from the table: "yearly_sales" */
+  yearly_sales_aggregate: Yearly_Sales_Aggregate;
 };
 
 
@@ -2323,6 +2478,24 @@ export type Query_RootInventory_AggregateArgs = {
 
 export type Query_RootInventory_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootMonthly_SalesArgs = {
+  distinct_on?: Maybe<Array<Monthly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Monthly_Sales_Order_By>>;
+  where?: Maybe<Monthly_Sales_Bool_Exp>;
+};
+
+
+export type Query_RootMonthly_Sales_AggregateArgs = {
+  distinct_on?: Maybe<Array<Monthly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Monthly_Sales_Order_By>>;
+  where?: Maybe<Monthly_Sales_Bool_Exp>;
 };
 
 
@@ -2515,6 +2688,42 @@ export type Query_RootUsers_AggregateArgs = {
 
 export type Query_RootUsers_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootWeekly_SalesArgs = {
+  distinct_on?: Maybe<Array<Weekly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Weekly_Sales_Order_By>>;
+  where?: Maybe<Weekly_Sales_Bool_Exp>;
+};
+
+
+export type Query_RootWeekly_Sales_AggregateArgs = {
+  distinct_on?: Maybe<Array<Weekly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Weekly_Sales_Order_By>>;
+  where?: Maybe<Weekly_Sales_Bool_Exp>;
+};
+
+
+export type Query_RootYearly_SalesArgs = {
+  distinct_on?: Maybe<Array<Yearly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Yearly_Sales_Order_By>>;
+  where?: Maybe<Yearly_Sales_Bool_Exp>;
+};
+
+
+export type Query_RootYearly_Sales_AggregateArgs = {
+  distinct_on?: Maybe<Array<Yearly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Yearly_Sales_Order_By>>;
+  where?: Maybe<Yearly_Sales_Bool_Exp>;
 };
 
 /**
@@ -3180,6 +3389,10 @@ export type Subscription_Root = {
   inventory_aggregate: Inventory_Aggregate;
   /** fetch data from the table: "inventory" using primary key columns */
   inventory_by_pk?: Maybe<Inventory>;
+  /** fetch data from the table: "monthly_sales" */
+  monthly_sales: Array<Monthly_Sales>;
+  /** fetch aggregated fields from the table: "monthly_sales" */
+  monthly_sales_aggregate: Monthly_Sales_Aggregate;
   /** fetch data from the table: "orgs" */
   orgs: Array<Orgs>;
   /** fetch aggregated fields from the table: "orgs" */
@@ -3228,6 +3441,14 @@ export type Subscription_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+  /** fetch data from the table: "weekly_sales" */
+  weekly_sales: Array<Weekly_Sales>;
+  /** fetch aggregated fields from the table: "weekly_sales" */
+  weekly_sales_aggregate: Weekly_Sales_Aggregate;
+  /** fetch data from the table: "yearly_sales" */
+  yearly_sales: Array<Yearly_Sales>;
+  /** fetch aggregated fields from the table: "yearly_sales" */
+  yearly_sales_aggregate: Yearly_Sales_Aggregate;
 };
 
 
@@ -3297,6 +3518,24 @@ export type Subscription_RootInventory_AggregateArgs = {
 
 export type Subscription_RootInventory_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootMonthly_SalesArgs = {
+  distinct_on?: Maybe<Array<Monthly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Monthly_Sales_Order_By>>;
+  where?: Maybe<Monthly_Sales_Bool_Exp>;
+};
+
+
+export type Subscription_RootMonthly_Sales_AggregateArgs = {
+  distinct_on?: Maybe<Array<Monthly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Monthly_Sales_Order_By>>;
+  where?: Maybe<Monthly_Sales_Bool_Exp>;
 };
 
 
@@ -3489,6 +3728,42 @@ export type Subscription_RootUsers_AggregateArgs = {
 
 export type Subscription_RootUsers_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootWeekly_SalesArgs = {
+  distinct_on?: Maybe<Array<Weekly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Weekly_Sales_Order_By>>;
+  where?: Maybe<Weekly_Sales_Bool_Exp>;
+};
+
+
+export type Subscription_RootWeekly_Sales_AggregateArgs = {
+  distinct_on?: Maybe<Array<Weekly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Weekly_Sales_Order_By>>;
+  where?: Maybe<Weekly_Sales_Bool_Exp>;
+};
+
+
+export type Subscription_RootYearly_SalesArgs = {
+  distinct_on?: Maybe<Array<Yearly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Yearly_Sales_Order_By>>;
+  where?: Maybe<Yearly_Sales_Bool_Exp>;
+};
+
+
+export type Subscription_RootYearly_Sales_AggregateArgs = {
+  distinct_on?: Maybe<Array<Yearly_Sales_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Yearly_Sales_Order_By>>;
+  where?: Maybe<Yearly_Sales_Bool_Exp>;
 };
 
 
@@ -4184,6 +4459,292 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
+/** columns and relationships of "weekly_sales" */
+export type Weekly_Sales = {
+  __typename?: 'weekly_sales';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  weekly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "weekly_sales" */
+export type Weekly_Sales_Aggregate = {
+  __typename?: 'weekly_sales_aggregate';
+  aggregate?: Maybe<Weekly_Sales_Aggregate_Fields>;
+  nodes: Array<Weekly_Sales>;
+};
+
+/** aggregate fields of "weekly_sales" */
+export type Weekly_Sales_Aggregate_Fields = {
+  __typename?: 'weekly_sales_aggregate_fields';
+  avg?: Maybe<Weekly_Sales_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Weekly_Sales_Max_Fields>;
+  min?: Maybe<Weekly_Sales_Min_Fields>;
+  stddev?: Maybe<Weekly_Sales_Stddev_Fields>;
+  stddev_pop?: Maybe<Weekly_Sales_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Weekly_Sales_Stddev_Samp_Fields>;
+  sum?: Maybe<Weekly_Sales_Sum_Fields>;
+  var_pop?: Maybe<Weekly_Sales_Var_Pop_Fields>;
+  var_samp?: Maybe<Weekly_Sales_Var_Samp_Fields>;
+  variance?: Maybe<Weekly_Sales_Variance_Fields>;
+};
+
+
+/** aggregate fields of "weekly_sales" */
+export type Weekly_Sales_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Weekly_Sales_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Weekly_Sales_Avg_Fields = {
+  __typename?: 'weekly_sales_avg_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "weekly_sales". All fields are combined with a logical 'AND'. */
+export type Weekly_Sales_Bool_Exp = {
+  _and?: Maybe<Array<Weekly_Sales_Bool_Exp>>;
+  _not?: Maybe<Weekly_Sales_Bool_Exp>;
+  _or?: Maybe<Array<Weekly_Sales_Bool_Exp>>;
+  name?: Maybe<String_Comparison_Exp>;
+  org?: Maybe<Uuid_Comparison_Exp>;
+  shop?: Maybe<Uuid_Comparison_Exp>;
+  total?: Maybe<Numeric_Comparison_Exp>;
+  weekly?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Weekly_Sales_Max_Fields = {
+  __typename?: 'weekly_sales_max_fields';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  weekly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Weekly_Sales_Min_Fields = {
+  __typename?: 'weekly_sales_min_fields';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  weekly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** Ordering options when selecting data from "weekly_sales". */
+export type Weekly_Sales_Order_By = {
+  name?: Maybe<Order_By>;
+  org?: Maybe<Order_By>;
+  shop?: Maybe<Order_By>;
+  total?: Maybe<Order_By>;
+  weekly?: Maybe<Order_By>;
+};
+
+/** select columns of table "weekly_sales" */
+export enum Weekly_Sales_Select_Column {
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Org = 'org',
+  /** column name */
+  Shop = 'shop',
+  /** column name */
+  Total = 'total',
+  /** column name */
+  Weekly = 'weekly'
+}
+
+/** aggregate stddev on columns */
+export type Weekly_Sales_Stddev_Fields = {
+  __typename?: 'weekly_sales_stddev_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Weekly_Sales_Stddev_Pop_Fields = {
+  __typename?: 'weekly_sales_stddev_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Weekly_Sales_Stddev_Samp_Fields = {
+  __typename?: 'weekly_sales_stddev_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Weekly_Sales_Sum_Fields = {
+  __typename?: 'weekly_sales_sum_fields';
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate var_pop on columns */
+export type Weekly_Sales_Var_Pop_Fields = {
+  __typename?: 'weekly_sales_var_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Weekly_Sales_Var_Samp_Fields = {
+  __typename?: 'weekly_sales_var_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Weekly_Sales_Variance_Fields = {
+  __typename?: 'weekly_sales_variance_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "yearly_sales" */
+export type Yearly_Sales = {
+  __typename?: 'yearly_sales';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  yearly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "yearly_sales" */
+export type Yearly_Sales_Aggregate = {
+  __typename?: 'yearly_sales_aggregate';
+  aggregate?: Maybe<Yearly_Sales_Aggregate_Fields>;
+  nodes: Array<Yearly_Sales>;
+};
+
+/** aggregate fields of "yearly_sales" */
+export type Yearly_Sales_Aggregate_Fields = {
+  __typename?: 'yearly_sales_aggregate_fields';
+  avg?: Maybe<Yearly_Sales_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Yearly_Sales_Max_Fields>;
+  min?: Maybe<Yearly_Sales_Min_Fields>;
+  stddev?: Maybe<Yearly_Sales_Stddev_Fields>;
+  stddev_pop?: Maybe<Yearly_Sales_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Yearly_Sales_Stddev_Samp_Fields>;
+  sum?: Maybe<Yearly_Sales_Sum_Fields>;
+  var_pop?: Maybe<Yearly_Sales_Var_Pop_Fields>;
+  var_samp?: Maybe<Yearly_Sales_Var_Samp_Fields>;
+  variance?: Maybe<Yearly_Sales_Variance_Fields>;
+};
+
+
+/** aggregate fields of "yearly_sales" */
+export type Yearly_Sales_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Yearly_Sales_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Yearly_Sales_Avg_Fields = {
+  __typename?: 'yearly_sales_avg_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "yearly_sales". All fields are combined with a logical 'AND'. */
+export type Yearly_Sales_Bool_Exp = {
+  _and?: Maybe<Array<Yearly_Sales_Bool_Exp>>;
+  _not?: Maybe<Yearly_Sales_Bool_Exp>;
+  _or?: Maybe<Array<Yearly_Sales_Bool_Exp>>;
+  name?: Maybe<String_Comparison_Exp>;
+  org?: Maybe<Uuid_Comparison_Exp>;
+  shop?: Maybe<Uuid_Comparison_Exp>;
+  total?: Maybe<Numeric_Comparison_Exp>;
+  yearly?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Yearly_Sales_Max_Fields = {
+  __typename?: 'yearly_sales_max_fields';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  yearly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Yearly_Sales_Min_Fields = {
+  __typename?: 'yearly_sales_min_fields';
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  shop?: Maybe<Scalars['uuid']>;
+  total?: Maybe<Scalars['numeric']>;
+  yearly?: Maybe<Scalars['timestamptz']>;
+};
+
+/** Ordering options when selecting data from "yearly_sales". */
+export type Yearly_Sales_Order_By = {
+  name?: Maybe<Order_By>;
+  org?: Maybe<Order_By>;
+  shop?: Maybe<Order_By>;
+  total?: Maybe<Order_By>;
+  yearly?: Maybe<Order_By>;
+};
+
+/** select columns of table "yearly_sales" */
+export enum Yearly_Sales_Select_Column {
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Org = 'org',
+  /** column name */
+  Shop = 'shop',
+  /** column name */
+  Total = 'total',
+  /** column name */
+  Yearly = 'yearly'
+}
+
+/** aggregate stddev on columns */
+export type Yearly_Sales_Stddev_Fields = {
+  __typename?: 'yearly_sales_stddev_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Yearly_Sales_Stddev_Pop_Fields = {
+  __typename?: 'yearly_sales_stddev_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Yearly_Sales_Stddev_Samp_Fields = {
+  __typename?: 'yearly_sales_stddev_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Yearly_Sales_Sum_Fields = {
+  __typename?: 'yearly_sales_sum_fields';
+  total?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate var_pop on columns */
+export type Yearly_Sales_Var_Pop_Fields = {
+  __typename?: 'yearly_sales_var_pop_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Yearly_Sales_Var_Samp_Fields = {
+  __typename?: 'yearly_sales_var_samp_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Yearly_Sales_Variance_Fields = {
+  __typename?: 'yearly_sales_variance_fields';
+  total?: Maybe<Scalars['Float']>;
+};
+
 export type InventoryByProductQueryVariables = Exact<{
   _eq?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
@@ -4295,6 +4856,39 @@ export type MyShopsQuery = (
   & { shops: Array<(
     { __typename?: 'shops' }
     & Pick<Shops, 'id' | 'name' | 'location' | 'org'>
+  )> }
+);
+
+export type YearlySalesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type YearlySalesQuery = (
+  { __typename?: 'query_root' }
+  & { yearly_sales: Array<(
+    { __typename?: 'yearly_sales' }
+    & Pick<Yearly_Sales, 'name' | 'org' | 'shop' | 'total' | 'yearly'>
+  )> }
+);
+
+export type WeeklySalesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type WeeklySalesQuery = (
+  { __typename?: 'query_root' }
+  & { weekly_sales: Array<(
+    { __typename?: 'weekly_sales' }
+    & Pick<Weekly_Sales, 'org' | 'shop' | 'total' | 'weekly' | 'name'>
+  )> }
+);
+
+export type MonthlySalesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MonthlySalesQuery = (
+  { __typename?: 'query_root' }
+  & { monthly_sales: Array<(
+    { __typename?: 'monthly_sales' }
+    & Pick<Monthly_Sales, 'name' | 'org' | 'shop' | 'total' | 'weekly'>
   )> }
 );
 
@@ -4813,6 +5407,120 @@ export function useMyShopsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<My
 export type MyShopsQueryHookResult = ReturnType<typeof useMyShopsQuery>;
 export type MyShopsLazyQueryHookResult = ReturnType<typeof useMyShopsLazyQuery>;
 export type MyShopsQueryResult = Apollo.QueryResult<MyShopsQuery, MyShopsQueryVariables>;
+export const YearlySalesDocument = gql`
+    query yearlySales {
+  yearly_sales {
+    name
+    org
+    shop
+    total
+    yearly
+  }
+}
+    `;
+
+/**
+ * __useYearlySalesQuery__
+ *
+ * To run a query within a React component, call `useYearlySalesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useYearlySalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useYearlySalesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useYearlySalesQuery(baseOptions?: Apollo.QueryHookOptions<YearlySalesQuery, YearlySalesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<YearlySalesQuery, YearlySalesQueryVariables>(YearlySalesDocument, options);
+      }
+export function useYearlySalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<YearlySalesQuery, YearlySalesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<YearlySalesQuery, YearlySalesQueryVariables>(YearlySalesDocument, options);
+        }
+export type YearlySalesQueryHookResult = ReturnType<typeof useYearlySalesQuery>;
+export type YearlySalesLazyQueryHookResult = ReturnType<typeof useYearlySalesLazyQuery>;
+export type YearlySalesQueryResult = Apollo.QueryResult<YearlySalesQuery, YearlySalesQueryVariables>;
+export const WeeklySalesDocument = gql`
+    query weeklySales {
+  weekly_sales {
+    org
+    shop
+    total
+    weekly
+    name
+  }
+}
+    `;
+
+/**
+ * __useWeeklySalesQuery__
+ *
+ * To run a query within a React component, call `useWeeklySalesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useWeeklySalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWeeklySalesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useWeeklySalesQuery(baseOptions?: Apollo.QueryHookOptions<WeeklySalesQuery, WeeklySalesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<WeeklySalesQuery, WeeklySalesQueryVariables>(WeeklySalesDocument, options);
+      }
+export function useWeeklySalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<WeeklySalesQuery, WeeklySalesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<WeeklySalesQuery, WeeklySalesQueryVariables>(WeeklySalesDocument, options);
+        }
+export type WeeklySalesQueryHookResult = ReturnType<typeof useWeeklySalesQuery>;
+export type WeeklySalesLazyQueryHookResult = ReturnType<typeof useWeeklySalesLazyQuery>;
+export type WeeklySalesQueryResult = Apollo.QueryResult<WeeklySalesQuery, WeeklySalesQueryVariables>;
+export const MonthlySalesDocument = gql`
+    query monthlySales {
+  monthly_sales {
+    name
+    org
+    shop
+    total
+    weekly
+  }
+}
+    `;
+
+/**
+ * __useMonthlySalesQuery__
+ *
+ * To run a query within a React component, call `useMonthlySalesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMonthlySalesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMonthlySalesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMonthlySalesQuery(baseOptions?: Apollo.QueryHookOptions<MonthlySalesQuery, MonthlySalesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MonthlySalesQuery, MonthlySalesQueryVariables>(MonthlySalesDocument, options);
+      }
+export function useMonthlySalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MonthlySalesQuery, MonthlySalesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MonthlySalesQuery, MonthlySalesQueryVariables>(MonthlySalesDocument, options);
+        }
+export type MonthlySalesQueryHookResult = ReturnType<typeof useMonthlySalesQuery>;
+export type MonthlySalesLazyQueryHookResult = ReturnType<typeof useMonthlySalesLazyQuery>;
+export type MonthlySalesQueryResult = Apollo.QueryResult<MonthlySalesQuery, MonthlySalesQueryVariables>;
 export const TransactionbyshopDocument = gql`
     query transactionbyshop($_eq: uuid = "", $limit: Int = 10, $offset: Int = 0, $_eq1: uuid = "") {
   sales(

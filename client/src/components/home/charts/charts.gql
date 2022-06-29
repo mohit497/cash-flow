@@ -1,0 +1,31 @@
+query yearlySales {
+  yearly_sales {
+    name
+    org
+    shop
+    total
+    yearly
+  }
+}
+
+
+query weeklySales {
+  weekly_sales {
+    org
+    shop
+    total
+    weekly
+    name
+  }
+}
+
+
+query monthlySales {
+  monthly_sales {
+    name
+    org
+    shop
+    total
+    weekly
+  }
+}

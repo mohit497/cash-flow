@@ -72,6 +72,15 @@ const createApolloClient = () => {
         "shop_sales_by_date": {
           keyFields: ["id", "date"],
         },
+        "monthly_sales": {
+          keyFields: ["shop", "name","weekly"],
+        },
+        "weekly_sales": {
+          keyFields: ["shop", "name","weekly"],
+        },
+        "yearly_sales": {
+          keyFields: ["shop", "name","yearly"],
+        },
       },
     }),
   });
