@@ -8,18 +8,16 @@ interface Props {
 
 export const SelectShopModal = (props: Props) => {
 
-  const { setSelectedShop, state } = useAppState();
+  const { state } = useAppState();
 
-  const onHide = () => {
-    setSelectedShop(undefined);
-  };
+
   return (
-    <Modal onHide={onHide} show={!state.selectedShop?.id}>
+    <Modal show={!state.selectedShop?.id}>
       <Modal.Header>
         <Modal.Title>Select Shop</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <ShopSelect />
+      <ShopSelect size="lg" />
       </Modal.Body>
     </Modal>
   );

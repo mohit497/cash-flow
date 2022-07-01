@@ -29,3 +29,14 @@ query monthlySales {
     weekly
   }
 }
+
+query top5ProductsDaily($limit: Int = 5) {
+  top_products_daily(limit: $limit) {
+    daily
+    name
+    org
+    p_code
+    sum
+  }
+}
+

@@ -24,12 +24,12 @@ export default function Sales({ id, activetab }) {
   });
 
   return (
-    <Container style={{ height: "200px" }}>
+    <Container style={{ height: "250px" }}>
       <Row>
         <h3>Sales</h3>
       </Row>
 
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer  width="100%" height="100%">
         <ComposedChart
           data={data?.shop_sales_by_date}
           margin={{

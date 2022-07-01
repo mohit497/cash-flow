@@ -24,11 +24,11 @@ function App() {
       <Container fluid>
         <Row>
           {role === Roles_ENUM.ORGADMIN && isLoggedIn() && (
-            <Col xs={1} lg={1} md={3}>
+            <Col xs={2} lg={1} md={3}>
               <SideMenu />
             </Col>
           )}
-          <Col xs={11} lg={11} md={9}>
+          <Col xs={9} lg={11} md={9} >
             <AppRoutes />
           </Col>
         </Row>

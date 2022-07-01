@@ -1,5 +1,5 @@
 query getinventory($limit: Int = 10, $offset: Int = 10, $_iregex: String = "", $_iregex1: String = "") {
-  product_left_in_store(limit: $limit, offset: $offset, where: {_or: {product: {name: {_iregex: $_iregex}}, p_code: {_iregex: $_iregex1}}}) {
+  products_left_in_store(limit: $limit, offset: $offset, where: {_or: {product: {name: {_iregex: $_iregex}}, p_code: {_iregex: $_iregex1}}}) {
     org
     p_code
     total

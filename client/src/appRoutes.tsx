@@ -1,5 +1,6 @@
 import Cashier from "components/cashier/cashier";
 import Home from "components/home/home";
+import { TransactionsTable } from "components/home/transactions";
 import Login from "components/login";
 import Products from "components/product/products";
 import Register from "components/register";
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
       <Route  path="/login" element={<Login />}></Route>
       <Route  path="/register" element={<Register />} />
       <Route  path="/cashier" element={<Cashier />}></Route>
+      <Route  path="/transactions" element={<TransactionsTable />}></Route>
     </Routes>
   );
 };

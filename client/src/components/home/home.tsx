@@ -1,52 +1,32 @@
-import { useMyShopsQuery } from "generated/graphql";
-import { Tabs, Tab, Container, Badge, Row, Col } from "react-bootstrap";
-import { TransactionsTable } from "./transactions";
+import { Container, Row, Col } from "react-bootstrap";
 import "./style.scss";
 // import { ShopTotal } from "./shopTotal";
-import Sales from "./sales";
-import { useState } from "react";
 import { TopSales } from "./charts/topSales";
+import { ShopTotal } from "./shopTotal";
+import { TopProducts } from "./charts/topProducts";
 
 export default function Home() {
-  const { data } = useMyShopsQuery({ variables: {} });
-  const [key, setKey] = useState(data?.shops[0].id);
-
   return (
-    <Container fluid>
+    <Container fluid className="px-0 px-lg-2 mx-0 mx-lg-2">
       <Row>
         <Col className="text-left">
           <h3>Sales</h3>
         </Col>
       </Row>
+      <Row>
+        <Col className="p-2 border">
+          <TopSales />
+        </Col>
+      </Row>
 
-      {/* <ShopTotal /> */}
-
-      <TopSales />
-
-      <Tabs
-        activeKey={key}
-        transition={false}
-        id="noanim-tab-example"
-        className="my-4"
-        variant="pills"
-        onSelect={(k) => setKey(k)}
-      >
-        {data?.shops.map((shop) => {
-          return (
-            <Tab
-              eventKey={shop.id}
-              title={
-                <span>
-                  {shop.name.toUpperCase()}{" "}
-                  <Badge bg="dark">{shop.location}</Badge>
-                </span>
-              }
-            ></Tab>
-          );
-        })}
-      </Tabs>
-      <Sales id={key} activetab={key} />
-      <TransactionsTable shop_id={key} />
+      <Row>
+        <Col lg={6} className="p-2 mt-2 p-lg-5 mt-lg-5 border">
+          <ShopTotal />
+        </Col>
+        <Col lg={6} className="p-2 mt-2 p-lg-5 mt-lg-5 border">
+          <TopProducts />
+        </Col>
+      </Row>
     </Container>
   );
 }

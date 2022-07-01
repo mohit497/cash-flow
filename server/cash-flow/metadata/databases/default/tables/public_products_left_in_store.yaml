@@ -1,0 +1,16 @@
+table:
+  schema: public
+  name: products_left_in_store
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - left
+        - name
+        - org
+        - sold
+        - sum
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

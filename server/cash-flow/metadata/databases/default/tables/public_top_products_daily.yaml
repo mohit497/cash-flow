@@ -1,0 +1,17 @@
+table:
+  schema: public
+  name: top_products_daily
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - sum
+        - daily
+        - name
+        - p_code
+        - org
+        - user
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

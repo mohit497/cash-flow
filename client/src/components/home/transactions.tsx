@@ -1,5 +1,9 @@
 import { PaginationBasic } from "components/paginationBasic";
-import { Transactions, useTransactionbyshopQuery } from "generated/graphql";
+import {
+  Transactions,
+  useMyShopsQuery,
+  useTransactionbyshopQuery,
+} from "generated/graphql";
 import { useState } from "react";
 import {
   Table,
@@ -9,18 +13,28 @@ import {
   Row,
   Col,
   Container,
+  Badge,
+  Tab,
+  Tabs,
 } from "react-bootstrap";
 import { FaClock, FaDollarSign, FaList, FaUser } from "react-icons/fa";
 import Moment from "react-moment";
 import { PAGE_SIZE } from "utils";
+import TransactionsChart from "./charts/transactionsChart";
 
-export const TransactionsTable = ({ shop_id }) => {
+export const TransactionsTable = () => {
   const [page, setpage] = useState(1);
-  const { data, refetch } = useTransactionbyshopQuery({
-    variables: {
-      _eq: shop_id,
+  const [key, setKey] = useState<any>();
+  const { data } = useMyShopsQuery({
+    onCompleted: (res) => {
+      setKey(res.shops[0].id);
     },
-    skip: !shop_id
+  });
+
+  const { data: transactionData, refetch } = useTransactionbyshopQuery({
+    variables: {
+      _eq: key,
+    },
   });
 
   const onPageChange = (page: number) => {
@@ -58,11 +72,44 @@ export const TransactionsTable = ({ shop_id }) => {
     );
   };
 
+
+  const getChartData = ()=>{
+    return transactionData?.sales.map((item)=>{
+      return {...item, total: calculateTotalAmount(item?.transactions as Transactions[])}
+
+    })
+  }
+
+  console.log(getChartData())
+
   return (
     <Container fluid className="transactions mt-4 p-2">
+      <Tabs
+        activeKey={key}
+        transition={false}
+        id="noanim-tab-example"
+        className="my-4"
+        variant="pills"
+        onSelect={(k) => setKey(k)}
+      >
+        {data?.shops.map((shop) => {
+          return (
+            <Tab
+              eventKey={shop.id}
+              title={
+                <span>
+                  {shop.name.toUpperCase()}{" "}
+                  <Badge bg="dark">{shop.location}</Badge>
+                </span>
+              }
+            ></Tab>
+          );
+        })}
+      </Tabs>
+      <TransactionsChart key={key} data={getChartData()} />
 
       <Row>
-      <h4>Transactions</h4>
+        <h4>Transactions</h4>
       </Row>
       <Table responsive size="md">
         <thead>
@@ -83,7 +130,7 @@ export const TransactionsTable = ({ shop_id }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.sales.map((record, index) => {
+          {transactionData?.sales.map((record, index) => {
             return (
               <tr>
                 <td>{index + 1}</td>
@@ -121,7 +168,8 @@ export const TransactionsTable = ({ shop_id }) => {
             onPageChange={onPageChange}
             active={page}
             total={Math.ceil(
-              (data?.sales_aggregate.aggregate?.count || 0) / PAGE_SIZE
+              (transactionData?.sales_aggregate.aggregate?.count || 0) /
+                PAGE_SIZE
             )}
           />
         </Col>

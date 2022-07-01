@@ -3,6 +3,7 @@ import {
   FaDollarSign,
   FaHome,
   FaStore,
+  FaTable,
   FaTshirt,
   FaWarehouse,
 } from "react-icons/fa";
@@ -23,6 +24,9 @@ export default function SideMenu() {
         </Nav.Link>
         <Nav.Link href="/shops">
           <FaStore /> <span className="d-none d-md-block">Shops</span>
+        </Nav.Link>
+        <Nav.Link href="/transactions">
+          <FaTable /> <span className="d-none d-md-block">Transactions</span>
         </Nav.Link>
         <Nav.Link href="/store">
           <FaWarehouse /> <span className="d-none d-md-block">Store</span>

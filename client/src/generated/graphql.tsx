@@ -2385,6 +2385,10 @@ export type Query_Root = {
   shops_aggregate: Shops_Aggregate;
   /** fetch data from the table: "shops" using primary key columns */
   shops_by_pk?: Maybe<Shops>;
+  /** fetch data from the table: "top_products_daily" */
+  top_products_daily: Array<Top_Products_Daily>;
+  /** fetch aggregated fields from the table: "top_products_daily" */
+  top_products_daily_aggregate: Top_Products_Daily_Aggregate;
   /** fetch data from the table: "total_sales_by_shop" */
   total_sales_by_shop: Array<Total_Sales_By_Shop>;
   /** fetch aggregated fields from the table: "total_sales_by_shop" */
@@ -2624,6 +2628,24 @@ export type Query_RootShops_AggregateArgs = {
 
 export type Query_RootShops_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootTop_Products_DailyArgs = {
+  distinct_on?: Maybe<Array<Top_Products_Daily_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Top_Products_Daily_Order_By>>;
+  where?: Maybe<Top_Products_Daily_Bool_Exp>;
+};
+
+
+export type Query_RootTop_Products_Daily_AggregateArgs = {
+  distinct_on?: Maybe<Array<Top_Products_Daily_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Top_Products_Daily_Order_By>>;
+  where?: Maybe<Top_Products_Daily_Bool_Exp>;
 };
 
 
@@ -3425,6 +3447,10 @@ export type Subscription_Root = {
   shops_aggregate: Shops_Aggregate;
   /** fetch data from the table: "shops" using primary key columns */
   shops_by_pk?: Maybe<Shops>;
+  /** fetch data from the table: "top_products_daily" */
+  top_products_daily: Array<Top_Products_Daily>;
+  /** fetch aggregated fields from the table: "top_products_daily" */
+  top_products_daily_aggregate: Top_Products_Daily_Aggregate;
   /** fetch data from the table: "total_sales_by_shop" */
   total_sales_by_shop: Array<Total_Sales_By_Shop>;
   /** fetch aggregated fields from the table: "total_sales_by_shop" */
@@ -3667,6 +3693,24 @@ export type Subscription_RootShops_By_PkArgs = {
 };
 
 
+export type Subscription_RootTop_Products_DailyArgs = {
+  distinct_on?: Maybe<Array<Top_Products_Daily_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Top_Products_Daily_Order_By>>;
+  where?: Maybe<Top_Products_Daily_Bool_Exp>;
+};
+
+
+export type Subscription_RootTop_Products_Daily_AggregateArgs = {
+  distinct_on?: Maybe<Array<Top_Products_Daily_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Top_Products_Daily_Order_By>>;
+  where?: Maybe<Top_Products_Daily_Bool_Exp>;
+};
+
+
 export type Subscription_RootTotal_Sales_By_ShopArgs = {
   distinct_on?: Maybe<Array<Total_Sales_By_Shop_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3778,6 +3822,156 @@ export type Timestamptz_Comparison_Exp = {
   _lte?: Maybe<Scalars['timestamptz']>;
   _neq?: Maybe<Scalars['timestamptz']>;
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
+};
+
+/** columns and relationships of "top_products_daily" */
+export type Top_Products_Daily = {
+  __typename?: 'top_products_daily';
+  daily?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  sum?: Maybe<Scalars['numeric']>;
+  user?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregated selection of "top_products_daily" */
+export type Top_Products_Daily_Aggregate = {
+  __typename?: 'top_products_daily_aggregate';
+  aggregate?: Maybe<Top_Products_Daily_Aggregate_Fields>;
+  nodes: Array<Top_Products_Daily>;
+};
+
+/** aggregate fields of "top_products_daily" */
+export type Top_Products_Daily_Aggregate_Fields = {
+  __typename?: 'top_products_daily_aggregate_fields';
+  avg?: Maybe<Top_Products_Daily_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Top_Products_Daily_Max_Fields>;
+  min?: Maybe<Top_Products_Daily_Min_Fields>;
+  stddev?: Maybe<Top_Products_Daily_Stddev_Fields>;
+  stddev_pop?: Maybe<Top_Products_Daily_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Top_Products_Daily_Stddev_Samp_Fields>;
+  sum?: Maybe<Top_Products_Daily_Sum_Fields>;
+  var_pop?: Maybe<Top_Products_Daily_Var_Pop_Fields>;
+  var_samp?: Maybe<Top_Products_Daily_Var_Samp_Fields>;
+  variance?: Maybe<Top_Products_Daily_Variance_Fields>;
+};
+
+
+/** aggregate fields of "top_products_daily" */
+export type Top_Products_Daily_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Top_Products_Daily_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Top_Products_Daily_Avg_Fields = {
+  __typename?: 'top_products_daily_avg_fields';
+  sum?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "top_products_daily". All fields are combined with a logical 'AND'. */
+export type Top_Products_Daily_Bool_Exp = {
+  _and?: Maybe<Array<Top_Products_Daily_Bool_Exp>>;
+  _not?: Maybe<Top_Products_Daily_Bool_Exp>;
+  _or?: Maybe<Array<Top_Products_Daily_Bool_Exp>>;
+  daily?: Maybe<Timestamptz_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  org?: Maybe<Uuid_Comparison_Exp>;
+  p_code?: Maybe<String_Comparison_Exp>;
+  sum?: Maybe<Numeric_Comparison_Exp>;
+  user?: Maybe<Uuid_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Top_Products_Daily_Max_Fields = {
+  __typename?: 'top_products_daily_max_fields';
+  daily?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  sum?: Maybe<Scalars['numeric']>;
+  user?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type Top_Products_Daily_Min_Fields = {
+  __typename?: 'top_products_daily_min_fields';
+  daily?: Maybe<Scalars['timestamptz']>;
+  name?: Maybe<Scalars['String']>;
+  org?: Maybe<Scalars['uuid']>;
+  p_code?: Maybe<Scalars['String']>;
+  sum?: Maybe<Scalars['numeric']>;
+  user?: Maybe<Scalars['uuid']>;
+};
+
+/** Ordering options when selecting data from "top_products_daily". */
+export type Top_Products_Daily_Order_By = {
+  daily?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  org?: Maybe<Order_By>;
+  p_code?: Maybe<Order_By>;
+  sum?: Maybe<Order_By>;
+  user?: Maybe<Order_By>;
+};
+
+/** select columns of table "top_products_daily" */
+export enum Top_Products_Daily_Select_Column {
+  /** column name */
+  Daily = 'daily',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Org = 'org',
+  /** column name */
+  PCode = 'p_code',
+  /** column name */
+  Sum = 'sum',
+  /** column name */
+  User = 'user'
+}
+
+/** aggregate stddev on columns */
+export type Top_Products_Daily_Stddev_Fields = {
+  __typename?: 'top_products_daily_stddev_fields';
+  sum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Top_Products_Daily_Stddev_Pop_Fields = {
+  __typename?: 'top_products_daily_stddev_pop_fields';
+  sum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Top_Products_Daily_Stddev_Samp_Fields = {
+  __typename?: 'top_products_daily_stddev_samp_fields';
+  sum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Top_Products_Daily_Sum_Fields = {
+  __typename?: 'top_products_daily_sum_fields';
+  sum?: Maybe<Scalars['numeric']>;
+};
+
+/** aggregate var_pop on columns */
+export type Top_Products_Daily_Var_Pop_Fields = {
+  __typename?: 'top_products_daily_var_pop_fields';
+  sum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Top_Products_Daily_Var_Samp_Fields = {
+  __typename?: 'top_products_daily_var_samp_fields';
+  sum?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Top_Products_Daily_Variance_Fields = {
+  __typename?: 'top_products_daily_variance_fields';
+  sum?: Maybe<Scalars['Float']>;
 };
 
 /** columns and relationships of "total_sales_by_shop" */
@@ -4892,6 +5086,19 @@ export type MonthlySalesQuery = (
   )> }
 );
 
+export type Top5ProductsDailyQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type Top5ProductsDailyQuery = (
+  { __typename?: 'query_root' }
+  & { top_products_daily: Array<(
+    { __typename?: 'top_products_daily' }
+    & Pick<Top_Products_Daily, 'daily' | 'name' | 'org' | 'p_code' | 'sum'>
+  )> }
+);
+
 export type TransactionbyshopQueryVariables = Exact<{
   _eq?: Maybe<Scalars['uuid']>;
   limit?: Maybe<Scalars['Int']>;
@@ -5521,6 +5728,45 @@ export function useMonthlySalesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MonthlySalesQueryHookResult = ReturnType<typeof useMonthlySalesQuery>;
 export type MonthlySalesLazyQueryHookResult = ReturnType<typeof useMonthlySalesLazyQuery>;
 export type MonthlySalesQueryResult = Apollo.QueryResult<MonthlySalesQuery, MonthlySalesQueryVariables>;
+export const Top5ProductsDailyDocument = gql`
+    query top5ProductsDaily($limit: Int = 5) {
+  top_products_daily(limit: $limit) {
+    daily
+    name
+    org
+    p_code
+    sum
+  }
+}
+    `;
+
+/**
+ * __useTop5ProductsDailyQuery__
+ *
+ * To run a query within a React component, call `useTop5ProductsDailyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTop5ProductsDailyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTop5ProductsDailyQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useTop5ProductsDailyQuery(baseOptions?: Apollo.QueryHookOptions<Top5ProductsDailyQuery, Top5ProductsDailyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Top5ProductsDailyQuery, Top5ProductsDailyQueryVariables>(Top5ProductsDailyDocument, options);
+      }
+export function useTop5ProductsDailyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Top5ProductsDailyQuery, Top5ProductsDailyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Top5ProductsDailyQuery, Top5ProductsDailyQueryVariables>(Top5ProductsDailyDocument, options);
+        }
+export type Top5ProductsDailyQueryHookResult = ReturnType<typeof useTop5ProductsDailyQuery>;
+export type Top5ProductsDailyLazyQueryHookResult = ReturnType<typeof useTop5ProductsDailyLazyQuery>;
+export type Top5ProductsDailyQueryResult = Apollo.QueryResult<Top5ProductsDailyQuery, Top5ProductsDailyQueryVariables>;
 export const TransactionbyshopDocument = gql`
     query transactionbyshop($_eq: uuid = "", $limit: Int = 10, $offset: Int = 0, $_eq1: uuid = "") {
   sales(

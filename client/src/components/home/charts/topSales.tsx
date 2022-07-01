@@ -1,3 +1,5 @@
+import { DateSelect } from "components/shared/dateSelect";
+import { ShopSelect } from "components/shared/shopSelect";
 import {
   useMonthlySalesQuery,
   useWeeklySalesQuery,
@@ -61,11 +63,12 @@ export function TopSales() {
   return (
     <Container
       className="mx-0 mx-lg-5 px-0 px-lg-5"
-      style={{ maxHeight: "300px" }}
+      style={{ maxHeight: "350px" }}
     >
-      <Row className="my-2 text-left">
+      <Row className="my-2 p-2 text-left gap-1">
         <Col>
           <Form.Select
+            size="sm"
             onChange={handleChange}
             defaultValue={view}
             style={{ width: "120px" }}
@@ -75,14 +78,20 @@ export function TopSales() {
             <option value="yearly">Yearly</option>
           </Form.Select>
         </Col>
+        <Col xs={12} lg={4}>
+          <DateSelect onDateChange={() => {}} />
+        </Col>
+        <Col lg={2} xs={12}>
+          <ShopSelect size="sm" />
+        </Col>
       </Row>
       <ResponsiveContainer aspect={1} maxHeight={200}>
         <ComposedChart
           data={graphData}
           margin={{
             top: 5,
-            right: 30,
-            left: 20,
+            right: 10,
+            left: 10,
             bottom: 5,
           }}
           barSize={100 / Number(graphData?.length)}
