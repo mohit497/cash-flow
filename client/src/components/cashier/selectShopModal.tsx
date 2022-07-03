@@ -17,7 +17,7 @@ export const SelectShopModal = (props: Props) => {
         <Modal.Title>Select Shop</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <ShopSelect size="lg" />
+      <ShopSelect global size="lg" />
       </Modal.Body>
     </Modal>
   );

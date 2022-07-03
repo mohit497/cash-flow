@@ -1,5 +1,5 @@
-query yearlySales {
-  yearly_sales {
+query yearlySales($_lte: timestamptz = "", $_gte: timestamptz = "") {
+  yearly_sales(where: {yearly: {_lte: $_lte, _gte: $_gte}, shop: {}}) {
     name
     org
     shop
@@ -9,8 +9,9 @@ query yearlySales {
 }
 
 
-query weeklySales {
-  weekly_sales {
+
+query weeklySales($_gte: timestamptz = "", $_lte: timestamptz = "") {
+  weekly_sales(where: {weekly: {_gte: $_gte, _lte: $_lte}}) {
     org
     shop
     total
@@ -20,15 +21,16 @@ query weeklySales {
 }
 
 
-query monthlySales {
-  monthly_sales {
+query monthlySales($_gte: timestamptz = "", $_lte: timestamptz = "") {
+  monthly_sales(where: {monthly: {_gte: $_gte, _lte: $_lte}}) {
     name
     org
     shop
     total
-    weekly
+    monthly
   }
 }
+
 
 query top5ProductsDaily($limit: Int = 5) {
   top_products_daily(limit: $limit) {
@@ -40,3 +42,11 @@ query top5ProductsDaily($limit: Int = 5) {
   }
 }
 
+
+query lowInventoryProducts($limit: Int = 10) {
+  products_in_store(order_by: {total_products: desc}, limit: $limit) {
+    name
+    org
+    total_products
+  }
+}

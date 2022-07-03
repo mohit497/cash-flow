@@ -3,6 +3,7 @@ mutation addproduct(
   $inventories: inventory_arr_rel_insert_input = { data: { count: 10 } }
   $code: String = ""
   $amount: numeric = ""
+  $cost_price: numeric = ""
 ) {
   insert_products(
     objects: {
@@ -10,6 +11,7 @@ mutation addproduct(
       code: $code
       name: $name
       inventories: $inventories
+      cost_price: $cost_price
     }
   ) {
     affected_rows
@@ -32,12 +34,12 @@ query findProductByCode($_eq: String = "") {
     createdAt
     name
     id
+    cost_price
   }
 }
 
-
 mutation updateProduct($_set: products_set_input = {}, $id: uuid = "") {
-  update_products_by_pk(pk_columns: {id: $id}, _set: $_set) {
+  update_products_by_pk(pk_columns: { id: $id }, _set: $_set) {
     ...productsFragment
   }
 }

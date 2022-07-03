@@ -1,12 +1,11 @@
 import {
   GetinventoryDocument,
-  Products,
   useAddinventoryMutation,
 } from "generated/graphql";
 import { useState } from "react";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 
-export default function AddItem(product: Products) {
+export default function AddItem({product_code }) {
   const [count, setcount] = useState();
   const handleChange = (e) => {
     setcount(e.target.value);
@@ -16,7 +15,7 @@ export default function AddItem(product: Products) {
     variables: {
       object: {
         count,
-        p_code: product.code,
+        p_code: product_code,
       },
     },
     refetchQueries: [

@@ -8,6 +8,15 @@ object_relationships:
   - name: orgByOrg
     using:
       foreign_key_constraint_on: org
+  - name: products_to_sold
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: products_sold_till_date
+        insertion_order: null
+        column_mapping:
+          code: p_code
 array_relationships:
   - name: inventories
     using:
@@ -33,26 +42,29 @@ insert_permissions:
         added_by: x-hasura-Role-Id
         org: x-hasura-Org-Id
       columns:
-        - code
+        - id
         - name
+        - code
         - amount
+        - org
         - createdAt
         - updatedAt
-        - id
-        - org
+        - added_by
+        - cost_price
       backend_only: false
 select_permissions:
   - role: org-admin
     permission:
       columns:
-        - added_by
-        - amount
-        - code
-        - createdAt
         - id
         - name
+        - code
+        - amount
         - org
+        - createdAt
         - updatedAt
+        - added_by
+        - cost_price
       filter:
         org:
           _eq: X-Hasura-Org-Id
@@ -64,8 +76,10 @@ update_permissions:
         - code
         - name
         - amount
+        - cost_price
         - createdAt
         - updatedAt
+        - added_by
         - id
         - org
       filter:

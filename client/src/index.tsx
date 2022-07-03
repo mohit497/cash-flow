@@ -73,7 +73,7 @@ const createApolloClient = () => {
           keyFields: ["id", "date"],
         },
         "monthly_sales": {
-          keyFields: ["shop", "name","weekly"],
+          keyFields: ["shop", "name","monthly"],
         },
         "weekly_sales": {
           keyFields: ["shop", "name","weekly"],

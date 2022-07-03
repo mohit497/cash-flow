@@ -16,6 +16,7 @@ interface ProductForm {
   price: number | undefined;
   total: number | undefined;
   code: number | undefined;
+  cost_price: number | undefined;
 }
 
 interface Props {
@@ -31,6 +32,7 @@ export default function AddProduct(props: Props) {
     price: product?.amount,
     total: undefined,
     code: Number(product?.code) || undefined,
+    cost_price: undefined
   });
 
   const [addproductMutation] = useAddproductMutation();
@@ -56,6 +58,7 @@ export default function AddProduct(props: Props) {
         name: form.name,
         code: form.code?.toString() || "",
         amount: form.price,
+        cost_price: Number(form.cost_price)
       },
       refetchQueries: [{ query: GetproductsDocument }],
     })
@@ -118,6 +121,15 @@ export default function AddProduct(props: Props) {
             value={form.name}
             type="text"
             placeholder="Name"
+          />
+        </Col>
+        <Col>
+          <Form.Control
+            name="cost_price"
+            onChange={handleChange}
+            value={form.cost_price}
+            type="text"
+            placeholder="cost price"
           />
         </Col>
         <Col>

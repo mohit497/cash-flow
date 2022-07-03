@@ -1,6 +1,6 @@
 import { useAppState } from "appstate/useAppstate";
 import Loading from "components/loader/loader";
-import { Products, useGetinventoryQuery } from "generated/graphql";
+import {  useGetinventoryQuery } from "generated/graphql";
 import { useState } from "react";
 import {
   Breadcrumb,
@@ -97,19 +97,19 @@ export default function Store() {
           </tr>
         </thead>
         <tbody>
-          {data?.product_left_in_store.map((item, index) => {
+          {data?.products_in_store.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{item.product?.name}</td>
-                <td>{item.product?.amount}</td>
+                <td>{item?.name}</td>
+                <td>{item.name}</td>
                 <td className="bar-code">
                   <Barcode value={item.p_code} />
                 </td>
-                <td>{item.total - item.sold}</td>
-                <td>{item.sold || 0}</td>
+                <td>{item.total_products - item.sold_products?.sold}</td>
+                <td>{item.sold_products?.sold || 0}</td>
                 <td className="add-item">
-                  <AddItem {...(item.product as Products)} />{" "}
+                  <AddItem product_code={item.p_code} />{" "}
                 </td>
                 <td className="add-item align-items-center">
                   <Button

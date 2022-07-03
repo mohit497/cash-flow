@@ -1,15 +1,15 @@
 table:
   schema: public
-  name: monthly_sales
+  name: products_sold_till_date
 select_permissions:
   - role: org-admin
     permission:
       columns:
-        - monthly
-        - total
-        - shop
-        - org
+        - sold
+        - p_code
         - name
+        - amount
+        - org
       filter:
         org:
           _eq: X-Hasura-Org-Id

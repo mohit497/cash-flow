@@ -5,6 +5,7 @@ import {
   useWeeklySalesQuery,
   useYearlySalesQuery,
 } from "generated/graphql";
+import moment from "moment";
 import { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import {
@@ -17,6 +18,7 @@ import {
   ResponsiveContainer,
   Area,
   ComposedChart,
+  // CartesianGrid,
 } from "recharts";
 
 enum VIEWS {
@@ -28,11 +30,16 @@ enum VIEWS {
 export function TopSales() {
   const [view, setview] = useState(VIEWS[VIEWS.WEEKLY]);
   const [graphData, setgraphData] = useState<any[]>([]);
+  const [date, setdate] = useState({ start: "", end: "" });
 
   const { refetch: fetchWeekly } = useWeeklySalesQuery({
     skip: view !== VIEWS[VIEWS.WEEKLY],
     onCompleted: (res) => {
       setgraphData(res?.weekly_sales);
+    },
+    variables: {
+      _gte: date.start,
+      _lte: date.end,
     },
   });
 
@@ -41,11 +48,19 @@ export function TopSales() {
     onCompleted: (res) => {
       setgraphData(res?.yearly_sales);
     },
+    variables: {
+      _gte: date.start,
+      _lte: date.end,
+    },
   });
   const { refetch: monthlySales } = useMonthlySalesQuery({
     skip: view !== VIEWS[VIEWS.MONTHLY],
     onCompleted: (res) => {
       setgraphData(res?.monthly_sales);
+    },
+    variables: {
+      _gte: date.start,
+      _lte: date.end,
     },
   });
 
@@ -59,6 +74,28 @@ export function TopSales() {
     }
     setview(e.target.value.toUpperCase());
   };
+
+  const handleDateChange = (date) => {
+    setdate(date);
+  };
+
+  const xtickFomart = (data) => {
+
+    if(view === VIEWS[VIEWS.WEEKLY].toString()){
+      return `${moment(data).week().toString()}-${moment(data).format('MMMM')}`
+    } 
+    if(view === VIEWS[VIEWS.YEARLY].toString()){
+      return moment(data).year().toString()
+    } 
+    if(view === VIEWS[VIEWS.MONTHLY].toString()){
+      return moment(data).format('MMMM-YYYY')
+    } 
+    return moment(data).format("ll");
+  };
+
+  const toolTipFormatter= (payload, value, props)=>{
+    return [`${props.payload.total}`, `${props.payload.name}`]
+  }
 
   return (
     <Container
@@ -79,7 +116,7 @@ export function TopSales() {
           </Form.Select>
         </Col>
         <Col xs={12} lg={4}>
-          <DateSelect onDateChange={() => {}} />
+          <DateSelect onDateChange={handleDateChange} />
         </Col>
         <Col lg={2} xs={12}>
           <ShopSelect size="sm" />
@@ -97,9 +134,9 @@ export function TopSales() {
           barSize={100 / Number(graphData?.length)}
         >
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
-          <XAxis dataKey="name" />
+          <XAxis tickFormatter={xtickFomart} dataKey={view.toLowerCase()} />
           <YAxis />
-          <Tooltip />
+          <Tooltip formatter={toolTipFormatter} />
           <Legend />
           <Area
             type="monotone"

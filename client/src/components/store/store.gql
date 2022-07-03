@@ -1,17 +1,13 @@
 query getinventory($limit: Int = 10, $offset: Int = 10, $_iregex: String = "", $_iregex1: String = "") {
-  products_left_in_store(limit: $limit, offset: $offset, where: {_or: {product: {name: {_iregex: $_iregex}}, p_code: {_iregex: $_iregex1}}}) {
+  products_in_store(where: {_or: {p_code: {_iregex: $_iregex}, name: {_iregex: $_iregex1}}}) {
+    sold_products {
+      amount
+      sold
+    }
     org
     p_code
-    total
-    sold
-    product {
-      amount
-      code
-      createdAt
-      id
-      added_by
-      name
-    }
+    name
+    total_products
   }
 }
 

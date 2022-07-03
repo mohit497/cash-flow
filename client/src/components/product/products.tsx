@@ -26,7 +26,6 @@ export default function Products() {
   const { setState, state } = useAppState();
 
   const editProduct = (id) => {
-    console.log(id, '^^^^')
     setState({ ...state, editProduct: id });
   };
 
@@ -50,6 +49,7 @@ export default function Products() {
           <tr>
             <th>#</th>
             <th>name</th>
+            <th>cost price</th>
             <th>price</th>
             <th>code</th>
             <th>Edit</th>
@@ -61,6 +61,7 @@ export default function Products() {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
+                <td>{item.cost_price}</td>
                 <td>{item.amount}</td>
                 <td className="bar-code">
                   <Barcode value={item.code} />
