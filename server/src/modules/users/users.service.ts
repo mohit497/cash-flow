@@ -12,6 +12,7 @@ export type User = any;
 @Injectable()
 export class UsersService {
   async findOne(username: string): Promise<User | undefined> {
+    console.log(process.env,'^^^^ env')
     let res;
     try {
       res = await superagent
