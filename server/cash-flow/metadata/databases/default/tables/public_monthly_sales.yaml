@@ -6,10 +6,11 @@ select_permissions:
     permission:
       columns:
         - monthly
-        - total
-        - shop
-        - org
         - name
+        - org
+        - shop
+        - total
+        - total_cost
       filter:
         org:
           _eq: X-Hasura-Org-Id

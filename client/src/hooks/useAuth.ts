@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useNotifications from "./useNotifications";
 import jwt_decode from "jwt-decode";
 import { RegisterForm } from "components/register";
+import { useApolloClient } from "@apollo/client";
 
 export function useAuth() {
   const navigate = useNavigate();
   const { showNotifications } = useNotifications();
+  const client = useApolloClient();
+
 
   const login = (username: string, password: string) => {
     return axios
@@ -45,6 +48,7 @@ export function useAuth() {
   const logout = () => {
     localStorage.clear();
     localStorage.clear();
+    client.clearStore()
     navigate("/login");
   };
   const register = (form: RegisterForm) => {

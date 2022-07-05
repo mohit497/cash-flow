@@ -1,0 +1,17 @@
+table:
+  schema: public
+  name: daily_sales
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - daily
+        - total
+        - shop
+        - org
+        - name
+        - total_cost
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

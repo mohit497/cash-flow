@@ -1,0 +1,16 @@
+table:
+  schema: public
+  name: product_sale_by_cost_price
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - count
+        - cost_price
+        - p_code
+        - org
+        - name
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

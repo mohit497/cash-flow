@@ -1,35 +1,51 @@
-query yearlySales($_lte: timestamptz = "", $_gte: timestamptz = "") {
-  yearly_sales(where: {yearly: {_lte: $_lte, _gte: $_gte}, shop: {}}) {
+query yearlySales($_lte: timestamptz = "", $_gte: timestamptz = "", $_in: [uuid!] = "") {
+  yearly_sales(where: {yearly: {_lte: $_lte, _gte: $_gte}, shop: {_in: $_in}}) {
     name
     org
     shop
     total
     yearly
+    total_cost
   }
 }
 
 
 
-query weeklySales($_gte: timestamptz = "", $_lte: timestamptz = "") {
-  weekly_sales(where: {weekly: {_gte: $_gte, _lte: $_lte}}) {
+
+query weeklySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!] = "") {
+  weekly_sales(where: {weekly: {_gte: $_gte, _lte: $_lte}, shop: {_in: $_in}}) {
     org
     shop
     total
     weekly
     name
+    total_cost
   }
 }
 
 
-query monthlySales($_gte: timestamptz = "", $_lte: timestamptz = "") {
-  monthly_sales(where: {monthly: {_gte: $_gte, _lte: $_lte}}) {
+query monthlySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!] = "") {
+  monthly_sales(where: {monthly: {_gte: $_gte, _lte: $_lte}, shop: {_in: $_in}}) {
     name
     org
     shop
     total
     monthly
+    total_cost
   }
 }
+
+query dailySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!] = "") {
+  daily_sales(where: {daily: {_gte: $_gte, _lte: $_lte}, shop: {_in: $_in}}) {
+    name
+    org
+    shop
+    total
+    daily
+    total_cost
+  }
+}
+
 
 
 query top5ProductsDaily($limit: Int = 5) {

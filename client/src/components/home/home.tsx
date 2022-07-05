@@ -15,21 +15,21 @@ export default function Home() {
         </Col>
       </Row>
       <Row>
-        <Col className="p-2 m-0 m-lg-5 border">
+        <Col className="p-2 m-2 m-lg-3 border">
           <TopSales />
         </Col>
       </Row>
 
       <Row className="gap-5 justify-content-center">
-        <Col lg={5} className="p-2 mt-2 p-lg-5 border">
+        <Col lg={5} className="p-2 m-0 m-lg-3 p-lg-5 border">
           <ShopTotal />
         </Col>
-        <Col lg={5} className="p-2 mt-2 p-lg-5  border">
+        <Col lg={5} className="p-2 m-0 m-lg-3 p-lg-5  border">
           <TopProducts />
         </Col>
       </Row>
       <Row className="gap-5 justify-content-center">
-        <Col lg={5} className="p-2 mt-2 p-lg-5 border">
+        <Col lg={5} className="p-2 m-0 m-lg-3 p-lg-5 border">
           <LowInventory />
         </Col>
 

@@ -6,6 +6,15 @@ object_relationships:
     using:
       foreign_key_constraint_on: org
 array_relationships:
+  - name: products_sold
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: sales_by_shop
+        insertion_order: null
+        column_mapping:
+          id: shop
   - name: sales
     using:
       foreign_key_constraint_on:

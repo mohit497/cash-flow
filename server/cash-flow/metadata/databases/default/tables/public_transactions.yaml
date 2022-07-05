@@ -23,6 +23,7 @@ insert_permissions:
         - createdAt
         - updatedAt
         - price
+        - cost_price
       backend_only: false
 select_permissions:
   - role: org-admin
@@ -35,6 +36,9 @@ select_permissions:
         - createdAt
         - updatedAt
         - price
+        - cost_price
+        - p_id
+        - status
       filter:
         saleBySale:
           org:
@@ -45,6 +49,7 @@ update_permissions:
     permission:
       columns:
         - count
+        - cost_price
         - price
         - p_code
         - createdAt

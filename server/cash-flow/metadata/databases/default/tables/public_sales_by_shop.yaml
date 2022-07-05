@@ -1,0 +1,27 @@
+table:
+  schema: public
+  name: sales_by_shop
+object_relationships:
+  - name: sales_to_shop
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: shops
+        insertion_order: null
+        column_mapping:
+          shop: id
+select_permissions:
+  - role: org-admin
+    permission:
+      columns:
+        - sold
+        - p_code
+        - name
+        - amount
+        - org
+        - shop
+      filter:
+        org:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true

@@ -35,6 +35,7 @@ export const TransactionsTable = () => {
     variables: {
       _eq: key,
     },
+    skip: !key
   });
 
   const onPageChange = (page: number) => {

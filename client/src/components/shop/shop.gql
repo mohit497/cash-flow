@@ -19,3 +19,12 @@ mutation addshop($objects: [shops_insert_input!] = {}) {
     }
   }
 }
+
+query myShops {
+  shops {
+    id
+    name
+    location
+    org
+  }
+}

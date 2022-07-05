@@ -5,3 +5,9 @@ query getUserInfo {
     name
   }
 }
+
+query getusers {
+    users{
+      name
+    }
+  }

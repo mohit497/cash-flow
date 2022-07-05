@@ -7,9 +7,7 @@ interface Props {
 }
 
 export const SelectShopModal = (props: Props) => {
-
   const { state } = useAppState();
-
 
   return (
     <Modal show={!state.selectedShop?.id}>
@@ -17,7 +15,7 @@ export const SelectShopModal = (props: Props) => {
         <Modal.Title>Select Shop</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <ShopSelect global size="lg" />
+        <ShopSelect onShopSelect={() => {}} global size="lg" />
       </Modal.Body>
     </Modal>
   );

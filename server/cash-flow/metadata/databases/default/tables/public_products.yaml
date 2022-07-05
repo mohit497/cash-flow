@@ -21,7 +21,7 @@ array_relationships:
   - name: inventories
     using:
       foreign_key_constraint_on:
-        column: p_code
+        column: p_id
         table:
           schema: public
           name: inventory

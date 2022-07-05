@@ -18,6 +18,7 @@ query transactionbyshop($_eq: uuid = "", $limit: Int = 10, $offset: Int = 0, $_e
       product {
         amount
         name
+        cost_price
       }
     }
   }
@@ -55,6 +56,18 @@ fragment shop_sales_by_dateFragment on shop_sales_by_date {
   id
   shop_name
   total
+}
+
+
+query productSalesByShop {
+  shops {
+    products_sold(order_by: {amount: desc}) {
+      amount
+      name
+    }
+    id
+    name
+  }
 }
 
 

@@ -32,7 +32,7 @@ export default function AddProduct(props: Props) {
     price: product?.amount,
     total: undefined,
     code: Number(product?.code) || undefined,
-    cost_price: undefined
+    cost_price: product?.cost_price || undefined
   });
 
   const [addproductMutation] = useAddproductMutation();
@@ -80,6 +80,7 @@ export default function AddProduct(props: Props) {
         _set: {
           name: form.name,
           amount: form.price,
+          cost_price: form.cost_price
         },
         id: product?.id,
       },

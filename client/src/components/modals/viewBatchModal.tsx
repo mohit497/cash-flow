@@ -47,10 +47,10 @@ export const ViewBatchShopModal = () => {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.product.name}</td>
+                  <td>{item?.product?.name}</td>
                   <td>{item.count}</td>
                   <td> <Moment format="LLL" >{item.createdAt}</Moment></td>
-                  <td>{item.product.added_by}</td>
+                  <td>{item?.product?.added_by}</td>
                   <td>{item.id}</td>
                 </tr>
               );

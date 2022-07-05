@@ -5,11 +5,12 @@ select_permissions:
   - role: org-admin
     permission:
       columns:
-        - name
-        - org
-        - shop
-        - total
         - weekly
+        - total
+        - shop
+        - org
+        - name
+        - total_cost
       filter:
         org:
           _eq: X-Hasura-Org-Id

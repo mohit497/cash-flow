@@ -10,6 +10,7 @@ query findproduct($_iregex: String = "", $_iregex1: String = "") {
     id
     name
     org
+    cost_price
   }
 }
 

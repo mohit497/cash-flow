@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import "./style.scss";
 
 import BarcodeReader from "react-barcode-reader";
@@ -67,7 +67,7 @@ export default function Cashier() {
   });
 
   return (
-    <Container>
+    <Container fluid className="mx-0 mx-lg-5 px-0 p-lg-5">
       <BarcodeReader onError={handleError} onScan={handleScan} />
       <Row>
         <Col xs={12} md={9} className="bill-col">
@@ -86,10 +86,13 @@ export default function Cashier() {
       <CashierHeader />
       <Divider />
       <Row className="my-1">
+        <h3>History</h3>
         {data?.sales.map((sale) => {
           return (
-            <Col xs={12} md={4} lg={3}>
-              <SaleCard {...(sale as Sales)} />
+            <Col xs={12}>
+              <ListGroup as="ol" numbered>
+                <SaleCard {...(sale as Sales)} />
+              </ListGroup>
             </Col>
           );
         })}

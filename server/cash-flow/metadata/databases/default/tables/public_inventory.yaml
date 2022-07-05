@@ -4,14 +4,11 @@ table:
 object_relationships:
   - name: product
     using:
-      foreign_key_constraint_on: p_code
+      foreign_key_constraint_on: p_id
 insert_permissions:
   - role: org-admin
     permission:
-      check:
-        product:
-          org:
-            _eq: X-Hasura-Org-Id
+      check: {}
       set:
         role_id: x-hasura-Role-Id
       columns:
@@ -25,11 +22,13 @@ select_permissions:
   - role: org-admin
     permission:
       columns:
-        - count
+        - id
         - p_code
+        - count
         - createdAt
         - updatedAt
-        - id
+        - role_id
+        - p_id
       filter:
         product:
           org:
@@ -44,15 +43,5 @@ update_permissions:
         - createdAt
         - updatedAt
         - id
-      filter:
-        product:
-          org:
-            _eq: X-Hasura-Org-Id
+      filter: {}
       check: null
-delete_permissions:
-  - role: org-admin
-    permission:
-      filter:
-        product:
-          org:
-            _eq: X-Hasura-Org-Id

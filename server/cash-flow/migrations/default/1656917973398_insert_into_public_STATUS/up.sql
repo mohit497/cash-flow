@@ -1,0 +1,1 @@
+INSERT INTO "public"."STATUS"("STATUS") VALUES (E'PAID');

@@ -21,7 +21,7 @@ export default function TransactionsChart({ data }) {
     <Container style={{ height: "350px" }}>
       <Row>
         <Col xs={12} lg={4} >
-           <DateSelect onDateChange={() => {}}></DateSelect>
+           <DateSelect value={{ start: '', end:''}} onDateChange={() => {}}></DateSelect>
         </Col>
         <Col xs={12} lg={8} >
          <h3>Sales</h3>

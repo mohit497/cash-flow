@@ -10,6 +10,7 @@ select_permissions:
         - shop
         - org
         - name
+        - total_cost
       filter:
         org:
           _eq: X-Hasura-Org-Id

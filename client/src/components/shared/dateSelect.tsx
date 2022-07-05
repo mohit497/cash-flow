@@ -1,24 +1,17 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import "./styles.scss";
 
-export const DateSelect = ({ onDateChange }) => {
-  const [date, setdate] = useState({ start: "", end: "" });
+interface Props {
+  onDateChange: (date) => void;
+  value: { start: string; end: string };
+}
 
-  useEffect(() => {
-    onDateChange(date);
-  }, [date]);
+export const DateSelect = (props: Props) => {
 
-  useEffect(() => {
-    setdate({
-      start: moment().startOf("month").format("YYYY-MM-DD"),
-      end: moment().endOf("month").format("YYYY-MM-DD"),
-    });
-  }, []);
 
   const handleChange = (e) => {
-    setdate({ ...date, [e.target.name]: e.target.value });
+    props.onDateChange({ ...props.value, [e.target.name]: e.target.value });
   };
 
   return (
@@ -30,24 +23,24 @@ export const DateSelect = ({ onDateChange }) => {
           type="date"
           placeholder="start Date"
           size="sm"
-          value={date.start}
+          value={props.value.start}
         />
-        <p className=" hint text-black-50">
-          {moment(date.start).format("MMMM-YYYY")}
-        </p>
+        <span className=" hint text-black-50">
+          {moment(props?.value.start).format("MMMM-YYYY")}
+        </span>
       </Col>
       <Col>
         <Form.Control
           onChange={handleChange}
-          value={date.end}
+          value={props.value.end}
           name="end"
           type="date"
           placeholder="End Date"
           size="sm"
         />
-        <p className=" hint text-black-50">
-          {moment(date.end).format("MMMM-YYYY")}
-        </p>
+        <span className=" hint text-black-50">
+          {moment(props?.value?.end).format("MMMM-YYYY")}
+        </span>
       </Col>
     </Row>
   );
