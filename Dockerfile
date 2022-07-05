@@ -5,6 +5,7 @@ ADD ./client ./frontend
 
 WORKDIR /frontend
 RUN npm i
+RUN rm -rf .env
 RUN npm run build
 
 #  setup
