@@ -10,11 +10,11 @@ RUN npm run build
 
 #  setup
 WORKDIR /app
+RUN rm -rf .env.local
 RUN npm install
 EXPOSE $PORT
 
 # build app
-RUN rm -rf .env.local
 RUN npm run build
 
 #copy frontend build
