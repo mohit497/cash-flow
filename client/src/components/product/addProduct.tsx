@@ -58,7 +58,8 @@ export default function AddProduct(props: Props) {
         name: form.name,
         code: form.code?.toString() || "",
         amount: form.price,
-        cost_price: Number(form.cost_price)
+        cost_price: Number(form.cost_price),
+        inventories:{ data:[{ count: Number(form.total), p_code: form.code?.toString()}]}
       },
       refetchQueries: [{ query: GetproductsDocument }],
     })
