@@ -5,6 +5,7 @@ import "./styles.scss";
 interface Props {
   onDateChange: (date) => void;
   value: { start: string; end: string };
+  hint?: string;
 }
 
 export const DateSelect = (props: Props) => {
@@ -26,7 +27,7 @@ export const DateSelect = (props: Props) => {
           value={props.value.start}
         />
         <span className=" hint text-black-50">
-          {moment(props?.value.start).format("MMMM-YYYY")}
+          {moment(props?.value.start).format( props?.hint || "MMMM-YYYY")}
         </span>
       </Col>
       <Col>
@@ -39,7 +40,7 @@ export const DateSelect = (props: Props) => {
           size="sm"
         />
         <span className=" hint text-black-50">
-          {moment(props?.value?.end).format("MMMM-YYYY")}
+          {moment(props?.value?.end).format( props?.hint || "MMMM-YYYY")}
         </span>
       </Col>
     </Row>

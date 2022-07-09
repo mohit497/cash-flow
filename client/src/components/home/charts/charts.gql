@@ -24,8 +24,8 @@ query weeklySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!
 }
 
 
-query monthlySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!] = "") {
-  monthly_sales(where: {monthly: {_gte: $_gte, _lte: $_lte}, shop: {_in: $_in}}) {
+query monthlySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!] = "", $limit: Int = 1000) {
+  monthly_sales(where: {monthly: {_gte: $_gte, _lte: $_lte}, shop: {_in: $_in}}, limit: $limit) {
     name
     org
     shop
@@ -34,6 +34,7 @@ query monthlySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid
     total_cost
   }
 }
+
 
 query dailySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!] = "") {
   daily_sales(where: {daily: {_gte: $_gte, _lte: $_lte}, shop: {_in: $_in}}) {
@@ -48,8 +49,8 @@ query dailySales($_gte: timestamptz = "", $_lte: timestamptz = "", $_in: [uuid!]
 
 
 
-query top5ProductsDaily($limit: Int = 5) {
-  top_products_daily(limit: $limit) {
+query top5ProductsDaily($limit: Int = 5, $_gte: timestamptz = "", $_lte: timestamptz = "") {
+  top_products_daily(limit: $limit, where: {daily: {_gte: $_gte, _lte: $_lte}}) {
     daily
     name
     org
@@ -57,6 +58,7 @@ query top5ProductsDaily($limit: Int = 5) {
     sum
   }
 }
+
 
 
 query lowInventoryProducts($limit: Int = 10) {

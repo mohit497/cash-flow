@@ -118,7 +118,7 @@ export function TopSales() {
     return `${data / 1000} K`;
   };
 
-  // const toolTipFormatter = (payload, value, props) => {
+  // const toolTipFormatter = (payload, name, props) => {
   //   return [
   //     `${props.payload.total}`,
   //     `${props.payload.name}`,
@@ -170,23 +170,17 @@ export function TopSales() {
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis tickFormatter={xtickFomart} dataKey={view.toLowerCase()} />
           <YAxis tickFormatter={ytickFomart} />
-          <Tooltip  />
+          <Tooltip   />
           <Legend />
-          <Area
-            type="monotone"
-            dataKey="total"
-            fill="#8884d8"
-            stroke="#8884d8"
-          />
           <Area
             type="monotone"
             dataKey="total_cost"
             fill="#dee2e6"
-            stroke="#ffc107"
+            stroke="#dee2e9"
           />
 
           <Bar name="Sale" dataKey="total" stackId="a" fill="#8884d8" />
-          <Bar name="cost" dataKey="total_cost" stackId="a" fill="#ffc107" />
+
         </ComposedChart>
       </ResponsiveContainer>
     </Container>

@@ -29,6 +29,7 @@ select_permissions:
         - updatedAt
         - role_id
         - p_id
+        - cost_price
       filter:
         product:
           org:
