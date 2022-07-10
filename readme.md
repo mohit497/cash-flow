@@ -18,7 +18,7 @@ Cash Flow is simple Point of Sale Software
 ## Tech
 - [ReactJs] - HTML enhanced for web apps! - frontend
 - [Hasura] - Graphql Engine
-- [PostGres] - Markdown parser done right. Fast and easy to extend.
+- [PostGres] - Database
 - [Twitter Bootstrap] - great UI boilerplate for modern web apps
 - [node.js] - evented I/O for the backend
 - [NestJs] - Backend 
@@ -44,7 +44,7 @@ update ./server/env.local to HASURA_ENDPOINT= `http://localhost:8080`
 
 ```sh
 npm i
-docker-compose -f docker-compose.dev.yml up // migrate databse schema
+docker-compose -f docker-compose.dev.yml up // migrate database schema
 npm run mig:local
 npm run start
 ```
