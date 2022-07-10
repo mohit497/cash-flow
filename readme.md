@@ -3,7 +3,8 @@
 
 [DEMO](https://cash-flow-docker.herokuapp.com)
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+![image](https://user-images.githubusercontent.com/13354732/178130421-d0208219-92ff-40e6-9f41-f4c3776ac539.png)
+
 
 Cash Flow is simple Point of Sale Software
 
