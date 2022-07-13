@@ -9,7 +9,7 @@ export const ShopTotal = () => {
   const { data } = useMonthlySalesQuery({
     variables: {
       limit: 5,
-      _in: shops?.shops.map((i) => i.id),
+      _in: shops?.shops.map((i) => i.id) || [],
       _gte: getDate(1).start,
       _lte: getDate(1).end,
     },
